@@ -1,0 +1,91 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+body {
+  font-family: sans-serif;
+  background-color: black;
+}
+
+h1 {
+  font-size: 40pt;
+  font-weight: bold;
+  color: #3a3a38;
+  margin-bottom: 24px;
+}
+
+h2 {
+  font-size: 28pt;
+  color: #1393aa;
+  margin: 20px 0px 8px;
+  font-weight: bold;
+}
+
+ul {
+  list-style-image: url("bullet.svg");
+  margin: 20px 28px 50px;
+}
+
+ul li {
+  margin-top: 20px;
+}
+
+hr {
+  background-color: #3a3a38;
+  border: 0 none;
+  height: 4px;
+}
+
+pre {
+  background-color: #333;
+  color: white;
+  font-family: "Lucida Console", Monaco, monospace;
+  border-radius: 12px;
+  padding: 16px;
+  line-height: 85%;
+  font-size: 11pt;
+}
+
+section {
+  padding: 8px;
+  font-size: 28pt;
+  background-image: url(bg.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: #cbd3c5;
+  width: 1024px;
+  height: 768px;
+  overflow: hidden;
+  padding: 12px 36px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+section.title {
+  background-image: none;
+}
+
+section.title h1 {
+  margin-top: 30%;
+}
+
+section.title ul {
+  margin-left: 0px;
+  list-style: none;
+}
+
+.pagenum {
+  position: absolute;
+  font-size: 16pt;
+  top: 2%;
+  left: 95%;
+}
+
+p.large {
+  text-align: center;
+  font-size: 160pt;
+  line-height: 80%;
+}
+

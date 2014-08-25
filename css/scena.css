@@ -1,0 +1,17 @@
+body {
+  overflow      : hidden;
+  counter-reset : pagecounter;
+}
+
+section {
+  visibility        : hidden;
+  margin            : 0px;
+  position          : absolute;
+  top               : 0px;
+  left              : 0px;
+  counter-increment : pagecounter;
+}
+
+p.pagenum:before {
+  content : counter(pagecounter);
+}
