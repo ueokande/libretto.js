@@ -3,8 +3,9 @@ class window.Scena.PageAnimation
   #
   #
   #
-  constructor: (@prevPage, @nextPage) ->
-    @pageAnimeCss = new Scena.Css('page_anime')
+  constructor: (@prevPage, @nextPage, styleName) ->
+    styleName = 'PageAnimation' if styleName is undefined
+    @pageAnimeCss = new Scena.Css(styleName)
 
   #
   #
