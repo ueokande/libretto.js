@@ -2,10 +2,21 @@ describe 'Test of page_animation.coffee', ->
   beforeEach ->
     @pageEle1 = window.document.createElement('section')
     @pageEle2 = window.document.createElement('section')
+    @pageEle1.style.position = 'absolute'
+    @pageEle2.style.position = 'absolute'
+    window.document.body.appendChild(@pageEle1)
+    window.document.body.appendChild(@pageEle2)
+
     @prevPage = new Scena.Page(@pageEle1)
     @nextPage = new Scena.Page(@pageEle2)
 
   afterEach ->
+    window.document.body.removeChild(@pageEle1)
+    window.document.body.removeChild(@pageEle2)
+    @prevPage = null
+    @nextPage = null
+    @pageEle1 = null
+    @pageEle2 = null
 
   it 'constructs and destructs a object', ->
     pageAnimation = new Scena.PageAnimation(@prevPage, @nextPage, 'TestPageAnimation')
@@ -22,6 +33,8 @@ describe 'Test of page_animation.coffee', ->
 
     expect(@pageEle1.classList.contains('prev')).toBeTruthy()
     expect(@pageEle2.classList.contains('next')).toBeTruthy()
+    expect(window.getComputedStyle(@pageEle1).zIndex) \
+      .toBeLessThan(window.getComputedStyle(@pageEle2).zIndex)
 
     pageAnimation.finalize()
 
