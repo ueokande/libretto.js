@@ -17,8 +17,8 @@ describe 'Test of css.coffee', ->
     css.addRule('h2', {'color':'red'})
     css.addRule('h3', {'background-color':'blue'})
     expect(css.style.sheet.rules.length).toBe(2)
-    expect(css.style.sheet.rules[0].style.color).toBe('red')
-    expect(css.style.sheet.rules[1].style.backgroundColor).toBe('blue')
+    expect(css.style.sheet.rules[0].style.backgroundColor).toBe('blue')
+    expect(css.style.sheet.rules[1].style.color).toBe('red')
     css.finalize()
 
   it 'applying on-site HTML', ->
