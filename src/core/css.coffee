@@ -14,22 +14,24 @@ class window.Scena.Css
   #
   addRule: (selector, styles) ->
     return if @style is null
+    len = @style.sheet.rules.length
     if styles is undefined
       cssString = "#{selector} {}"
-      @style.textContent += cssString
-      return @style.sheet.rules[@style.sheet.rules.length - 1].style
+      @style.sheet.insertRule(cssString, len)
+      return @style.sheet.rules[len].style
     else
       cssString = "#{selector} {"
       cssString += "#{key}: #{value} !important;" for key,value of styles
       cssString += "}"
-      @style.textContent += cssString
+      @style.sheet.insertRule(cssString, len)
 
   #
   #
   #
   clearRules: ->
     return if @style is null
-    @style.textContent = ''
+    while @style.sheet.rules.length != 0
+      @style.sheet.removeRule(0)
 
   #
   #

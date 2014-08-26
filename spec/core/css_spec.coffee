@@ -3,7 +3,7 @@ describe 'Test of css.coffee', ->
   beforeEach ->
   afterEach ->
 
-  it 'construct and destruct', ->
+  it 'constructs and finalizes', ->
     css = new Scena.Css('tested_css')
     styleEle = window.document.getElementById('tested_css')
     expect(styleEle).not.toBeNull()
@@ -12,7 +12,7 @@ describe 'Test of css.coffee', ->
     styleEle = window.document.getElementById('tested_css')
     expect(styleEle).toBeNull()
 
-  it 'addRule with specifying style', ->
+  it 'adds rules with specifying style', ->
     css = new Scena.Css('tested_css')
     css.addRule('h2', {'color':'red'})
     css.addRule('h3', {'background-color':'blue'})
@@ -21,7 +21,7 @@ describe 'Test of css.coffee', ->
     expect(css.style.sheet.rules[1].style.backgroundColor).toBe('blue')
     css.finalize()
 
-  it 'applying on-site HTML', ->
+  it 'applies to on-site HTML', ->
     css = new Scena.Css('tested_css')
     css.addRule('#div_id', {'color':'red'})
     css.addRule('.div_cls', {'background-color':'blue'})
@@ -33,7 +33,7 @@ describe 'Test of css.coffee', ->
 
     css.finalize()
 
-  it 'clearRule', ->
+  it 'clears rules', ->
     css = new Scena.Css('tested_css')
     css.addRule('h2', {'color':'red'})
     css.addRule('h3', {'background-color':'blue'})

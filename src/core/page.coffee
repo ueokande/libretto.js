@@ -43,31 +43,6 @@ class window.Scena.Page
     return obj
 
   #
-  #
-  #
-  setClassAsPrevious : ->
-    return if @element is null
-    @resetClass()
-    @element.classList.add('prev')
-
-  #
-  #
-  #
-  setClassAsNext : ->
-    return if @element is null
-    @resetClass()
-    @element.classList.add('next')
-
-  #
-  #
-  #
-  resetClass : ->
-    return if @element is null
-    return if @element.classList.length == 0
-    @element.classList.remove('prev')
-    @element.classList.remove('next')
-
-  #
   # Create animation object
   #
   createAnimation: ->
