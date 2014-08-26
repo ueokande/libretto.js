@@ -18,7 +18,6 @@ class window.Scena.Core extends window.Scena.Plugin
     @pages = null
     @currentIndex = null
     @pageAnimation = null
-    @prevPrevPage = null
     @currentPageChangedListeners = []
 
     window.Scena.core = @
@@ -58,17 +57,16 @@ class window.Scena.Core extends window.Scena.Plugin
     index = @pages.length - 1 if @pages.length - 1 < index
     return if index is @currentIndex
 
-    prevPage = if @currentIndex isnt null then @pages[@currentIndex] else null
-    nextPage = @pages[index]
+    prevIndex = if @currentIndex isnt null then @currentIndex else null
+    nextIndex = index
+    currentPage = @pages[index]
     @currentIndex = index
     @currentAnimation.finalize() if @currentAnimation isnt null
-    @currentAnimation = @pages[@currentIndex].createAnimation()
+    @currentAnimation = currentPage.createAnimation()
 
-    @prevPrevPage.resetClass() if @prevPrevPage isnt null
     @pageAnimation.finalize() if @pageAnimation isnt null
-    @pageAnimation = new Scena.PageAnimation(prevPage, nextPage)
+    @pageAnimation = new Scena.PageAnimation(prevIndex, nextIndex, currentPage)
     @pageAnimation.switchPage(animationEnable)
-    @prevPrevPage = prevPage
 
     l() for l in @currentPageChangedListeners
 

@@ -3,7 +3,7 @@ class window.Scena.PageAnimation
   #
   #
   #
-  constructor: (@prevPage, @nextPage, styleName) ->
+  constructor: (@prevIndex, @nextIndex, @nextPage, styleName) ->
     styleName = 'PageAnimation' if styleName is undefined
     @pageAnimeCss = new Scena.Css(styleName)
 
@@ -54,15 +54,13 @@ class window.Scena.PageAnimation
   #
   execAnime = (effect, duration, options) ->
     @pageAnimeCss.clearRules()
-    prevStyle = @pageAnimeCss.addRule('.prev')
-    prevStyle.visibility = 'visible'
-    prevStyle.zIndex = 0
-    nextStyle = @pageAnimeCss.addRule('.next')
+    if @prevIndex isnt null
+      prevStyle = @pageAnimeCss.addRule("section:nth-of-type(#{@prevIndex+1})")
+      prevStyle.visibility = 'visible'
+      prevStyle.zIndex = 0
+    nextStyle = @pageAnimeCss.addRule("section:nth-of-type(#{@nextIndex+1})")
     nextStyle.visibility = 'visible'
     nextStyle.zIndex = 1
-
-    @prevPage.setClassAsPrevious() if @prevPage isnt null
-    @nextPage.setClassAsNext()
 
     effect.before(prevStyle, nextStyle, duration, options)
     setTimeout(->

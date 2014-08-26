@@ -40,7 +40,4 @@ describe 'Test of page.coffee', ->
   #   options = pageEle.options()
   #   expect(options.length).toBe(0)
 
-  # it 'setClassAsPrevious()', ->
-  # it 'setClassAsNext()', ->
-  # it 'resetClasses()', ->
   # it 'createAnimation()', ->

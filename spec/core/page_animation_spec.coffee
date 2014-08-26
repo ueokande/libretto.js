@@ -19,7 +19,7 @@ describe 'Test of page_animation.coffee', ->
     @pageEle2 = null
 
   it 'constructs and destructs a object', ->
-    pageAnimation = new Scena.PageAnimation(@prevPage, @nextPage, 'TestPageAnimation')
+    pageAnimation = new Scena.PageAnimation(0, 1, @nextPage, 'TestPageAnimation')
     styleEle = window.document.getElementById('TestPageAnimation')
     expect(styleEle).not.toBeNull()
     
@@ -28,11 +28,9 @@ describe 'Test of page_animation.coffee', ->
     expect(styleEle).toBeNull()
 
   it 'switches the page without animation', ->
-    pageAnimation = new Scena.PageAnimation(@prevPage, @nextPage, 'TestPageAnimation')
+    pageAnimation = new Scena.PageAnimation(0, 1, @nextPage, 'TestPageAnimation')
     pageAnimation.switchPage(false)
 
-    expect(@pageEle1.classList.contains('prev')).toBeTruthy()
-    expect(@pageEle2.classList.contains('next')).toBeTruthy()
     expect(window.getComputedStyle(@pageEle1).zIndex) \
       .toBeLessThan(window.getComputedStyle(@pageEle2).zIndex)
 
