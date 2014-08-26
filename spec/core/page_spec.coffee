@@ -1,23 +1,23 @@
 describe 'Test of page.coffee', ->
 
-  it 'animationEffect() of given effect', ->
+  it 'returns an effect name if the name is given', ->
     pageEle = window.document.createElement('section')
     pageEle.setAttribute('effect', 'my_effect')
     page = new Scena.Page(pageEle)
     expect(page.animationEffect()).toBe('my_effect')
 
-  it 'animationEffect() of non-given effect', ->
+  it 'returns null if the name is not given', ->
     pageEle = window.document.createElement('section')
     page = new Scena.Page(pageEle)
     expect(page.animationEffect()).toBeNull()
 
-  it 'animationDuration() of given duration', ->
+  it 'return a effect duration if the duration is given', ->
     pageEle = window.document.createElement('section')
     pageEle.setAttribute('duration', '500ms')
     page = new Scena.Page(pageEle)
     expect(page.animationDuration()).toBe('500ms')
 
-  it 'animationDuration() of non-given duration', ->
+  it 'return null if the duration is not given', ->
     pageEle = window.document.createElement('section')
     page = new Scena.Page(pageEle)
     expect(page.animationDuration()).toBeNull()

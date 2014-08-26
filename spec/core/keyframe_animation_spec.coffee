@@ -5,7 +5,7 @@ describe 'Test of animation.coffee', ->
 
   afterEach ->
 
-  it 'constructor and finalize', ->
+  it 'constructs and finalizes', ->
     animationEle = window.document.createElement('animation')
     animationEle.innerHTML = '''
       <keyframe target='#div_id'  duration='500ms'/>
@@ -19,7 +19,7 @@ describe 'Test of animation.coffee', ->
     style = window.document.getElementById('animation_style_test')
     expect(style).toBeNull()
 
-  it 'nextKeyframe()', ->
+  it 'pops the next key frame', ->
     animationEle = window.document.createElement('animation')
     animationEle.innerHTML = '''
       <keyframe target='#div_id'  duration='500ms'/>
@@ -37,7 +37,7 @@ describe 'Test of animation.coffee', ->
 
     anime.finalize()
 
-  it 'out of stack', ->
+  it 'does nothing when keyframes are not in the queue', ->
     animationEle = window.document.createElement('animation')
     animationEle.innerHTML = '''
       <keyframe target='#div_id'  duration='500ms'/>
@@ -68,7 +68,7 @@ describe 'Test of animation.coffee', ->
 
     anime.finalize()
 
-  it 'methos() after finalize', ->
+  it 'does nothing after the finalize() is called', ->
     animationEle = window.document.createElement('animation')
     animationEle.innerHTML = '''
       <keyframe target='#div_id'  duration='500ms'/>
