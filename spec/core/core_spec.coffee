@@ -24,7 +24,6 @@ describe 'Test of core.coffee', ->
     expect(window.Scena.core).toBe(core)
 
     core.initialize()
-    expect(core.pages.length).toBe(3)
 
   it "skips to aspecified page", ->
     core = new Scena.Core
