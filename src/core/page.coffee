@@ -8,13 +8,24 @@
 
 class window.Scena.Page
   #
+  # Returns the number of the pages in the document.
+  #
+  @count: ->
+    document.body.getElementsByTagName('section').length
+  #
+  # Returns a Page object of specified index
+  #
+  @pageAt: (index) ->
+    element = document.body.getElementsByTagName('section')[index]
+    obj = new Scena.Page
+    obj.element = element
+    return obj
+
+  #
   # Constructs a Page object with the given <section> element.
   #
   constructor: (@element) ->
-   if @element is undefined or @element is null
-     @element = null
-   else
-     @defaultCss = @element.cssText
+    @element = null if @element is undefined
 
   #
   # Returns the effect name of the page animation
