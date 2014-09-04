@@ -48,11 +48,11 @@ class window.Scena.Core extends window.Scena.Plugin
   #
   #
   switchPage = (index, animationEnable) ->
-    index = 0 if index < 0
-    index = Scena.Page.count - 1 if Scena.Page.count - 1 < index
+    index = Math.max(0, index)
+    index = Math.min(Scena.Page.count() - 1, index)
     return if index is @currentIndex
 
-    prevIndex = if @currentIndex isnt null then @currentIndex else null
+    prevIndex = @currentIndex
     nextIndex = index
     currentPage = Scena.Page.pageAt(index)
     @currentIndex = index
