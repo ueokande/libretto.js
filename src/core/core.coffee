@@ -15,7 +15,6 @@ class window.Scena.Core extends window.Scena.Plugin
   #
   constructor: ->
     @currentAnimation = null
-    @pages = null
     @currentIndex = null
     @pageAnimation = null
     @currentPageChangedListeners = []
@@ -32,21 +31,17 @@ class window.Scena.Core extends window.Scena.Plugin
   initialize: =>
     sections = document.body.getElementsByTagName("section")
     return if sections.length is 0
-    @pages = []
-    @pages.push(new Scena.Page(p)) for p in sections
 
   #
   # Skips to specified page without animation.
   #
   skipToPage: (index) ->
-    return if @pages is null
     switchPage.call(@, index, false)
 
   #
   #
   #
   animateToPage: (index) ->
-    return if @pages is null
     switchPage.call(@, index, true)
 
   #
@@ -54,12 +49,12 @@ class window.Scena.Core extends window.Scena.Plugin
   #
   switchPage = (index, animationEnable) ->
     index = 0 if index < 0
-    index = @pages.length - 1 if @pages.length - 1 < index
+    index = Scena.Page.count - 1 if Scena.Page.count - 1 < index
     return if index is @currentIndex
 
     prevIndex = if @currentIndex isnt null then @currentIndex else null
     nextIndex = index
-    currentPage = @pages[index]
+    currentPage = Scena.Page.pageAt(index)
     @currentIndex = index
     @currentAnimation.finalize() if @currentAnimation isnt null
     @currentAnimation = currentPage.createAnimation()
@@ -107,7 +102,7 @@ class window.Scena.Core extends window.Scena.Plugin
   # Skips to last page without animation.
   #
   skipToLastPage: ->
-    @skipToPage(@pages.length - 1)
+    @skipToPage(Scena.Page.count() - 1)
 
   #
   #

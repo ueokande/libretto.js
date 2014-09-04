@@ -22,12 +22,6 @@ class window.Scena.Page
     return obj
 
   #
-  # Constructs a Page object with the given <section> element.
-  #
-  constructor: (@element) ->
-    @element = null if @element is undefined
-
-  #
   # Returns the effect name of the page animation
   #
   animationEffect : () ->
