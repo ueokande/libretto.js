@@ -46,4 +46,9 @@ class window.Scena.KeyframeAnimation
     duration = keyframe.duration()
     properties['transition-duration'] = duration
     @css.addRule(target, properties)
+
+    return unless @hasNextKeyframe()
+    next_key = @keyframes[0]
+    if next_key.timing() == 'with'
+      @nextKeyframe()
     return 0
