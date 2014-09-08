@@ -52,3 +52,17 @@ class window.Scena.KeyframeAnimation
     if next_key.timing() == 'with'
       @nextKeyframe()
     return 0
+
+  #
+  # Converts time descrived as string to millisecond
+  # timeToMs("200ms")    // return 200
+  # timeToMs("5s")       // return 5000
+  # timeToMs("1.4s")     // return 1400
+  #
+  @timeToMillisecond: (time) ->
+    return null if time.length == 0
+    msec1 = +(time.split("ms")[0])
+    msec2 = time.split("s")[0] * 1000
+    num = msec1 || msec2
+    return null if isNaN(num)
+    return num
