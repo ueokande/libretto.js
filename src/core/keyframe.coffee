@@ -40,3 +40,7 @@ class window.Scena.Keyframe
       if attr.nodeName != "target" && attr.nodeName != "duration"
         obj[attr.nodeName] = attr.value
     return obj
+
+  timing : ->
+    return null if @element is null
+    return @element.getAttribute("timing")
