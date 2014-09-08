@@ -41,6 +41,10 @@ class window.Scena.Keyframe
         obj[attr.nodeName] = attr.value
     return obj
 
+  delay : ->
+    return null if @element is null
+    return @element.getAttribute("delay")
+
   timing : ->
     return null if @element is null
     return @element.getAttribute("timing")
