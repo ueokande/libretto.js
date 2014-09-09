@@ -1,6 +1,7 @@
 body {
   overflow      : hidden;
   counter-reset : pagecounter;
+  position      : relative;
 }
 
 section {
