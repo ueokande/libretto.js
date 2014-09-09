@@ -47,8 +47,8 @@ describe 'Test of keyframe_animation.coffee', ->
     expect(+window.getComputedStyle(div_by_id).opacity).toBe(1)
     anime.nextKeyframe()
     setTimeout(->
-      expect(+window.getComputedStyle(div_by_id).opacity).toBeGreaterThan(0)
       expect(+window.getComputedStyle(div_by_id).opacity).toBeLessThan(1)
+      expect(+window.getComputedStyle(div_by_id).opacity).toBeGreaterThan(0)
     ,250)
     setTimeout(->
       expect(+window.getComputedStyle(div_by_id).opacity).toBe(0)
@@ -56,6 +56,70 @@ describe 'Test of keyframe_animation.coffee', ->
       done()
     ,600)
 
+  it 'fires a keyframe with delay', (done) ->
+    animationEle = window.document.createElement('animation')
+    animationEle.innerHTML = '''
+      <keyframe target='#div_id'  duration='500ms' delay='500ms' opacity='0' />
+    '''
+    anime = new Scena.KeyframeAnimation(animationEle)
+
+    expect(+window.getComputedStyle(div_by_id).opacity).toBe(1)
+    anime.nextKeyframe()
+    setTimeout(->
+      expect(1 - window.getComputedStyle(div_by_id).opacity).toBeLessThan(0.00001) # nearly to be 1
+    ,250)
+    setTimeout(->
+      expect(+window.getComputedStyle(div_by_id).opacity).toBeLessThan(1)
+      expect(+window.getComputedStyle(div_by_id).opacity).toBeGreaterThan(0)
+    ,750)
+    setTimeout(->
+      expect(+window.getComputedStyle(div_by_id).opacity).toBe(0)
+      anime.finalize()
+      done()
+    ,1250)
+
+  it 'fires a keyframe with the previous keyframe by property timing="with"', (done) ->
+    animationEle = window.document.createElement('animation')
+    animationEle.innerHTML = '''
+      <keyframe target='#div_id'  duration='500ms'/>
+      <keyframe target='.div_cls' duration='500ms' timing='with' opacity='0' />
+    '''
+    anime = new Scena.KeyframeAnimation(animationEle)
+
+    expect(+window.getComputedStyle(div_by_class).opacity).toBe(1)
+    anime.nextKeyframe()
+    setTimeout(->
+      expect(+window.getComputedStyle(div_by_class).opacity).toBeLessThan(1)
+      expect(+window.getComputedStyle(div_by_class).opacity).toBeGreaterThan(0)
+    ,250)
+    setTimeout(->
+      expect(+window.getComputedStyle(div_by_class).opacity).toBe(0)
+      anime.finalize()
+      done()
+    ,600)
+
+  it 'fires a keyframe after the previous keyframe by property timing="after"', (done) ->
+    animationEle = window.document.createElement('animation')
+    animationEle.innerHTML = '''
+      <keyframe target='#div_id'  duration='500ms'/>
+      <keyframe target='.div_cls' duration='500ms' timing='after' opacity='0' />
+    '''
+    anime = new Scena.KeyframeAnimation(animationEle)
+
+    expect(+window.getComputedStyle(div_by_class).opacity).toBe(1)
+    anime.nextKeyframe()
+    setTimeout(->
+      expect(1 - window.getComputedStyle(div_by_class).opacity).toBeLessThan(0.00001) # nearly to be 1
+    ,250)
+    setTimeout(->
+      expect(+window.getComputedStyle(div_by_class).opacity).toBeLessThan(1)
+      expect(+window.getComputedStyle(div_by_class).opacity).toBeGreaterThan(0)
+    ,750)
+    setTimeout(->
+      expect(+window.getComputedStyle(div_by_class).opacity).toBe(0)
+      anime.finalize()
+      done()
+    ,1250)
 
   it 'does nothing when keyframes are not in the queue', ->
     animationEle = window.document.createElement('animation')
