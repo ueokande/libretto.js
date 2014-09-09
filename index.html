@@ -50,14 +50,14 @@
       <li>Sandwich contents between <tt>&lt;contents&gt;</tt> tag, which will become a page of slides</li>
     </ul>
     <pre>
-&lt;section effect="Push"&gt;<br />
+<span style='color:orange'>&lt;section effect="Push"&gt;</span><br />
 &lt;h1&gt;How to describe contents</h1><br />
 &lt;h2&gt;Write contents as HTML</h2><br />
 &lt;ul&gt;<br />
   &lt;li&gt;Use HTML tags <tt>&lt;h1&gt;</tt> and <tt>&lt;ul&gt;</tt></li><br />
   &lt;li&gt;Sandwich contents between <tt>&lt;contents&gt;</tt> tag</li><br />
 &lt;/ul&gt;<br />
-&lt;/section&gt; </pre>
+<span style='color:orange'>&lt;/section&gt; </span> </pre>
     </section>
 
 
@@ -83,7 +83,7 @@
       <li>The property of the animation is described with advanced attributes such as <tt>duration</tt> and <tt>direction</tt></li>
     </ul>
     <pre>
-&lt;section effect="MoveIn" direction="down" duration="2000ms"&gt;<br />
+&lt;section <span style='color:orange'>effect="MoveIn" direction="down" duration="2000ms"</span>&gt;<br />
 &lt;!-- Something contents --&gt;<br />
 &lt;/section&gt; </pre>
     </section>
@@ -145,14 +145,14 @@
           background-color:#afa" id="box4"&gt;&lt;/p&gt;<br />
 &lt;p style="width: 48px; height: 48px;<br />
           background-color:#aaf" id="box5"&gt;&lt;/p&gt;<br />
-&lt;p id="txt1"&gt;zooming&lt;/p&gt;<br />
+&lt;p id="txt1"&gt;zooming&lt;/p&gt;<br /> <span style='color:orange'>
 &lt;animation&gt;<br />
-  &lt;keyframe target="box4" duration="1s" width="96px"<br />
+  &lt;keyframe target="#box4" duration="1s" width="96px"<br />
             background-color="red" /&gt;<br />
-  &lt;keyframe target="box5" duration="1s" <br />
+  &lt;keyframe target="#box5" duration="1s" <br />
             -webkit-transform="rotate(90deg)" /&gt;<br />
-  &lt;keyframe target="txt1" duration="1s" font-size="200%" /&gt;<br />
-&lt;/animation&gt; </pre>
+  &lt;keyframe target="#txt1" duration="1s" font-size="200%" /&gt;<br />
+&lt;/animation&gt;</span style='color:orange'> </pre>
     </code>
     <p style="width: 48px; height: 48px;
               background-color:#afa" id="box4"></p>
@@ -163,6 +163,41 @@
       <keyframe target="#box4" duration="1s" width="96px" background-color="red" />
       <keyframe target="#box5" duration="1s" -webkit-transform="rotate(90deg)" />
       <keyframe target="#txt1" duration="1s" font-size="200%" />
+    </animation>
+    </section>
+
+
+    <section effect="Push">
+    <p class="pagenum"></p>
+    <h1>Element Animations</h1>
+    <ul>
+      <li>Timing 'with'</li>
+      <div style='margin:32px'>
+        <span
+          id='with1' style='display:inline-block; position:absolute; left:128px; width:48px; height:48px; background-color:red'></span><span
+          id='with2' style='display:inline-block; position:absolute; left:256px; width:48px; height:48px; background-color:green'></span><span
+          id='with3' style='display:inline-block; position:absolute; left:384px; width:48px; height:48px; background-color:blue'></span>
+      </div>
+      <li style='margin-top:256px'>Timing 'after'</li>
+      <div style='margin:32px'>
+        <span
+          id='after1' style='display:inline-block; position:absolute; left:128px; width:48px; height:48px; background-color:red'></span><span
+          id='after2' style='display:inline-block; position:absolute; left:256px; width:48px; height:48px; background-color:green'></span><span
+          id='after3' style='display:inline-block; position:absolute; left:384px; width:48px; height:48px; background-color:blue'></span>
+      </div>
+    </ul>
+    <code style='display:block; margin-top:128px'>
+      <pre>
+      &lt;keyframe target="#box" <span style='color:orange'>timing="with"</span> duration="500ms" ... /&gt; <br />
+      &lt;keyframe target="#box" <span style='color:orange'>timing="after"</span>  duration="500ms" ... /&gt; </pre>
+    </code>
+    <animation>
+      <keyframe target="#with1"               duration="500ms" margin-left='80px'/>
+      <keyframe target="#with2" timing='with' duration="500ms" margin-left='80px'/>
+      <keyframe target="#with3" timing='with' duration="500ms" margin-left='80px'/>
+      <keyframe target="#after1"                duration="500ms" margin-left='80px'/>
+      <keyframe target="#after2" timing='after' duration="500ms" margin-left='80px'/>
+      <keyframe target="#after3" timing='after' duration="500ms" margin-left='80px'/>
     </animation>
     </section>
 
