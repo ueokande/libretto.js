@@ -31,19 +31,31 @@ describe 'Test of keyframe_animation.coffee', ->
     style = window.document.getElementById('animation_style_test')
     expect(style).toBeNull()
 
-  it 'pops the next key frame', ->
+  it 'pops the next key frame', (done) ->
     animationEle = window.document.createElement('animation')
     animationEle.innerHTML = '''
       <keyframe target='#div_id'  duration='500ms'/>
       <keyframe target='.div_cls' background-color='green' />
+      <keyframe target='#div_id'  duration='500ms' opacity='0'/>
     '''
     anime = new Scena.KeyframeAnimation(animationEle)
     anime.nextKeyframe()
     expect(window.getComputedStyle(div_by_id).transitionDuration).toBe('0.5s')
     anime.nextKeyframe()
-    div = window.document.getElementsByClassName('div_cls')[0]
     expect(window.getComputedStyle(div_by_class).backgroundColor).toBe('rgb(0, 128, 0)')
-    anime.finalize()
+
+    expect(+window.getComputedStyle(div_by_id).opacity).toBe(1)
+    anime.nextKeyframe()
+    setTimeout(->
+      expect(+window.getComputedStyle(div_by_id).opacity).toBeGreaterThan(0)
+      expect(+window.getComputedStyle(div_by_id).opacity).toBeLessThan(1)
+    ,250)
+    setTimeout(->
+      expect(+window.getComputedStyle(div_by_id).opacity).toBe(0)
+      anime.finalize()
+      done()
+    ,600)
+
 
   it 'does nothing when keyframes are not in the queue', ->
     animationEle = window.document.createElement('animation')
