@@ -1,9 +1,21 @@
-describe 'Test of animation.coffee', ->
+describe 'Test of keyframe_animation.coffee', ->
 
+  div_by_id = null
+  div_by_class = null
 
   beforeEach ->
+    div_by_id = window.document.createElement('div')
+    div_by_id.id = 'div_id'
+    div_by_class = window.document.createElement('div')
+    div_by_class.className = 'div_cls'
+    window.document.body.appendChild(div_by_id)
+    window.document.body.appendChild(div_by_class)
 
   afterEach ->
+    window.document.body.removeChild(div_by_id)
+    window.document.body.removeChild(div_by_class)
+    div_by_id = null
+    div_by_class = null
 
   it 'constructs and finalizes', ->
     animationEle = window.document.createElement('animation')
@@ -26,15 +38,11 @@ describe 'Test of animation.coffee', ->
       <keyframe target='.div_cls' background-color='green' />
     '''
     anime = new Scena.KeyframeAnimation(animationEle)
-
     anime.nextKeyframe()
-    div = window.document.getElementById('div_id')
-    expect(window.getComputedStyle(div).transitionDuration).toBe('0.5s')
-
+    expect(window.getComputedStyle(div_by_id).transitionDuration).toBe('0.5s')
     anime.nextKeyframe()
     div = window.document.getElementsByClassName('div_cls')[0]
-    expect(window.getComputedStyle(div).backgroundColor).toBe('rgb(0, 128, 0)')
-
+    expect(window.getComputedStyle(div_by_class).backgroundColor).toBe('rgb(0, 128, 0)')
     anime.finalize()
 
   it 'does nothing when keyframes are not in the queue', ->

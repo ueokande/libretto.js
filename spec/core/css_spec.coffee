@@ -22,16 +22,23 @@ describe 'Test of css.coffee', ->
     css.finalize()
 
   it 'applies to on-site HTML', ->
+    div_by_id = window.document.createElement('div')
+    div_by_id.id = 'div_id'
+    div_by_class = window.document.createElement('div')
+    div_by_class.className = 'div_cls'
+    window.document.body.appendChild(div_by_id)
+    window.document.body.appendChild(div_by_class)
+
     css = new Scena.Css('tested_css')
     css.addRule('#div_id', {'color':'red'})
     css.addRule('.div_cls', {'background-color':'blue'})
 
-    div = window.document.getElementById('div_id')
-    expect(window.getComputedStyle(div).color).toBe('rgb(255, 0, 0)')
-    div = window.document.getElementsByClassName('div_cls')[0]
-    expect(window.getComputedStyle(div).backgroundColor).toBe('rgb(0, 0, 255)')
+    expect(window.getComputedStyle(div_by_id).color).toBe('rgb(255, 0, 0)')
+    expect(window.getComputedStyle(div_by_class).backgroundColor).toBe('rgb(0, 0, 255)')
 
     css.finalize()
+    window.document.body.removeChild(div_by_id)
+    window.document.body.removeChild(div_by_class)
 
   it 'clears rules', ->
     css = new Scena.Css('tested_css')
