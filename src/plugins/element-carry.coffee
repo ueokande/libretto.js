@@ -68,5 +68,5 @@ class Scena.ElementCarry extends window.Scena.Plugin
       @prevHovered = hovered
 
 
-###  This plugin will potentially be removed.
+#  This plugin will potentially be removed.
 # new window.Scena.ElementCarry
