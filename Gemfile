@@ -4,3 +4,4 @@ gem 'slim'
 gem 'coffee-script'
 
 gem 'sinatra'
+gem 'rake'
