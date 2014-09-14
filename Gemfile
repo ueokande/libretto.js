@@ -5,3 +5,5 @@ gem 'coffee-script'
 
 gem 'sinatra'
 gem 'rake'
+
+gem 'jasmine'

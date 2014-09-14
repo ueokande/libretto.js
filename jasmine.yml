@@ -1,0 +1,7 @@
+src_files:
+  - scena.js
+spec_files:
+  - scena_spec.js
+
+src_dir: js
+spec_dir: js
