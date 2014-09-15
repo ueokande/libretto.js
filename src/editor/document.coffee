@@ -59,6 +59,7 @@ class window.Scena.Document
 
   deletePage: (index) ->
     return null if @container is null
+    @container.removeChild(@container.children[index])
 
   addPage: (to) ->
     return null if @container is null
@@ -66,6 +67,7 @@ class window.Scena.Document
     to = Math.min(to, @pageCount() - 1)
     newElement = document.createElement('section')
     @container.insertBefore(newElement, @pageAt(to))
+    return newElement
 
   movePage: (from, to) ->
     return null if @container is null

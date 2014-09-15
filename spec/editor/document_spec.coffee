@@ -46,6 +46,10 @@ describe 'Test of document.coffee', ->
 
   xit 'generates the document as plain text', ->
 
+  it 'deletes a page', ->
+    doc.deletePage(3)
+    expect(doc.pageCount()).toBe(3)
+
   it 'adds a page into first and middle', ->
     doc.addPage(0)
     expect(doc.pageCount()).toBe(5)
