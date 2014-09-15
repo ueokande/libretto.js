@@ -12,33 +12,19 @@ class window.Scena.Navigator
 
   refreshPage: (index) ->
     doc = Scena.Document.currentDocument()
-    cloned = doc.pageAt(index).cloneNode(true)
-    for element in cloned.getElementsByTagName('*')
-      element.removeAttribute('id')
-    cloned.removeAttribute('id')
-    old = @dom.children[index]
-    @dom.insertBefore(cloned, old)
-    @dom.removeChild(old)
+    cloned = cloneAndInsert.call(@, index, doc.pageAt(index))
+    @dom.removeChild(@dom.children[index + 1])
 
   updateAll: ->
     @dom.innerHTML = ''
     doc = Scena.Document.currentDocument()
     for p in doc.pages()
-      cloned = p.cloneNode(true)
-      for element in cloned.getElementsByTagName('*')
-        element.removeAttribute('id')
-      cloned.removeAttribute('id')
-      @dom.appendChild(cloned)
+      cloneAndInsert.call(@, doc.pageCount(), p)
 
   movePage: (from, to) ->
     doc = Scena.Document.currentDocument()
     doc.movePage(from, to)
-
-    if to > doc.pageCount - 1
-      @dom.insertBefore(@dom.children[from], null)
-    else
-      to = Math.max(to, 0)
-      @dom.insertBefore(@dom.children[from], @dom.children[to])
+    @dom.insertBefore(@dom.children[from], @dom.children[to])
 
   deletePage: (index) ->
     doc = Scena.Document.currentDocument()
@@ -48,11 +34,15 @@ class window.Scena.Navigator
   addPage: (before) ->
     doc = Scena.Document.currentDocument()
     added = doc.addPage(before)
-    cloned = added.cloneNode(true)
-    for element in cloned.getElementsByTagName('*')
-      element.removeAttribute('id')
+    cloneAndInsert.call(@, before, added)
+
+  cloneAndInsert = (before, element) ->
+    cloned = element.cloneNode()
+    for e in cloned.getElementsByTagName('*')
+      e.removeAttribute('id')
     cloned.removeAttribute('id')
     @dom.insertBefore(cloned, @dom.children[before])
+    return cloned
 
   getCurrentPage: ->
     @currentIndex
