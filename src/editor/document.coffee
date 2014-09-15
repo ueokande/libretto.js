@@ -25,6 +25,10 @@ class window.Scena.Document
     return null if @container is null
     return @container.getElementsByTagName('section').length
 
+  pages: () ->
+    return null if @container is null
+    return @container.getElementsByTagName('section')
+
   toHtmlText: ->
     return null if @container is null
     headContents = ''

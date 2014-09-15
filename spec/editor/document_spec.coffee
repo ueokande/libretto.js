@@ -39,6 +39,11 @@ describe 'Test of document.coffee', ->
   it 'returns the number of the page', ->
     expect(doc.pageCount()).toBe(4)
 
+  it 'returns the number of the page', ->
+    pages = doc.pages()
+    expect(pages.length).toBe(4)
+    expect(pages[2]).toBe(doc.pageAt(2))
+
   xit 'generates the document as plain text', ->
 
   it 'adds a page into first and middle', ->
