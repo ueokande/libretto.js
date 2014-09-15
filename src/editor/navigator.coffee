@@ -52,7 +52,7 @@ class window.Scena.Navigator
     for element in cloned.getElementsByTagName('*')
       element.removeAttribute('id')
     cloned.removeAttribute('id')
-    @dom.appendChild(cloned)
+    @dom.insertBefore(cloned, @dom.children[before])
 
   getCurrentPage: ->
     @currentIndex

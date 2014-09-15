@@ -84,4 +84,6 @@ describe 'Test of navigator.coffee', ->
     navigator.addPage(1)
     expect(doc.pageAt(0).id).toBe('id_a')
     expect(doc.pageAt(2).id).toBe('id_b')
+    expect(navigator.dom.children[0].className).toBe('class_a')
+    expect(navigator.dom.children[2].className).toBe('class_b')
 
