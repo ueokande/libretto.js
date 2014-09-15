@@ -30,3 +30,9 @@ class window.Scena.Document
       <head>#{headContents}</head>
       <body>#{bodyContents}</body>
     </html>"
+
+  movePage: (from, to) ->
+
+  deletePage: (index) ->
+
+  addPage: (before) ->
