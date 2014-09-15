@@ -19,6 +19,10 @@ get "/scena_spec.js" do
   coffee_from_files spec_files
 end
 
+get "/scena_editor.js" do
+  coffee_from_files editor_files
+end
+
 get "/index.html" do
   slim :index
 end
