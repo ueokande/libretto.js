@@ -16,19 +16,19 @@ describe 'Test of document.coffee', ->
         </body>
       </html>
       '''
-    doc = new Scena.Document(text)
+    doc = Scena.Document.createDocument(text)
 
   afterEach ->
-    doc.finalize()
+    doc.closeDocument()
     doc = null
 
-  it 'constructs and finalizes a document', ->
-    container = window.document.getElementById('scena-editor-container')
-    expect(container.getElementsByTagName('title')[0].innerHTML).toBe('Hello Editor Title')
-    expect(container.getElementsByTagName('section')[0].id).toBe('a')
+  it 'creates a new document', ->
+    expect(window.document.getElementById(Scena.Document.containerId)).not.toBeNull()
+    doc.closeDocument()
+    expect(window.document.getElementById(Scena.Document.containerId)).toBeNull()
 
-    doc.finalize()
-    expect(window.document.getElementById('a')).toBeNull()
+  it 'returns current document', ->
+    expect(Scena.Document.currentDocument()).toEqual(doc)
 
   it 'returns a page specified by page index', ->
     expect(doc.pageAt(0).id).toBe('a')

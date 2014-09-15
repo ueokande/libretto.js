@@ -3,13 +3,26 @@
 # 
 
 class window.Scena.Document
-  constructor: (contents) ->
-    @container = document.createElement('div')
-    @container.id = 'scena-editor-container'
-    @container.innerHTML = contents
-    document.body.appendChild(@container)
 
-  finalize: ->
+  @containerId = 'scena-editor-container'
+
+  @createDocument: (contents) ->
+    currentDocument = Scena.Document.currentDocument()
+    currentDocument.closeDocument() if currentDocument is not null
+    container = document.createElement('div')
+    container.id = 'scena-editor-container'
+    container.innerHTML = contents if contents != undefined
+    document.body.appendChild(container)
+    return Document.currentDocument()
+
+  @currentDocument: ->
+    container = document.getElementById(Scena.Document.containerId)
+    return null if container is null
+    return new Scena.Document(container)
+
+  constructor: (@container) ->
+
+  closeDocument: ->
     return if @container is null
     document.body.removeChild(@container)
     @container = null
