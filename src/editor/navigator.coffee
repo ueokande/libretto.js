@@ -37,7 +37,7 @@ class window.Scena.Navigator
     cloneAndInsert.call(@, before, added)
 
   cloneAndInsert = (before, element) ->
-    cloned = element.cloneNode()
+    cloned = element.cloneNode(true)
     for e in cloned.getElementsByTagName('*')
       e.removeAttribute('id')
     cloned.removeAttribute('id')
