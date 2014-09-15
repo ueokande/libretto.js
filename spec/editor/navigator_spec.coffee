@@ -65,12 +65,23 @@ describe 'Test of navigator.coffee', ->
     expect(navigator.dom.children[2].className).toBe('class_b')
     expect(navigator.dom.children[3].className).toBe('class_d')
 
+    navigator.movePage(0,4)
+    expect(doc.pageAt(0).id).toBe('id_a')
+    expect(doc.pageAt(1).id).toBe('id_b')
+    expect(doc.pageAt(2).id).toBe('id_d')
+    expect(doc.pageAt(3).id).toBe('id_c')
+    expect(navigator.dom.children[0].className).toBe('class_a')
+    expect(navigator.dom.children[1].className).toBe('class_b')
+    expect(navigator.dom.children[2].className).toBe('class_d')
+    expect(navigator.dom.children[3].className).toBe('class_c')
+
   it 'deletes a page', ->
     navigator.deletePage(2)
+    expect(navigator.dom.children.length).toBe(3)
     expect(doc.pageCount()).toBe(3)
 
   it 'adds a page', ->
     navigator.addPage(1)
-    expect(doc.pageAt[0].id).toBe('a')
-    expect(doc.pageAt[2].id).toBe('b')
+    expect(doc.pageAt(0).id).toBe('id_a')
+    expect(doc.pageAt(2).id).toBe('id_b')
 
