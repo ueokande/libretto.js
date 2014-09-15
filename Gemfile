@@ -6,4 +6,4 @@ gem 'coffee-script'
 gem 'sinatra'
 gem 'rake'
 
-gem 'jasmine'
+gem 'jasmine-core'
