@@ -40,9 +40,9 @@ describe 'Test of navigator.coffee', ->
 
   it 'refreshes specified page', ->
     expect(navigator.dom.children[2].className).toBe('class_c')
-    doc = pageAt[2].className = 'changed'
+    doc.pageAt(2).className = 'changed'
     expect(navigator.dom.children[2].className).toBe('class_c')
-    navigator.refresh(2)
+    navigator.refreshPage(2)
     expect(navigator.dom.children[2].className).toBe('changed')
 
   it 'moves a page into specified position', ->
@@ -55,7 +55,7 @@ describe 'Test of navigator.coffee', ->
     expect(navigator.dom.children[2].className).toBe('class_c')
     expect(navigator.dom.children[3].className).toBe('class_d')
 
-    navigator.move(2,0)
+    navigator.movePage(2,0)
     expect(doc.pageAt(0).id).toBe('id_c')
     expect(doc.pageAt(1).id).toBe('id_a')
     expect(doc.pageAt(2).id).toBe('id_b')
