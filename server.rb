@@ -31,6 +31,10 @@ get "/test.html" do
   slim :test
 end
 
+get "/editor.html" do
+  slim :editor
+end
+
 get '/jasmine/*.js' do |path|
   content_type 'application/javascript'
   File.read File.join(Jasmine::Core.path, path + '.js')

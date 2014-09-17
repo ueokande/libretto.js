@@ -1,0 +1,87 @@
+doctype html
+html
+  head
+    meta charset='UTF-8'
+
+    link href="css/scena.css" rel="stylesheet" type="text/css"
+    link href="themes/simple/design.css" rel="stylesheet" type="text/css"
+    script src='scena.js'
+    script src='scena_editor.js'
+
+    style
+      |
+        * {
+          margin: 0;
+          padding: 0;
+        }
+        [draggable] {
+          -moz-user-select: none;
+          -khtml-user-select: none;
+          -webkit-user-select: none;
+          user-select: none;
+          /* Required to make elements draggable in old WebKit */
+          -khtml-user-drag: element;
+          -webkit-user-drag: element;
+        }
+        html, body {
+          width: 100%;
+          height: 100%;
+          overflow: hidden;
+        }
+        body {
+          display : table;
+        }
+        #navigator {
+          width            : 220px;
+          height           : 100%;
+          display          : table-cell;
+          z-index          : 10;
+          overflow-x       : hidden;
+          overflow-y       : scroll;
+          background-color : white;
+        }
+        #main {
+          width   : 100%;
+          height  : 100%;
+          display : table-cell;
+        }
+        #navigator section {
+          position   : relative;
+          visibility : visible;
+          margin     : 8px auto;
+          box-shadow : 0 0 4px black;
+          border     : 4px solid white;
+          width      : 1024px;
+          height     : 768px;
+          zoom       : 0.15625;
+        }
+
+  body
+    aside id='navigator'
+    div id='main'
+
+    coffee:
+      src = '''
+        <html>
+          <head>
+            <title>Hello Editor Title</title>
+          </head>
+          <body>
+            <section id='a'>
+              <h1>Hello</h1>
+            </section>
+            <section id='b'>
+              <h1>This is </h1>
+            </section>
+            <section id='c'>
+              <h1>a</h1>
+            </section>
+            <section id='d'>
+              <h1>pen</h1>
+            </section>
+          </body>
+        </html>
+      '''
+      Scena.Document.createDocument(src)
+      window.navigator = new Scena.Navigator(document.getElementById('navigator'))
+
