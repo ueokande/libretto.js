@@ -12,7 +12,7 @@ class window.Scena.Navigator
 
   refreshPage: (index) ->
     doc = Scena.Document.currentDocument()
-    capsula = cloneAndInsert.call(@, index, doc.pageAt(index))
+    capsule = cloneAndInsert.call(@, index, doc.pageAt(index))
     @dom.removeChild(@dom.children[index + 1])
 
   updateAll: ->
@@ -41,17 +41,19 @@ class window.Scena.Navigator
     for e in cloned.getElementsByTagName('*')
       e.removeAttribute('id')
     cloned.removeAttribute('id')
-    innerCcapsula = document.createElement('div')
-    innerCcapsula.appendChild(cloned)
-    outterCapsula = document.createElement('div')
-    outterCapsula.setAttribute('draggable', 'true')
-    outterCapsula.addEventListener('dragstart', @pageDragStart, false)
-    outterCapsula.addEventListener('dragenter', @pageDragEnter, false)
-    outterCapsula.addEventListener('dragleave', @pageDragLeave, false)
-    outterCapsula.addEventListener('dragover', @pageDragOver, false)
-    outterCapsula.appendChild(innerCcapsula)
-    @dom.insertBefore(outterCapsula, @dom.children[before])
-    return outterCapsula
+    innerCapsule = document.createElement('div')
+    innerCapsule.appendChild(cloned)
+    innerCapsule.classList.add('innerCapsule')
+    outerCapsule = document.createElement('div')
+    outerCapsule.setAttribute('draggable', 'true')
+    outerCapsule.addEventListener('dragstart', @pageDragStart, false)
+    outerCapsule.addEventListener('dragenter', @pageDragEnter, false)
+    outerCapsule.addEventListener('dragleave', @pageDragLeave, false)
+    outerCapsule.addEventListener('dragover', @pageDragOver, false)
+    outerCapsule.classList.add('outerCapsule')
+    outerCapsule.appendChild(innerCapsule)
+    @dom.insertBefore(outerCapsule, @dom.children[before])
+    return outerCapsule
 
   getCurrentPage: ->
     @currentIndex
