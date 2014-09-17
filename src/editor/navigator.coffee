@@ -12,7 +12,7 @@ class window.Scena.Navigator
 
   refreshPage: (index) ->
     doc = Scena.Document.currentDocument()
-    cloned = cloneAndInsert.call(@, index, doc.pageAt(index))
+    capsula = cloneAndInsert.call(@, index, doc.pageAt(index))
     @dom.removeChild(@dom.children[index + 1])
 
   updateAll: ->
@@ -41,8 +41,10 @@ class window.Scena.Navigator
     for e in cloned.getElementsByTagName('*')
       e.removeAttribute('id')
     cloned.removeAttribute('id')
-    @dom.insertBefore(cloned, @dom.children[before])
-    return cloned
+    capsula = document.createElement('div')
+    capsula.appendChild(cloned)
+    @dom.insertBefore(capsula, @dom.children[before])
+    return capsula
 
   getCurrentPage: ->
     @currentIndex

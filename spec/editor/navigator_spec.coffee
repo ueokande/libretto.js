@@ -31,49 +31,52 @@ describe 'Test of navigator.coffee', ->
     doc.closeDocument()
     doc = null
 
+  pageElementAt = (index) ->
+    navigator.dom.children[index].children[0]
+
   xit 'constructs and finalize an object', ->
 
   it 'updates all pages', ->
     navigator.updateAll()
     expect(navigator.dom.children.length).toBe(4)
-    expect(navigator.dom.children[2].className).toBe('class_c')
+    expect(pageElementAt(2).className).toBe('class_c')
 
   it 'refreshes specified page', ->
-    expect(navigator.dom.children[2].className).toBe('class_c')
+    expect(pageElementAt(2).className).toBe('class_c')
     doc.pageAt(2).className = 'changed'
-    expect(navigator.dom.children[2].className).toBe('class_c')
+    expect(pageElementAt(2).className).toBe('class_c')
     navigator.refreshPage(2)
-    expect(navigator.dom.children[2].className).toBe('changed')
+    expect(pageElementAt(2).className).toBe('changed')
 
   it 'moves a page into specified position', ->
     expect(doc.pageAt(0).id).toBe('id_a')
     expect(doc.pageAt(1).id).toBe('id_b')
     expect(doc.pageAt(2).id).toBe('id_c')
     expect(doc.pageAt(3).id).toBe('id_d')
-    expect(navigator.dom.children[0].className).toBe('class_a')
-    expect(navigator.dom.children[1].className).toBe('class_b')
-    expect(navigator.dom.children[2].className).toBe('class_c')
-    expect(navigator.dom.children[3].className).toBe('class_d')
+    expect(pageElementAt(0).className).toBe('class_a')
+    expect(pageElementAt(1).className).toBe('class_b')
+    expect(pageElementAt(2).className).toBe('class_c')
+    expect(pageElementAt(3).className).toBe('class_d')
 
     navigator.movePage(2,0)
     expect(doc.pageAt(0).id).toBe('id_c')
     expect(doc.pageAt(1).id).toBe('id_a')
     expect(doc.pageAt(2).id).toBe('id_b')
     expect(doc.pageAt(3).id).toBe('id_d')
-    expect(navigator.dom.children[0].className).toBe('class_c')
-    expect(navigator.dom.children[1].className).toBe('class_a')
-    expect(navigator.dom.children[2].className).toBe('class_b')
-    expect(navigator.dom.children[3].className).toBe('class_d')
+    expect(pageElementAt(0).className).toBe('class_c')
+    expect(pageElementAt(1).className).toBe('class_a')
+    expect(pageElementAt(2).className).toBe('class_b')
+    expect(pageElementAt(3).className).toBe('class_d')
 
     navigator.movePage(0,4)
     expect(doc.pageAt(0).id).toBe('id_a')
     expect(doc.pageAt(1).id).toBe('id_b')
     expect(doc.pageAt(2).id).toBe('id_d')
     expect(doc.pageAt(3).id).toBe('id_c')
-    expect(navigator.dom.children[0].className).toBe('class_a')
-    expect(navigator.dom.children[1].className).toBe('class_b')
-    expect(navigator.dom.children[2].className).toBe('class_d')
-    expect(navigator.dom.children[3].className).toBe('class_c')
+    expect(pageElementAt(0).className).toBe('class_a')
+    expect(pageElementAt(1).className).toBe('class_b')
+    expect(pageElementAt(2).className).toBe('class_d')
+    expect(pageElementAt(3).className).toBe('class_c')
 
   it 'deletes a page', ->
     navigator.deletePage(2)
@@ -84,6 +87,6 @@ describe 'Test of navigator.coffee', ->
     navigator.addPage(1)
     expect(doc.pageAt(0).id).toBe('id_a')
     expect(doc.pageAt(2).id).toBe('id_b')
-    expect(navigator.dom.children[0].className).toBe('class_a')
-    expect(navigator.dom.children[2].className).toBe('class_b')
+    expect(pageElementAt(0).className).toBe('class_a')
+    expect(pageElementAt(2).className).toBe('class_b')
 
