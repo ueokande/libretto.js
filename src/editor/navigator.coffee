@@ -41,10 +41,17 @@ class window.Scena.Navigator
     for e in cloned.getElementsByTagName('*')
       e.removeAttribute('id')
     cloned.removeAttribute('id')
-    capsula = document.createElement('div')
-    capsula.appendChild(cloned)
-    @dom.insertBefore(capsula, @dom.children[before])
-    return capsula
+    innerCcapsula = document.createElement('div')
+    innerCcapsula.appendChild(cloned)
+    outterCapsula = document.createElement('div')
+    outterCapsula.setAttribute('draggable', 'true')
+    outterCapsula.addEventListener('dragstart', @pageDragStart, false)
+    outterCapsula.addEventListener('dragenter', @pageDragEnter, false)
+    outterCapsula.addEventListener('dragleave', @pageDragLeave, false)
+    outterCapsula.addEventListener('dragover', @pageDragOver, false)
+    outterCapsula.appendChild(innerCcapsula)
+    @dom.insertBefore(outterCapsula, @dom.children[before])
+    return outterCapsula
 
   getCurrentPage: ->
     @currentIndex

@@ -32,7 +32,7 @@ describe 'Test of navigator.coffee', ->
     doc = null
 
   pageElementAt = (index) ->
-    navigator.dom.children[index].children[0]
+    navigator.dom.children[index].children[0].children[0]
 
   xit 'constructs and finalize an object', ->
 
