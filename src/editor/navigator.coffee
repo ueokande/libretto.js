@@ -47,6 +47,7 @@ class window.Scena.Navigator
     outerCapsule = document.createElement('div')
     outerCapsule.setAttribute('draggable', 'true')
     outerCapsule.addEventListener('dragstart', @pageDragStart, false)
+    outerCapsule.addEventListener('dragend', @pageDragEnd, false)
     outerCapsule.addEventListener('dragenter', @pageDragEnter, false)
     outerCapsule.addEventListener('dragleave', @pageDragLeave, false)
     outerCapsule.addEventListener('dragover', @pageDragOver, false)
@@ -58,5 +59,22 @@ class window.Scena.Navigator
   getCurrentPage: ->
     @currentIndex
 
-  setCurrentPage: (index) ->
+  setCurrentPage: (index) =>
     @currentIndex = index
+
+  pageDragStart: (e) ->
+
+  pageDragEnd: (e) =>
+    for c in @dom.children
+      c.classList.remove('over')
+
+  pageDragOver: (e) ->
+    if (e.preventDefault)
+      e.preventDefault()
+    e.dataTransfer.dropEffect = 'move'
+
+  pageDragEnter: (e) ->
+    @.classList.add('over')
+
+  pageDragLeave: (e) ->
+    @.classList.remove('over')

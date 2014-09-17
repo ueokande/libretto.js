@@ -11,31 +11,30 @@ html
     style
       |
         * {
-          margin: 0;
-          padding: 0;
+          margin  : 0;
+          padding : 0;
         }
         [draggable] {
-          -moz-user-select: none;
-          -khtml-user-select: none;
-          -webkit-user-select: none;
-          user-select: none;
-          /* Required to make elements draggable in old WebKit */
-          -khtml-user-drag: element;
-          -webkit-user-drag: element;
+          -moz-user-select    : none;
+          -khtml-user-select  : none;
+          -webkit-user-select : none;
+          user-select         : none;
+          -khtml-user-drag    : element;
+          -webkit-user-drag   : element;
         }
         html, body {
-          width: 100%;
-          height: 100%;
-          overflow: hidden;
+          width    : 100%;
+          height   : 100%;
+          overflow : hidden;
         }
         body {
           display : table;
         }
         #navigator {
-          width            : 220px;
           height           : 100%;
           display          : table-cell;
           z-index          : 10;
+          padding          : 16px;
           overflow-x       : hidden;
           overflow-y       : scroll;
           background-color : white;
@@ -45,15 +44,27 @@ html
           height  : 100%;
           display : table-cell;
         }
+        #navigator > .outerCapsule {
+          transition-duration : 100ms;
+        }
+        #navigator .innerCapsule {
+          pointer-events : none;
+          box-shadow     : 0 0 4px black;
+          border-radius  : 4px;
+          border         : 4px solid white;
+          margin         : 4px 0;
+          width          : 160px;
+          height         : 120px;
+        }
+        #navigator > .over.outerCapsule {
+          padding-top : 24px;
+        }
         #navigator section {
           position   : relative;
           visibility : visible;
-          margin     : 8px auto;
-          box-shadow : 0 0 4px black;
-          border     : 4px solid white;
+          zoom       : 0.15625;
           width      : 1024px;
           height     : 768px;
-          zoom       : 0.15625;
         }
 
   body
