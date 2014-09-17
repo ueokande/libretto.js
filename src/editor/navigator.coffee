@@ -6,6 +6,7 @@ class window.Scena.Navigator
   constructor: (@dom) ->
     @updateAll()
     @currentIndex = null
+    @draggedEle = null
 
   finalize: ->
     @dom.innerHTML = ''
@@ -49,8 +50,9 @@ class window.Scena.Navigator
     outerCapsule.addEventListener('dragstart', @pageDragStart, false)
     outerCapsule.addEventListener('dragend', @pageDragEnd, false)
     outerCapsule.addEventListener('dragenter', @pageDragEnter, false)
-    outerCapsule.addEventListener('dragleave', @pageDragLeave, false)
     outerCapsule.addEventListener('dragover', @pageDragOver, false)
+    outerCapsule.addEventListener('dragleave', @pageDragLeave, false)
+    outerCapsule.addEventListener('drop', @pageDrop, false)
     outerCapsule.classList.add('outerCapsule')
     outerCapsule.appendChild(innerCapsule)
     @dom.insertBefore(outerCapsule, @dom.children[before])
@@ -62,19 +64,38 @@ class window.Scena.Navigator
   setCurrentPage: (index) =>
     @currentIndex = index
 
-  pageDragStart: (e) ->
+  indexOfChild: (node) ->
+    n = 0
+    n++ while (node = node.previousSibling)
+    return n
+
+  pageDragStart: (e) =>
+    e.dataTransfer.effectAllower = 'move'
+    @draggedEle = e.target
+    @draggedEle.classList.add('dragged')
 
   pageDragEnd: (e) =>
     for c in @dom.children
       c.classList.remove('over')
+    @draggedEle.classList.remove('dragged')
+    @draggedEle = null
+
+  pageDragEnter: (e) =>
+    return if e.target == @draggedEle
+    return if e.target == @draggedEle.nextSibling
+    e.target.classList.add('over')
 
   pageDragOver: (e) ->
-    if (e.preventDefault)
-      e.preventDefault()
+    e.preventDefault()
     e.dataTransfer.dropEffect = 'move'
-
-  pageDragEnter: (e) ->
-    @.classList.add('over')
 
   pageDragLeave: (e) ->
     @.classList.remove('over')
+
+  pageDrop: (e) =>
+    e.stopPropagation()
+    return if @draggedEle == null
+    indexFrom = @indexOfChild(@draggedEle)
+    indexTo = @indexOfChild(e.target)
+    @movePage(indexFrom, indexTo)
+    return false
