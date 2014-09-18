@@ -9,7 +9,8 @@ class Scena.AutoZoom extends window.Scena.Plugin
     iw = window.innerWidth
     ih = window.innerHeight
     zoom = Math.min(iw / @initialBodyWidth, ih / @initialBodyHeight)
-    window.document.body.style.zoom = zoom
+    window.document.body.style.transform = "scale(#{zoom})"
+    window.document.body.style.transformOrigin = "0 0"
 
   bodyWidth = ->
     window.getComputedStyle(window.document.body).width.split('px')[0]
