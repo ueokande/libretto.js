@@ -78,6 +78,20 @@ html
           display          : table-cell;
           background-color : white;
           position         : relative;
+          vertical-align   : middle;
+        }
+        #main_canvas .container {
+          display        : table;
+          pointer-events : none;
+          vertical-align : middle;
+          margin         : 0 auto;
+          box-shadow     : 0 0 8px black;
+        }
+        #main_canvas section {
+          position         : static;
+          visibility       : visible;
+          width            : 1024px;
+          height           : 768px;
         }
 
   body
@@ -107,6 +121,8 @@ html
         </html>
       '''
       Scena.Document.createDocument(src)
-      window.navigator = new Scena.Navigator(document.getElementById('navigator'))
+      window.page_navigator = new Scena.Navigator(document.getElementById('navigator'))
       window.main_canvas = new Scena.MainCanvas(document.getElementById('main_canvas'))
-
+      window.page_navigator.addCurrentPageChangedListener(->
+        main_canvas.setCurrentPage(page_navigator.getCurrentIndex())
+      )
