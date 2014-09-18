@@ -39,11 +39,6 @@ html
           overflow-y       : scroll;
           background-color : white;
         }
-        #main {
-          width   : 100%;
-          height  : 100%;
-          display : table-cell;
-        }
         #navigator > .outerCapsule {
           transition-duration : 100ms;
         }
@@ -74,10 +69,17 @@ html
           width            : 1024px;
           height           : 768px;
         }
+        #main_canvas {
+          width            : 100%;
+          height           : 100%;
+          display          : table-cell;
+          background-color : white;
+          position         : relative;
+        }
 
   body
-    aside id='navigator'
-    div id='main'
+    aside#navigator
+    div#main_canvas
 
     coffee:
       src = '''
@@ -103,4 +105,5 @@ html
       '''
       Scena.Document.createDocument(src)
       window.navigator = new Scena.Navigator(document.getElementById('navigator'))
+      window.main_canvas = new Scena.MainCanvas(document.getElementById('main_canvas'))
 
