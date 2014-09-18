@@ -13,12 +13,20 @@ describe 'Test of page.coffee', ->
       window.document.body.removeChild(ele)
     elements = null
 
-  it 'returns the number of the page in the document', ->
+  it 'returns the number of the page which has body as parent', ->
+    grandchildElement = document.createElement('section')
+    elements[1].appendChild(grandchildElement)
     expect(Scena.Page.count()).toBe(3)
 
   it 'returns a page object of the specified by index', ->
-    object = Scena.Page.pageAt(1)
-    expect(object.element).toBe(window.document.body.getElementsByTagName('section')[1])
+    grandchildElement = document.createElement('section')
+    elements[1].appendChild(grandchildElement)
+    object = Scena.Page.pageAt(2)
+
+    childSections = []
+    for c in window.document.body.children
+      childSections.push(c) if c.tagName.match(/section/i)
+    expect(object.element).toBe(childSections[2])
 
   it 'returns an effect name if the name is given', ->
     pageEle = window.document.body.getElementsByTagName('section')[1]

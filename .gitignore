@@ -1,3 +1,4 @@
+# gomi
 .DS_Store
 *~
 *.user
@@ -7,4 +8,10 @@
 *.orig
 .exrc
 
+#bundle
+/.bundle
+/vendor/bundle
+/Gemfile.lock
+
+# Compiled files
 js

@@ -26,22 +26,17 @@ class window.Scena.Core extends window.Scena.Plugin
     @currentIndex
 
   #
-  # Initializes internal variables and HTML contents.
-  #
-  initialize: =>
-    sections = document.body.getElementsByTagName("section")
-    return if sections.length is 0
-
-  #
   # Skips to specified page without animation.
   #
   skipToPage: (index) ->
+    return if Scena.Page.count() == 0
     switchPage.call(@, index, false)
 
   #
   #
   #
   animateToPage: (index) ->
+    return if Scena.Page.count() == 0
     switchPage.call(@, index, true)
 
   #

@@ -22,6 +22,7 @@ class Scena.IO extends window.Scena.Plugin
     )
 
     window.addEventListener('click', (e) =>
+      return if e.button != 0
       @core().nextStep()
     )
 

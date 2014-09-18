@@ -1,6 +1,11 @@
 body {
-  overflow      : hidden;
-  counter-reset : pagecounter;
+  overflow            : hidden;
+  counter-reset       : pagecounter;
+  position            : relative;
+  -webkit-user-select : none;
+  -moz-user-select    : none;
+  user-select         : none;
+  cursor              : default;
 }
 
 section {
@@ -10,6 +15,8 @@ section {
   top               : 0px;
   left              : 0px;
   counter-increment : pagecounter;
+  width             : 100%;
+  height            : 100%;
 }
 
 p.pagenum:before {

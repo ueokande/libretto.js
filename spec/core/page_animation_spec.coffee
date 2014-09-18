@@ -37,3 +37,12 @@ describe 'Test of page_animation.coffee', ->
     pageAnimation.finalize()
 
   xit 'switches the page with animation', ->
+
+  it 'converts the duratin text to millisec', ->
+    expect(Scena.KeyframeAnimation.timeToMillisecond("200ms")).toBe(200)
+    expect(Scena.KeyframeAnimation.timeToMillisecond("5s")).toBe(5000)
+    expect(Scena.KeyframeAnimation.timeToMillisecond("1.4s")).toBe(1400)
+    expect(Scena.KeyframeAnimation.timeToMillisecond("abc1.4s")).toBeNull()
+    expect(Scena.KeyframeAnimation.timeToMillisecond("x")).toBeNull()
+    expect(Scena.KeyframeAnimation.timeToMillisecond("ms")).toBeNull()
+    expect(Scena.KeyframeAnimation.timeToMillisecond("")).toBeNull()
