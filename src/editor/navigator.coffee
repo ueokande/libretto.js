@@ -8,6 +8,8 @@ class window.Scena.Navigator
     @currentIndex = null
     @draggedEle = null
 
+    @currentPageChangedListeners = []
+
   finalize: ->
     @dom.innerHTML = ''
 
@@ -47,6 +49,7 @@ class window.Scena.Navigator
     innerCapsule.classList.add('innerCapsule')
     outerCapsule = document.createElement('div')
     outerCapsule.setAttribute('draggable', 'true')
+    outerCapsule.addEventListener('mousedown', @pageMouseDown, false)
     outerCapsule.addEventListener('dragstart', @pageDragStart, false)
     outerCapsule.addEventListener('dragend', @pageDragEnd, false)
     outerCapsule.addEventListener('dragenter', @pageDragEnter, false)
@@ -58,16 +61,24 @@ class window.Scena.Navigator
     @dom.insertBefore(outerCapsule, @dom.children[before])
     return outerCapsule
 
-  getCurrentPage: ->
+  getCurrentIndex: ->
     @currentIndex
 
-  setCurrentPage: (index) =>
+  setCurrentIndex: (index) =>
+    return if @currentIndex == index
     @currentIndex = index
+    for c in @dom.children
+      c.classList.remove('active')
+    @dom.children[index].classList.add('active')
+    listener() for listener in @currentPageChangedListeners
 
   indexOfChild: (node) ->
     n = 0
     n++ while (node = node.previousSibling)
     return n
+
+  pageMouseDown: (e) =>
+    @setCurrentIndex(@indexOfChild(e.target))
 
   pageDragStart: (e) =>
     e.dataTransfer.effectAllower = 'move'
@@ -99,3 +110,6 @@ class window.Scena.Navigator
     indexTo = @indexOfChild(e.target)
     @movePage(indexFrom, indexTo)
     return false
+
+  addCurrentPageChangedListener: (listener) ->
+    @currentPageChangedListeners.push(listener)
