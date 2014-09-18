@@ -1,7 +1,11 @@
 body {
-  overflow      : hidden;
-  counter-reset : pagecounter;
-  position      : relative;
+  overflow            : hidden;
+  counter-reset       : pagecounter;
+  position            : relative;
+  -webkit-user-select : none;
+  -moz-user-select    : none;
+  user-select         : none;
+  cursor              : default;
 }
 
 section {
