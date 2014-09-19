@@ -82,6 +82,7 @@ class window.Scena.Pager extends window.Scena.Plugin
     return if e.keyCode != 13
     
     num = ~~(@inputBox.value)
-    core().skipToPage(num - 1)
+    viewer = window.Scena.Viewer.viewer()
+    viewer.skipToPage(num - 1)
     @hidePager()
   

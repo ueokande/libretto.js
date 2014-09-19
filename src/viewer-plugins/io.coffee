@@ -1,29 +1,32 @@
 class Scena.IO extends window.Scena.Plugin
   initialize: =>
     window.addEventListener('keypress', (e) =>
+      viewer = window.Scena.Viewer.viewer()
       if e.charCode == '['.charCodeAt(0)
-        @core().skipToPrevPage()
+        viewer.skipToPrevPage()
       else if e.charCode == ']'.charCodeAt(0)
-        @core().skipToNextPage()
+        viewer.skipToNextPage()
     )
 
     window.addEventListener('keydown', (e)=>
       # TODO: Added Enter key but the Enter is conflicted to pager plugin.
+      viewer = window.Scena.Viewer.viewer()
       switch (e.keyCode)
         # case 13:    // Enter
         when 32, 40, 34    # Space, Arrow Down, Page Down
-          @core().nextStep()
+          viewer.nextStep()
         when 38, 33    # Arrow Up, Page Up
-          @core().prevStep()
+          viewer.prevStep()
         when 36    # Home
-          @core().skipToFirstPage()
+          viewer.skipToFirstPage()
         when 35    # End
-          @core().skipToLastPage()
+          viewer.skipToLastPage()
     )
 
     window.addEventListener('click', (e) =>
       return if e.button != 0
-      @core().nextStep()
+      viewer = window.Scena.Viewer.viewer()
+      viewer.nextStep()
     )
 
 new window.Scena.IO

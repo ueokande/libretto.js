@@ -1,14 +1,7 @@
-class window.Scena.Plugin
-  constructor: (name) ->
-    window.addEventListener("load", @initialize)
+class window.Scena.Viewer
 
-  initialize: ->
-
-  core: ->
-    window.Scena.core
-
-
-class window.Scena.Core extends window.Scena.Plugin
+  @viewer: ->
+    window.Scena.viewer
 
   #
   # Initializes internal variables and HTML contents.
@@ -19,8 +12,7 @@ class window.Scena.Core extends window.Scena.Plugin
     @pageAnimation = null
     @currentPageChangedListeners = []
 
-    window.Scena.core = @
-    super()
+    window.Scena.viewer = @
 
   getCurrentIndex: ->
     @currentIndex
@@ -106,5 +98,5 @@ class window.Scena.Core extends window.Scena.Plugin
     @currentPageChangedListeners.push(listener)
 
 
-new window.Scena.Core
+new window.Scena.Viewer
 
