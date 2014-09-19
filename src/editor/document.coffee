@@ -59,7 +59,7 @@ class window.Scena.Document
 
   deletePage: (index) ->
     return null if @container is null
-    @container.removeChild(@container.children[index])
+    @container.removeChild(@pageAt(index))
 
   addPage: (to) ->
     return null if @container is null
@@ -72,3 +72,8 @@ class window.Scena.Document
     return null if @container is null
     to = Math.max(to, 0)
     @container.insertBefore(@pageAt(from), @pageAt(to))
+
+  updatePage: (index, updated) ->
+    return null if @container is null
+    @deletePage(index)
+    @container.insertBefore(updated, @pageAt(index))
