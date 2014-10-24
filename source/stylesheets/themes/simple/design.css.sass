@@ -1,0 +1,96 @@
+*
+  margin  : 0px
+  padding : 0px
+
+body
+  font-family      : sans-serif
+  background-color : black
+
+h1
+  font-size     : 40pt
+  font-weight   : bold
+  color         : #3a3a38
+  margin-bottom : 24px
+
+h2
+  font-size   : 28pt
+  color       : #1393aa
+  margin      : 20px 0px 8px
+  font-weight : bold
+
+ul
+  list-style : none
+  margin     : 20px 28px 50px
+
+  li
+    margin-top : 20px
+    &:before
+      content          : ''
+      width            : 16px
+      height           : 16px
+      display          : inline-block
+      background-color : #f7354f
+      border-radius    : 50%
+      margin-bottom    : .2ex
+      margin-left      : -24px
+      margin-right     : 8px
+
+hr
+  background-color : #3a3a38
+  border           : 0 none
+  height           : 4px
+
+pre
+  background-color : #333
+  color            : white
+  font-family      : "Lucida Console", Monaco, monospace
+  border-radius    : 12px
+  padding          : 16px
+  line-height      : 85%
+  font-size        : 11pt
+
+section
+  padding             : 8px
+  font-size           : 28pt
+  background-color    : #cbd3c5
+  overflow            : hidden
+  padding             : 12px 36px
+  -webkit-box-sizing  : border-box
+  -moz-box-sizing     : border-box
+  box-sizing          : border-box
+
+  &:before
+    content          : ''
+    width            : 96%
+    height           : 87%
+    position         : absolute
+    border-radius    : 24px
+    margin           : 0
+    left             : 2%
+    top              : 80px
+    z-index          : -1
+    background-color : #f9f6eb
+    display          : block
+
+section.title
+  background-image : none
+
+  h1
+    margin-top : 30%
+
+  ul
+    margin-left : 0px
+    li:before
+      content: none
+
+.pagenum
+  position  : absolute
+  font-size : 16pt
+  top       : 2%
+  left      : 95%
+
+p.large
+  text-align  : center
+  font-size   : 160pt
+  line-height : 80%
+
