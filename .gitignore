@@ -1,4 +1,4 @@
-# gomi
+# Gomi files
 .DS_Store
 *~
 *.user
@@ -8,10 +8,14 @@
 *.orig
 .exrc
 
-#bundle
+# Bundle
 /.bundle
 /vendor/bundle
 /Gemfile.lock
 
-# Compiled files
-js
+# Build directory
+/build
+
+# Ignore cache
+/.sass-cache
+/.cache

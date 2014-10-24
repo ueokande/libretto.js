@@ -5,11 +5,10 @@ html
 
     title Introduction of scena.js
 
-    link href="css/scena.css" rel="stylesheet" type="text/css"
-    link href="css/print.css" rel="stylesheet" type="text/css" media="print"
-    link href="themes/simple/design.css" rel="stylesheet" type="text/css"
-
-    script src="scena.js"
+    = stylesheet_link_tag 'scena'
+    = stylesheet_link_tag 'print', media: 'print'
+    = stylesheet_link_tag 'themes/simple/design.css'
+    = javascript_include_tag  "scena"
 
     style
       | body {

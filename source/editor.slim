@@ -3,10 +3,10 @@ html
   head
     meta charset='UTF-8'
 
-    link href="css/scena.css" rel="stylesheet" type="text/css"
-    link href="themes/simple/design.css" rel="stylesheet" type="text/css"
-    script src='scena.js'
-    script src='scena_editor.js'
+    = javascript_include_tag  "scena"
+    = javascript_include_tag  "scena-editor"
+    = stylesheet_link_tag 'scena'
+    = stylesheet_link_tag 'themes/simple/design.css'
 
     style
       |
