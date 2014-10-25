@@ -54,9 +54,6 @@ html ng-app='scena_editor'
         #navigator > .over.outer-capsule {
           padding-top : 24px;
         }
-        #navigator > .outer-capsule.active {
-          box-shadow     : 0 0 6px #44f;
-        }
         #navigator > .dragged.outer-capsule {
           opacity          : 0.5;
          -webkit-transform : scale(0.8);
@@ -97,9 +94,13 @@ html ng-app='scena_editor'
         }
 
   body
+    style ng-controller='NavigatorController'
+      | #navigator > .outer-capsule:nth-child({{currentIndex}}) {
+          box-shadow     : 0 0 6px #44f;
+        }
     aside#navigator (ng-controller='NavigatorController'
-                     ng-init='insertPage();insertPage();insertPage();'
-                     thumbnail-list)
+                     ng-init='insertPage();insertPage();insertPage();')
+      div (ng-repeat='page in pages' navigator-thumbnail)
 
     main#main_canvas
 
