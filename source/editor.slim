@@ -1,10 +1,10 @@
 doctype html
-html
+html ng-app='scena_editor'
   head
     meta charset='UTF-8'
 
-    = javascript_include_tag  "scena"
-    = javascript_include_tag  "scena-editor"
+    = javascript_include_tag "https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.min.js"
+    = javascript_include_tag "scena-editor"
     = stylesheet_link_tag 'scena'
     = stylesheet_link_tag 'themes/simple/design.css'
 
@@ -39,10 +39,10 @@ html
           overflow-y       : scroll;
           background-color : white;
         }
-        #navigator > .outerCapsule {
+        #navigator > .outer-capsule {
           transition-duration : 100ms;
         }
-        #navigator .innerCapsule {
+        #navigator .inner-capsule {
           pointer-events : none;
           box-shadow     : 0 0 4px black;
           border-radius  : 4px;
@@ -51,13 +51,13 @@ html
           width          : 160px;
           height         : 120px;
         }
-        #navigator > .over.outerCapsule {
+        #navigator > .over.outer-capsule {
           padding-top : 24px;
         }
-        #navigator > .outerCapsule.active {
+        #navigator > .outer-capsule.active {
           box-shadow     : 0 0 6px #44f;
         }
-        #navigator > .dragged.outerCapsule {
+        #navigator > .dragged.outer-capsule {
           opacity          : 0.5;
          -webkit-transform : scale(0.8);
          -moz-transform    : scale(0.8);
@@ -97,8 +97,11 @@ html
         }
 
   body
-    aside#navigator
-    div#main_canvas
+    aside#navigator (ng-controller='NavigatorController'
+                     ng-init='insertPage();insertPage();insertPage();'
+                     thumbnail-list)
+
+    main#main_canvas
 
     coffee:
       src = '''
@@ -122,9 +125,9 @@ html
           </body>
         </html>
       '''
-      Scena.Document.createDocument(src)
-      window.page_navigator = new Scena.Navigator(document.getElementById('navigator'))
-      window.main_canvas = new Scena.MainCanvas(document.getElementById('main_canvas'))
-      window.page_navigator.addCurrentPageChangedListener(->
-        main_canvas.setCurrentPage(page_navigator.getCurrentIndex())
-      )
+      # Scena.Document.createDocument(src)
+      # window.page_navigator = new Scena.Navigator(document.getElementById('navigator'))
+      # window.main_canvas = new Scena.MainCanvas(document.getElementById('main_canvas'))
+      # window.page_navigator.addCurrentPageChangedListener(->
+      #   main_canvas.setCurrentPage(page_navigator.getCurrentIndex())
+      # )
