@@ -42,17 +42,21 @@ app.controller 'NavigatorController', ($scope, $rootScope, presentation) ->
     return false
 
 app.directive 'navigatorThumbnail', ->
-  return {
-    replace: true
-    link: (scope, element, attrs) ->
-      cloned = scope.page.cloneNode(true)
-      for e in cloned.getElementsByTagName('*')
-        e.removeAttribute('id')
-      cloned.removeAttribute('id')
-      html = """
-        <div class='inner-capsule'>
-          #{cloned.outerHTML}
-        </div>
-      """
-      element[0].innerHTML = html
-  }
+  return (scope, element, attrs) ->
+    cloned = scope.page.cloneNode(true)
+    for e in cloned.getElementsByTagName('*')
+      e.removeAttribute('id')
+    cloned.removeAttribute('id')
+    html = """
+      <div class='inner-capsule'>
+        #{cloned.outerHTML}
+      </div>
+    """
+    ele = element[0]
+    ele.innerHTML = html
+    ele.addEventListener 'dragstart', -> scope.dragStart(scope.$index)
+    ele.addEventListener 'dragend', -> scope.dragEnd(scope.$index)
+    ele.addEventListener 'dragenter', -> scope.dragEnter(scope.$index)
+    ele.addEventListener 'dragover', -> scope.dragOver(scope.$index)
+    ele.addEventListener 'dragleave', -> scope.dragLeave(scope.$index)
+    ele.addEventListener 'drop', -> scope.drop(scope.$index)
