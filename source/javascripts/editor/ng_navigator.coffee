@@ -8,38 +8,31 @@ app.controller 'NavigatorController', ($scope, $rootScope, presentation) ->
     return true
   $scope.setCurrentPage = (index) ->
     $rootScope.currentIndex = index
+  $scope.overedIndex = -1
+  $scope.moveFromIndex = -1
 
   $scope.dragStart = (index) ->
-    return console.debug "dtart start @#{index}"
-    e.dataTransfer.effectAllowed = 'move'
-    @draggedEle = e.target
-    @draggedEle.classList.add('dragged')
+    $scope.$apply -> $scope.moveFromIndex = index
+
   $scope.dragEnd = (index) ->
-    return console.debug "dtart end @#{index}"
-    for c in @dom.children
-      c.classList.remove('over')
-    @draggedEle.classList.remove('dragged')
-    @draggedEle = null
+    $scope.$apply ->
+      $scope.overedIndex = -1
+      $scope.moveFromIndex = -1
+
   $scope.dragEnter = (index) ->
-    return console.debug "dtart enter @#{index}"
-    return if e.target == @draggedEle
-    return if e.target == @draggedEle.nextSibling
-    e.target.classList.add('over')
-  $scope.dragOver = (index) ->
-    return console.debug "dtart over @#{index}"
-    e.preventDefault()
-    e.dataTransfer.dropEffect = 'move'
+    return if index == $scope.moveFromIndex
+    return if index == $scope.moveFromIndex + 1
+    $scope.$apply -> $scope.overedIndex = index
+
   $scope.dragLeave = (index) ->
-    return console.debug "dtart leave @#{index}"
-    @.classList.remove('over')
+    $scope.$apply -> $scope.overedIndex = -1
+
   $scope.drop = (index) ->
-    return console.debug "drop @#{index}"
-    e.stopPropagation()
-    return if @draggedEle == null
-    indexFrom = @indexOfChild(@draggedEle)
-    indexTo = @indexOfChild(e.target)
-    @movePage(indexFrom, indexTo)
-    return false
+    return if $scope.moveFromIndex == -1
+    $scope.$apply -> presentation.movePage($scope.moveFromIndex, index)
+
+  $scope.appenPage = ->
+    presentation.insertPage
 
 app.directive 'navigatorThumbnail', ->
   return (scope, element, attrs) ->
@@ -54,9 +47,15 @@ app.directive 'navigatorThumbnail', ->
     """
     ele = element[0]
     ele.innerHTML = html
-    ele.addEventListener 'dragstart', -> scope.dragStart(scope.$index)
+    ele.addEventListener 'dragstart', (e) ->
+      e.dataTransfer.effectAllowed = 'move'
+      scope.dragStart(scope.$index)
     ele.addEventListener 'dragend', -> scope.dragEnd(scope.$index)
     ele.addEventListener 'dragenter', -> scope.dragEnter(scope.$index)
-    ele.addEventListener 'dragover', -> scope.dragOver(scope.$index)
+    ele.addEventListener 'dragover', (e) ->
+      e.preventDefault()
+      e.dataTransfer.dropEffect = 'move'
     ele.addEventListener 'dragleave', -> scope.dragLeave(scope.$index)
-    ele.addEventListener 'drop', -> scope.drop(scope.$index)
+    ele.addEventListener 'drop', (e) ->
+      e.stopPropagation()
+      scope.drop(scope.$index)

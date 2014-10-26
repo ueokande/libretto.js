@@ -38,7 +38,7 @@ html ng-app='scena_editor'
           overflow-y       : scroll;
           background-color : white;
         }
-        #navigator > .outer-capsule {
+        #navigator > .outer-cupsule {
           transition-duration : 100ms;
         }
         #navigator .inner-capsule {
@@ -49,16 +49,6 @@ html ng-app='scena_editor'
           margin         : 4px 0;
           width          : 160px;
           height         : 120px;
-        }
-        #navigator > .over.outer-capsule {
-          padding-top : 24px;
-        }
-        #navigator > .dragged.outer-capsule {
-          opacity          : 0.5;
-         -webkit-transform : scale(0.8);
-         -moz-transform    : scale(0.8);
-         -ms-transform     : scale(0.8);
-         -o-transform      : scale(0.8);
         }
         #navigator section {
           position         : relative;
@@ -93,16 +83,28 @@ html ng-app='scena_editor'
         }
 
   body ng-controller='Develop' ng-init='debugInit()'
-    style ng-controller='NavigatorController'
-      | #navigator > .outer-capsule:nth-child({{currentIndex}}) {
-          box-shadow     : 0 0 6px #44f;
-        }
     aside#navigator (ng-controller='NavigatorController')
       div.outer-cupsule (ng-repeat='page in pages'
-                         ng-click='setCurrentPage($index)'
+                         ng-mousedown='setCurrentPage($index)'
                          draggable='true'
                          ng-draggable='true'
                          navigator-thumbnail)
+      style
+        | #navigator > :nth-child({{currentIndex + 1}}) {
+            box-shadow     : 0 0 6px #44f;
+          }
+          /* drag over */
+          #navigator > :nth-child({{overedIndex + 1}}) {
+            padding-top : 24px;
+          }
+          /* dragged element*/
+          #navigator > :nth-child({{moveFromIndex + 1}}) {
+            opacity          : 0.5;
+           -webkit-transform : scale(0.8);
+           -moz-transform    : scale(0.8);
+           -ms-transform     : scale(0.8);
+           -o-transform      : scale(0.8);
+          }
 
     main#main_canvas
 
