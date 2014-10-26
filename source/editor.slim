@@ -107,7 +107,13 @@ html ng-app='scena_editor'
           }
 
     main#main_canvas (ng-controller='CanvasController'
+                      ng-mousedown='mouseDown($event)'
+                      ng-mouseup='mouseUp($event)'
+                      ng-mousemove='mouseMove($event)'
+                      ng-dblclick='doubleClick($event)'
                       main-canvas)
+    div (ng-controller='RubberBandController'
+         ng-style='rubberBandStyle()')
 
     coffee:
       # window.page_navigator = new Scena.Navigator(document.getElementById('navigator'))
