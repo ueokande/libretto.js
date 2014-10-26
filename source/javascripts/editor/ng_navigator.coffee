@@ -1,3 +1,5 @@
+#= require ./ng_presentation
+
 app = angular.module('scena_editor')
 app.controller 'NavigatorController', ($scope, $rootScope, presentation) ->
   $scope.pages = presentation.pages()

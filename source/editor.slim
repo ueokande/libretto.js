@@ -92,13 +92,12 @@ html ng-app='scena_editor'
           box-shadow     : 0 0 6px #88f;
         }
 
-  body
+  body ng-controller='Develop' ng-init='debugInit()'
     style ng-controller='NavigatorController'
       | #navigator > .outer-capsule:nth-child({{currentIndex}}) {
           box-shadow     : 0 0 6px #44f;
         }
-    aside#navigator (ng-controller='NavigatorController'
-                     ng-init='insertPage();insertPage();insertPage();')
+    aside#navigator (ng-controller='NavigatorController')
       div.outer-cupsule (ng-repeat='page in pages'
                          ng-click='setCurrentPage($index)'
                          ng-dragstart='dragstart($index)'
@@ -114,28 +113,6 @@ html ng-app='scena_editor'
     main#main_canvas
 
     coffee:
-      src = '''
-        <html>
-          <head>
-            <title>Hello Editor Title</title>
-          </head>
-          <body>
-            <section id='a'>
-              <h1>Hello</h1>
-            </section>
-            <section id='b'>
-              <h1>This is </h1>
-            </section>
-            <section id='c'>
-              <h1>a</h1>
-            </section>
-            <section id='d'>
-              <h1>pen</h1>
-            </section>
-          </body>
-        </html>
-      '''
-      # Scena.Document.createDocument(src)
       # window.page_navigator = new Scena.Navigator(document.getElementById('navigator'))
       # window.main_canvas = new Scena.MainCanvas(document.getElementById('main_canvas'))
       # window.page_navigator.addCurrentPageChangedListener(->

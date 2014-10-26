@@ -1,6 +1,9 @@
 class window.Scena.Presentation
   constructor: (@container) ->
 
+  loadFromText: (content) ->
+    @container.innerHTML = content
+
   pageAt: (index) ->
     return null if @container is null
     sections = @container.getElementsByTagName('section')
