@@ -9,8 +9,7 @@ html ng-app='scena_editor'
     = stylesheet_link_tag 'themes/simple/design.css'
 
     style
-      |
-        * {
+      | * {
           margin  : 0;
           padding : 0;
         }
@@ -100,7 +99,17 @@ html ng-app='scena_editor'
         }
     aside#navigator (ng-controller='NavigatorController'
                      ng-init='insertPage();insertPage();insertPage();')
-      div (ng-repeat='page in pages' navigator-thumbnail)
+      div.outer-cupsule (ng-repeat='page in pages'
+                         ng-click='setCurrentPage($index)'
+                         ng-dragstart='dragstart($index)'
+                         ng-dragend='dragend($index)'
+                         ng-dragenter='dragenter($index)'
+                         ng-dragover='dragover($index)'
+                         ng-dragleave='dragleave($index)'
+                         ng-drop='drop($index)'
+                         draggable='true'
+                         ng-draggable='true'
+                         navigator-thumbnail)
 
     main#main_canvas
 
