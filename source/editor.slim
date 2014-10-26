@@ -106,7 +106,8 @@ html ng-app='scena_editor'
            -o-transform      : scale(0.8);
           }
 
-    main#main_canvas
+    main#main_canvas (ng-controller='CanvasController'
+                      main-canvas)
 
     coffee:
       # window.page_navigator = new Scena.Navigator(document.getElementById('navigator'))
