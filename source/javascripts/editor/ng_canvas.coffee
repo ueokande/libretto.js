@@ -13,7 +13,10 @@ app.controller 'CanvasController', ($scope, $rootScope,
 
 app.directive 'mainCanvas', ($rootScope, presentation) ->
   return (scope, element) -> scope.$watch 'currentIndex', ->
-    return if $rootScope.currentIndex == undefined
-    cloned = presentation.pageAt(scope.currentIndex)
-    ele = element[0]
-    ele.innerHTML = cloned.outerHTML
+    return if scope.currentIndex == undefined
+    unless scope.prevIndex == undefined or scope.prevIndex == null
+      presentation.commitPage(scope.prevIndex, scope.currentPage)
+    currentPage = presentation.pageAt(scope.currentIndex).cloneNode(true)
+    element[0].appendChild(currentPage)
+    scope.currentPage = currentPage
+    scope.prevIndex = scope.currentIndex

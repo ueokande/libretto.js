@@ -50,6 +50,12 @@ class window.Scena.Presentation
     to = Math.max(to, 0)
     @container.insertBefore(@pageAt(from), @pageAt(to))
 
+  commitPage: (to, dom) ->
+    return null if @container is null
+    to = Math.max(to, 0)
+    @container.removeChild(@pageAt(to))
+    @container.insertBefore(dom, @pageAt(to))
+
 app = angular.module('scena_editor', [])
 app.factory 'presentation', ->
   container = document.createElement('div')
