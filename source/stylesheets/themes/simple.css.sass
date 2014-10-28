@@ -1,6 +1,6 @@
 *
-  margin  : 0px
-  padding : 0px
+  margin  : 0
+  padding : 0
 
 body
   font-family      : sans-serif
@@ -11,11 +11,12 @@ h1
   font-weight   : bold
   color         : #3a3a38
   margin-bottom : 24px
+  margin        : 0 0 32px
 
 h2
   font-size   : 28pt
   color       : #1393aa
-  margin      : 20px 0px 8px
+  margin      : 32px 0 8px
   font-weight : bold
 
 ul
@@ -40,21 +41,11 @@ hr
   border           : 0 none
   height           : 4px
 
-pre
-  background-color : #333
-  color            : white
-  font-family      : "Lucida Console", Monaco, monospace
-  border-radius    : 12px
-  padding          : 16px
-  line-height      : 85%
-  font-size        : 11pt
-
 section
-  padding             : 8px
+  padding             : 8px 64px
   font-size           : 28pt
   background-color    : #cbd3c5
   overflow            : hidden
-  padding             : 12px 36px
   -webkit-box-sizing  : border-box
   -moz-box-sizing     : border-box
   box-sizing          : border-box
@@ -73,24 +64,15 @@ section
     display          : block
 
 section.title
-  background-image : none
+  &:before
+    content : none
 
   h1
-    margin-top : 30%
-
-  ul
-    margin-left : 0px
-    li:before
-      content: none
+    font-size : 300%
+    margin-top : 20%
 
 .pagenum
   position  : absolute
-  font-size : 16pt
+  font-size : 21pt
   top       : 2%
   left      : 95%
-
-p.large
-  text-align  : center
-  font-size   : 160pt
-  line-height : 80%
-
