@@ -7,13 +7,14 @@
 #     up ... Top to Bottom
 #     down ... Bottom to Top
 #
-class Scena.PageEffect.Dissolve extends window.Scena.PageEffect
+Scena.registerPageEffect 'dissolve', ->
   before: (prevStyle, nextStyle, duration, options) ->
     nextStyle.opacity = "0"
 
   exec: (prevStyle, nextStyle, duration, options) ->
       nextStyle.transitionDuration = duration
       nextStyle.opacity = "1"
+
 #
 #
 # MoveIn page Effect
@@ -24,7 +25,7 @@ class Scena.PageEffect.Dissolve extends window.Scena.PageEffect
 #     up ... Top to Bottom
 #     down ... Bottom to Top
 #
-class Scena.PageEffect.MoveIn extends window.Scena.PageEffect
+Scena.registerPageEffect 'move-in', ->
 
   before: (prevStyle, nextStyle, duration, options) ->
     origin = ({
@@ -56,7 +57,7 @@ class Scena.PageEffect.MoveIn extends window.Scena.PageEffect
 #     up      ... Top to Bottom
 #     down    ... Bottom to Top
 #
-class Scena.PageEffect.Push extends window.Scena.PageEffect
+Scena.registerPageEffect 'push', ->
 
   before: (prevStyle, nextStyle, duration, options) ->
     posPrefix = {
@@ -93,7 +94,8 @@ class Scena.PageEffect.Push extends window.Scena.PageEffect
 #     in
 #     out
 #
-class Scena.PageEffect.Scale extends window.Scena.PageEffect
+Scena.registerPageEffect 'scale', ->
+
   before: (prevStyle, nextStyle, duration, options) ->
     direction = options.direction
     @targetNext = true   # A target of the animation is next slide when true

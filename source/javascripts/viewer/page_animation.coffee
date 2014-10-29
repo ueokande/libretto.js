@@ -26,8 +26,7 @@ class window.Scena.PageAnimation
   #
   #
   noAnimatePage = ->
-    effect = new Scena.PageEffect
-    execAnime.call(@, effect, null, null)
+    execAnime.call(@)
 
   #
   #
@@ -37,17 +36,15 @@ class window.Scena.PageAnimation
     duration = @nextPage.animationDuration()
     options = @nextPage.animationOptions()
 
-    if effectName == null
-      effectClass = Scena.PageEffect.Default
-    else if Scena.PageEffect[effectName] isnt undefined
-      effectClass = Scena.PageEffect[effectName]
-    else
+    effect = null if effectName == null
+    effect = Scena.loadPageEffect(effectName)
+    if effect is null
       console.warn("No such page effect : #{effectName}")
-      effectClass = Scena.PageEffect.Default
 
-    effect = new effectClass
-
-    execAnime.call(@, effect, duration, options)
+    if effect == null
+      execAnime.call(@)
+    else
+      execAnime.call(@, effect(), duration, options)
 
   #
   #
@@ -62,7 +59,10 @@ class window.Scena.PageAnimation
     nextStyle.visibility = 'visible'
     nextStyle.zIndex = 1
 
-    effect.before(prevStyle, nextStyle, duration, options)
+    return if effect == undefined
+
+    if effect.hasOwnProperty('before')
+      effect.before(prevStyle, nextStyle, duration, options)
     setTimeout(->
       effect.exec(prevStyle, nextStyle, duration, options)
     , 0)
