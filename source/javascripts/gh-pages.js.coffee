@@ -5,7 +5,6 @@ window.onload = (e) ->
 
   commit = ->
     preview.srcdoc = editor.value
-    console.debug editor.value
 
   commit_button.onclick = -> commit()
 
