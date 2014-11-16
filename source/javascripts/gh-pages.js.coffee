@@ -71,7 +71,8 @@ window.onload = (e) ->
       <h2>Join to contribution</h2>
       <ul>
         <li>Fork me on
-          <a href='https://github.com/iBenza/Scena.js'>Github</a>
+          <a target='_blank'
+             href='https://github.com/iBenza/Scena.js'>Github</a>
         </li>
       </ul>
       <h2>Future works</h2>
