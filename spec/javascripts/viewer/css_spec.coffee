@@ -16,9 +16,9 @@ describe 'Test of css.coffee', ->
     css = new Scena.Css('tested_css')
     css.addRule('h2', {'color':'red'})
     css.addRule('h3', {'background-color':'blue'})
-    expect(css.style.sheet.rules.length).toBe(2)
-    expect(css.style.sheet.rules[0].style.color).toBe('red')
-    expect(css.style.sheet.rules[1].style.backgroundColor).toBe('blue')
+    expect(css.rules().length).toBe(2)
+    expect(css.rules()[0].style.color).toBe('red')
+    expect(css.rules()[1].style.backgroundColor).toBe('blue')
     css.finalize()
 
   it 'applies to on-site HTML', ->
@@ -45,6 +45,6 @@ describe 'Test of css.coffee', ->
     css.addRule('h2', {'color':'red'})
     css.addRule('h3', {'background-color':'blue'})
     css.clearRules()
-    expect(css.style.sheet.rules.length).toBe(0)
+    expect(css.rules().length).toBe(0)
     css.finalize()
 

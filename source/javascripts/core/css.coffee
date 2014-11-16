@@ -12,13 +12,25 @@ class window.Scena.Css
   #
   #
   #
+  rules: ->
+    return null if @style is null
+    return @style.sheet.cssRules if @style.sheet.cssRules isnt undefined
+    return @style.sheet.rules
+
+  removeRule: (index) ->
+    return @style.sheet.deleteRule(0) if @style.sheet.deleteRule isnt undefined
+    @style.sheet.removeRule(0)
+
+  #
+  #
+  #
   addRule: (selector, styles) ->
     return if @style is null
-    len = @style.sheet.rules.length
+    len = @rules().length
     if styles is undefined
       cssString = "#{selector} {}"
       @style.sheet.insertRule(cssString, len)
-      return @style.sheet.rules[len].style
+      return @rules()[len].style
     else
       cssString = "#{selector} {"
       cssString += "#{key}: #{value} !important;" for key,value of styles
@@ -30,8 +42,8 @@ class window.Scena.Css
   #
   clearRules: ->
     return if @style is null
-    while @style.sheet.rules.length != 0
-      @style.sheet.removeRule(0)
+    while @rules().length != 0
+      @removeRule(0)
 
   #
   #
@@ -40,4 +52,3 @@ class window.Scena.Css
     return if @style is null
     window.document.head.removeChild(@style)
     @style = null
-
