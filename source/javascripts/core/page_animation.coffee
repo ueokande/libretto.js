@@ -36,8 +36,10 @@ class window.Scena.PageAnimation
     duration = @nextPage.animationDuration()
     options = @nextPage.animationOptions()
 
-    effect = null if effectName == null
-    effect = Scena.loadPageEffect(effectName)
+    if effectName == null
+      effect = null
+    else
+      effect = Scena.loadPageEffect(effectName)
     if effect is null
       console.warn("No such page effect : #{effectName}")
 
