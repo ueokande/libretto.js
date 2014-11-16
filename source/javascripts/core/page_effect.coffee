@@ -1,12 +1,9 @@
-class window.Scena.PageEffect
+window.Scena.pageEffects = {}
 
-  before : (prevStyle, currentStyle, duration, options) ->
-  exec : (prevStyle, currentStyle, duration, options) ->
+window.Scena.registerPageEffect = (name, animation) ->
+  Scena.pageEffects[name.toLowerCase()] = animation
 
-
-class window.Scena.PageEffect.Default extends window.Scena.PageEffect
-
-  exec: (prevStyle, currentStyle, duration, options) ->
-    prevStyle.visibility = 'hidden'
-    currentStyle.visibility = 'visible'
-
+window.Scena.loadPageEffect = (name) ->
+  name = name.toLowerCase()
+  return null unless Scena.pageEffects.hasOwnProperty(name)
+  return Scena.pageEffects[name]

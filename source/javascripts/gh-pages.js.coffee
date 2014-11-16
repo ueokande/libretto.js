@@ -5,7 +5,6 @@ window.onload = (e) ->
 
   commit = ->
     preview.srcdoc = editor.value
-    console.debug editor.value
 
   commit_button.onclick = -> commit()
 
@@ -33,7 +32,7 @@ window.onload = (e) ->
       <hr>
       <h3>Click me!</h3>
     </section>
-    <section effect='Push'>
+    <section effect='push'>
       <h1>Why use scena.js?</h1>
       <h2>Free and open source software</h2>
       <ul>
@@ -66,7 +65,7 @@ window.onload = (e) ->
       </animation>
     </section>
 
-    <section effect='Push'>
+    <section effect='push'>
       <h1>Miscellaneous</h1>
       <p class='pagenum'></p>
       <h2>Join to contribution</h2>
