@@ -11,11 +11,11 @@ window.onload = (e) ->
   editor.value = '''
   <!DOCTYPE html>
   <head>
-    <link href="/stylesheets/scena.css" rel="stylesheet"
+    <link href="stylesheets/scena.css" rel="stylesheet"
      type="text/css">
-    <link href="/stylesheets/themes/simple.css" rel="stylesheet"
+    <link href="stylesheets/themes/simple.css" rel="stylesheet"
      type="text/css">
-    <script src="/javascripts/scena.js" type="text/javascript"></script>
+    <script src="javascripts/scena.js" type="text/javascript"></script>
     <style>
       body { width: 1344px; height: 756px; }
       .box {
