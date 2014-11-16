@@ -67,5 +67,5 @@ class window.Scena.PageAnimation
       effect.before(prevStyle, nextStyle, duration, options)
     setTimeout(->
       effect.exec(prevStyle, nextStyle, duration, options)
-    , 0)
+    , 50)  # 50ms is hack to run on Firefox
 
