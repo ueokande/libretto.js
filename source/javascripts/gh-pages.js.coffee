@@ -20,7 +20,7 @@ window.onload = (e) ->
   open_button.onclick = open
 
   xhr = new XMLHttpRequest()
-  xhr.open('GET', '/demo.html')
+  xhr.open('GET', 'demo.html')
   xhr.onreadystatechange = ->
     editor.value = xhr.responseText
     commit()
