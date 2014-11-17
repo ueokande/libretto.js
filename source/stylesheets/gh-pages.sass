@@ -1,31 +1,33 @@
+$bg_color: #D9CB9E
+$fg_color: #374140
+$editor_bg_color: #1E1E20
+$btn_bg_color: #374140
+$btn_fg_color : $fg_color
+$btn_hover_color : #DC3522
+$border-color: #DC3522
+
 *
   margin  : 0
   padding : 0
 
 h1
   font-size   : 128px
-  color       : #fff
-  text-shadow : 0 0 8px black
+  color       : $fg_color
 
 h2
-  color : #fff
+  color : $fg_color
 
 body
-  background-color : #666660
+  background-color : $bg_color
   font-family      : 'Lato', Helvetica, Arial, "FreeSans"
   padding          : 32px
   text-align       : center
 
 hr
-  border     : none
-  border-top : 1px solid rgba(255,255,255,.5)
-  margin     : 32px auto
-
-p.caution
-  background-color : #faa
-  border           : 2px solid #f44
-  border-radius    : 8px
-
+  border        : none
+  border-top    : 1px solid rgba(192,192,192,.8)
+  border-bottom : 1px solid rgba(64,64,64,.8)
+  margin        : 32px auto
 
 #editor-wrapper
   display : inline-block
@@ -34,21 +36,31 @@ p.caution
     height           : 620px
     font-family      : Monaco, Consolas, Courier, monospace
     font-size        : 15px
-    background-color : #446
+    background-color : $editor_bg_color
     padding          : 16px
     color            : white
     box-sizing       : border-box
 
-  input
-    display          : block
+  .input-wrapper
     width            : 640px
-    background-color : #446
-    border           : 0
-    color            : white
-    font-weight      : bold
-    padding          : 8px
-    font-size        : 16px
-    box-sizing       : border-box
+    display          : block
+    border-radius    : 4px
+    overflow         : hidden
+    input
+      width            : 320px
+      background-color : $btn_bg_color
+      border           : 0
+      color            : white
+      font-weight      : bold
+      padding          : 8px
+      font-size        : 16px
+      box-sizing       : border-box
+      &:last-of-type
+        border-left : 1px solid rgba(255,255,255,.3)
+      &:hover
+        cursor: pointer
+        color : $btn_hover_color
+
 
 #preview-wrapper
   background-image : image-url("/images/monitor.png")
