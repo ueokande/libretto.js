@@ -6,7 +6,7 @@ env:
     - GIT_COMMITTER_EMAIL=qeexee@i-beam.org
     - GIT_AUTHOR_NAME=iBenza
     - GIT_AUTHOR_EMAIL=qeexee@i-beam.org
-    - secure: 'c2DI8yehTtPT0hgBC9vVLn3RBK9wQrkIESwaanYi+DINkOHZ71npE8hBDAACqc5MXuVJswvUqbJTtvEbTTI67KOjY13SDPzCLLOjf/X81+xFgg6/4ogu7NHo2VBUstfjGs76eDuY/B4gA8/Ln4UHrqlvHxOh+s3kIu0jCD0v59w='
+    - secure: c2DI8yehTtPT0hgBC9vVLn3RBK9wQrkIESwaanYi+DINkOHZ71npE8hBDAACqc5MXuVJswvUqbJTtvEbTTI67KOjY13SDPzCLLOjf/X81+xFgg6/4ogu7NHo2VBUstfjGs76eDuY/B4gA8/Ln4UHrqlvHxOh+s3kIu0jCD0v59w=
 before_script:
     - git clone --quiet https://github.com/iBenza/Scena.js build
     - pushd build
