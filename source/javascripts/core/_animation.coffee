@@ -1,4 +1,4 @@
-class window.Scena.KeyframeAnimation
+class window.Scena.Animation
 
   #
   #
@@ -50,7 +50,7 @@ class window.Scena.KeyframeAnimation
     if keyframe.delay() == null
       delay = afterTime + 'ms'
     else
-      delay = (KeyframeAnimation.timeToMillisecond(keyframe.delay()) + afterTime) + 'ms'
+      delay = (Animation.timeToMillisecond(keyframe.delay()) + afterTime) + 'ms'
     properties['transition-duration'] = duration
     properties['transition-delay'] = delay
     @css.addRule(target, properties)
@@ -60,7 +60,7 @@ class window.Scena.KeyframeAnimation
     if next_key.timing() == 'with'
       @execKeyframe(afterTime)
     else if next_key.timing() == 'after'
-      afterTime += KeyframeAnimation.timeToMillisecond(duration) if duration isnt null
+      afterTime += Animation.timeToMillisecond(duration) if duration isnt null
       @execKeyframe(afterTime)
     return 0
 

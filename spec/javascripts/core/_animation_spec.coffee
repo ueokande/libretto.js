@@ -1,4 +1,4 @@
-describe 'Test of keyframe_animation.coffee', ->
+describe 'Test of animation.coffee', ->
 
   div_by_id = null
   div_by_class = null
@@ -23,7 +23,7 @@ describe 'Test of keyframe_animation.coffee', ->
       <keyframe target='#div_id'  duration='500ms'/>
       <keyframe target='.div_cls' background-color='green' />
     '''
-    anime = new Scena.KeyframeAnimation(animationEle, 'animation_style_test')
+    anime = new Scena.Animation(animationEle, 'animation_style_test')
     style = window.document.getElementById('animation_style_test')
     expect(style).not.toBeNull()
 
@@ -38,7 +38,7 @@ describe 'Test of keyframe_animation.coffee', ->
       <keyframe target='.div_cls' background-color='green' />
       <keyframe target='#div_id'  duration='500ms' opacity='0'/>
     '''
-    anime = new Scena.KeyframeAnimation(animationEle)
+    anime = new Scena.Animation(animationEle)
     anime.nextKeyframe()
     expect(window.getComputedStyle(div_by_id).transitionDuration).toBe('0.5s')
     anime.nextKeyframe()
@@ -61,7 +61,7 @@ describe 'Test of keyframe_animation.coffee', ->
     animationEle.innerHTML = '''
       <keyframe target='#div_id'  duration='500ms' delay='500ms' opacity='0' />
     '''
-    anime = new Scena.KeyframeAnimation(animationEle)
+    anime = new Scena.Animation(animationEle)
 
     expect(+window.getComputedStyle(div_by_id).opacity).toBe(1)
     anime.nextKeyframe()
@@ -84,7 +84,7 @@ describe 'Test of keyframe_animation.coffee', ->
       <keyframe target='#div_id'  duration='500ms'/>
       <keyframe target='.div_cls' duration='500ms' timing='with' opacity='0' />
     '''
-    anime = new Scena.KeyframeAnimation(animationEle)
+    anime = new Scena.Animation(animationEle)
 
     expect(+window.getComputedStyle(div_by_class).opacity).toBe(1)
     anime.nextKeyframe()
@@ -104,7 +104,7 @@ describe 'Test of keyframe_animation.coffee', ->
       <keyframe target='#div_id'  duration='500ms'/>
       <keyframe target='.div_cls' duration='500ms' timing='after' opacity='0' />
     '''
-    anime = new Scena.KeyframeAnimation(animationEle)
+    anime = new Scena.Animation(animationEle)
 
     expect(+window.getComputedStyle(div_by_class).opacity).toBe(1)
     anime.nextKeyframe()
@@ -127,7 +127,7 @@ describe 'Test of keyframe_animation.coffee', ->
       <keyframe target='#div_id'  duration='500ms'/>
       <keyframe target='.div_cls' background-color='green' />
     '''
-    anime = new Scena.KeyframeAnimation(animationEle)
+    anime = new Scena.Animation(animationEle)
     expect(anime.nextKeyframe()).not.toBeNull()
     expect(anime.nextKeyframe()).not.toBeNull()
     expect(anime.nextKeyframe()).toBeNull()
@@ -140,7 +140,7 @@ describe 'Test of keyframe_animation.coffee', ->
       <keyframe target='#div_id'  duration='500ms'/>
       <keyframe target='.div_cls' background-color='green' />
     '''
-    anime = new Scena.KeyframeAnimation(animationEle)
+    anime = new Scena.Animation(animationEle)
 
     expect(anime.hasNextKeyframe()).toBeTruthy()
 
@@ -158,8 +158,16 @@ describe 'Test of keyframe_animation.coffee', ->
       <keyframe target='#div_id'  duration='500ms'/>
       <keyframe target='.div_cls' background-color='green' />
     '''
-    anime = new Scena.KeyframeAnimation(animationEle)
+    anime = new Scena.Animation(animationEle)
     anime.finalize()
 
     expect(anime.hasNextKeyframe()).toBeNull()
 
+  it 'converts the duratin text to millisec', ->
+    expect(Scena.Animation.timeToMillisecond("200ms")).toBe(200)
+    expect(Scena.Animation.timeToMillisecond("5s")).toBe(5000)
+    expect(Scena.Animation.timeToMillisecond("1.4s")).toBe(1400)
+    expect(Scena.Animation.timeToMillisecond("abc1.4s")).toBeNull()
+    expect(Scena.Animation.timeToMillisecond("x")).toBeNull()
+    expect(Scena.Animation.timeToMillisecond("ms")).toBeNull()
+    expect(Scena.Animation.timeToMillisecond("")).toBeNull()

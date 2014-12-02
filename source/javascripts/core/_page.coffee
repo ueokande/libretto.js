@@ -63,5 +63,5 @@ class window.Scena.Page
     return null if @element is null
     animeEle = @element.getElementsByTagName('animation')[0]
     return null if (animeEle is undefined or animeEle is null)
-    return new Scena.KeyframeAnimation(animeEle)
+    return new Scena.Animation(animeEle)
 

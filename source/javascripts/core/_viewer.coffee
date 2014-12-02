@@ -9,7 +9,7 @@ class window.Scena.Viewer
   constructor: ->
     @currentAnimation = null
     @currentIndex = null
-    @pageAnimation = null
+    @pageTransition = null
     @currentPageChangedListeners = []
 
     window.Scena.viewer = @
@@ -46,9 +46,9 @@ class window.Scena.Viewer
     @currentAnimation.finalize() if @currentAnimation isnt null
     @currentAnimation = currentPage.createAnimation()
 
-    @pageAnimation.finalize() if @pageAnimation isnt null
-    @pageAnimation = new Scena.PageAnimation(prevIndex, nextIndex, currentPage)
-    @pageAnimation.switchPage(animationEnable)
+    @pageTransition.finalize() if @pageTransition isnt null
+    @pageTransition = new Scena.PageTransition(prevIndex, nextIndex, currentPage)
+    @pageTransition.switchPage(animationEnable)
 
     l() for l in @currentPageChangedListeners
 
