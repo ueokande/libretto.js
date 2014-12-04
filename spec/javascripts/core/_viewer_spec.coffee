@@ -33,11 +33,11 @@ describe 'Test of viewer.coffee', ->
     viewer = new Scena.Viewer
     viewer.skipToPage(0)
 
-    expect(viewer.currentAnimation.keyframes.length).toBe(2)
+    expect(viewer.currentAnimation.index).toBe(0)
     viewer.nextStep()
-    expect(viewer.currentAnimation.keyframes.length).toBe(1)
+    expect(viewer.currentAnimation.index).toBe(1)
     viewer.nextStep()
-    expect(viewer.currentAnimation.keyframes.length).toBe(0)
+    expect(viewer.currentAnimation.index).toBe(2)
 
   it "moves to a next page if the page has no-keyframes", ->
     viewer = new Scena.Viewer

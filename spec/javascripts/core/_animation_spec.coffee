@@ -17,7 +17,7 @@ describe 'Test of animation.coffee', ->
     div_by_id = null
     div_by_class = null
 
-  it 'constructs and finalizes', ->
+  it 'constructs and reset', ->
     animationEle = window.document.createElement('animation')
     animationEle.innerHTML = '''
       <keyframe target='#div_id'  duration='500ms'/>
@@ -27,7 +27,7 @@ describe 'Test of animation.coffee', ->
     style = window.document.getElementById('animation_style_test')
     expect(style).not.toBeNull()
 
-    anime.finalize()
+    anime.reset()
     style = window.document.getElementById('animation_style_test')
     expect(style).toBeNull()
 
@@ -52,7 +52,7 @@ describe 'Test of animation.coffee', ->
     ,250)
     setTimeout(->
       expect(+window.getComputedStyle(div_by_id).opacity).toBe(0)
-      anime.finalize()
+      anime.reset()
       done()
     ,600)
 
@@ -74,7 +74,7 @@ describe 'Test of animation.coffee', ->
     ,750)
     setTimeout(->
       expect(+window.getComputedStyle(div_by_id).opacity).toBe(0)
-      anime.finalize()
+      anime.reset()
       done()
     ,1250)
 
@@ -94,7 +94,7 @@ describe 'Test of animation.coffee', ->
     ,250)
     setTimeout(->
       expect(+window.getComputedStyle(div_by_class).opacity).toBe(0)
-      anime.finalize()
+      anime.reset()
       done()
     ,600)
 
@@ -117,7 +117,7 @@ describe 'Test of animation.coffee', ->
     ,750)
     setTimeout(->
       expect(+window.getComputedStyle(div_by_class).opacity).toBe(0)
-      anime.finalize()
+      anime.reset()
       done()
     ,1250)
 
@@ -131,7 +131,7 @@ describe 'Test of animation.coffee', ->
     expect(anime.nextKeyframe()).not.toBeNull()
     expect(anime.nextKeyframe()).not.toBeNull()
     expect(anime.nextKeyframe()).toBeNull()
-    anime.finalize()
+    anime.reset()
 
 
   it 'hasNextKeyframe', ->
@@ -150,18 +150,7 @@ describe 'Test of animation.coffee', ->
     anime.nextKeyframe()
     expect(anime.hasNextKeyframe()).toBeFalsy()
 
-    anime.finalize()
-
-  it 'does nothing after the finalize() is called', ->
-    animationEle = window.document.createElement('animation')
-    animationEle.innerHTML = '''
-      <keyframe target='#div_id'  duration='500ms'/>
-      <keyframe target='.div_cls' background-color='green' />
-    '''
-    anime = new Scena.Animation(animationEle)
-    anime.finalize()
-
-    expect(anime.hasNextKeyframe()).toBeNull()
+    anime.reset()
 
   it 'converts the duratin text to millisec', ->
     expect(Scena.Animation.timeToMillisecond("200ms")).toBe(200)

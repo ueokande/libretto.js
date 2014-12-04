@@ -5,8 +5,7 @@ class window.Scena.Animation
   #
   constructor: (animationElement, cssId) ->
     @keyframes = []
-    @css = null
-    return if animationElement is null
+    @index = 0
 
     keyframeNodes = animationElement.getElementsByTagName('keyframe')
     for k in keyframeNodes
@@ -16,32 +15,30 @@ class window.Scena.Animation
   #
   #
   #
-  finalize: ->
-    return if @css is null
+  reset: ->
     @css.finalize()
-    @css = null
+    @index = 0
 
   #
   #
   #
   hasNextKeyframe: ->
-    return null if @css is null
-    @keyframes.length > 0
+    @index < @keyframes.length
 
   #
   #
   #
   nextKeyframe : ->
-    return null if @css is null
-    return null if @keyframes.length == 0
+    return null unless @hasNextKeyframe()
     return @execKeyframe(0)
 
   execKeyframe : (afterTime) ->
-    keyframe = @keyframes.shift()
+    keyframe = @keyframes[@index]
+    ++@index
     target = keyframe.target()
     if target is null
       console.warn("The animation target '#{target()}' is not existing.")
-      return
+      return null
     properties = keyframe.properties()
     duration = keyframe.duration()
     if keyframe.delay() == null
@@ -53,7 +50,7 @@ class window.Scena.Animation
     @css.addRule(target, properties)
 
     return unless @hasNextKeyframe()
-    next_key = @keyframes[0]
+    next_key = @keyframes[@index]
     if next_key.timing() == 'with'
       @execKeyframe(afterTime)
     else if next_key.timing() == 'after'

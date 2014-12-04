@@ -43,7 +43,7 @@ class window.Scena.Viewer
     nextIndex = index
     currentPage = Scena.Page.pageAt(index)
     @currentIndex = index
-    @currentAnimation.finalize() if @currentAnimation isnt null
+    @currentAnimation.reset() if @currentAnimation isnt null
     @currentAnimation = currentPage.createAnimation()
 
     @pageTransition.finalize() if @pageTransition isnt null
