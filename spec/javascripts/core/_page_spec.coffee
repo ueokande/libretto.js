@@ -28,6 +28,10 @@ describe 'Test of page.coffee', ->
       childSections.push(c) if c.tagName.match(/section/i)
     expect(object.element).toBe(childSections[2])
 
+  it 'returns an index of the pages', ->
+    grandchildElement = document.createElement('section')
+    expect(Scena.Page.pageAt(1).indexOf()).toBe(1)
+
   it 'returns an effect name if the name is given', ->
     pageEle = window.document.body.getElementsByTagName('section')[1]
     pageEle.setAttribute('effect', 'my_effect')

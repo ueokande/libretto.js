@@ -3,7 +3,7 @@ class window.Scena.Animation
   #
   #
   #
-  constructor: (animationElement, styleName) ->
+  constructor: (animationElement, cssId) ->
     @keyframes = []
     @css = null
     return if animationElement is null
@@ -11,10 +11,7 @@ class window.Scena.Animation
     keyframeNodes = animationElement.getElementsByTagName('keyframe')
     for k in keyframeNodes
       @keyframes.push(new Scena.Keyframe(k))
-    if styleName isnt undefined
-      @css = new Scena.Css(styleName)
-    else
-      @css = new Scena.Css('animation')
+    @css = Scena.Css.findOrCreate(cssId)
 
   #
   #

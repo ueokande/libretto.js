@@ -3,9 +3,9 @@ class window.Scena.PageTransition
   #
   #
   #
-  constructor: (@prevIndex, @nextIndex, @nextPage, styleName) ->
+  constructor: (@prevIndex, @nextIndex, @nextPage, cssId) ->
     styleName = 'PageTransition' if styleName is undefined
-    @pageAnimeCss = new Scena.Css(styleName)
+    @pageAnimeCss = Scena.Css.findOrCreate(cssId)
 
   #
   #
