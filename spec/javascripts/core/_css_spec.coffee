@@ -12,9 +12,15 @@ describe 'Test of css.coffee', ->
     styleEle = window.document.getElementById('tested_css')
     expect(styleEle).toBeNull()
 
-  it 'find a exist css', ->
+  it 'finds a exist css', ->
     css1 = Scena.Css.create('tested_css')
     css2 = Scena.Css.findById('tested_css')
+    expect(css1.style).toEqual(css2.style)
+    css1.finalize()
+
+  it 'finds a exist css or creates new', ->
+    css1 = Scena.Css.findOrCreate('tested_css')
+    css2 = Scena.Css.findOrCreate('tested_css')
     expect(css1.style).toEqual(css2.style)
     css1.finalize()
 

@@ -31,7 +31,7 @@ class window.Scena.Css
   #
   @findOrCreate: (id) ->
     ele = document.getElementById(id)
-    return Scena.Css.create(id)
+    return Scena.Css.create(id) if ele is null
     if (/style/i).test(ele.tagName)
       css = new Scena.Css
       css.style = ele
