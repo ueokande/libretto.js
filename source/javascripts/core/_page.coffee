@@ -66,7 +66,7 @@ class window.Scena.Page
   #
   # Create animation object
   #
-  createAnimation: ->
+  animation: ->
     return null if @element is null
     animeEle = @element.getElementsByTagName('animation')[0]
     return null if (animeEle is undefined or animeEle is null)
