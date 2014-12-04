@@ -16,7 +16,7 @@ class window.Scena.Animation
   #
   #
   reset: ->
-    @css.finalize()
+    @css.clearRules()
     @index = 0
 
   #
