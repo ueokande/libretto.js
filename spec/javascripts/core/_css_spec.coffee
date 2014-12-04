@@ -3,8 +3,8 @@ describe 'Test of css.coffee', ->
   beforeEach ->
   afterEach ->
 
-  it 'constructs and finalizes', ->
-    css = new Scena.Css('tested_css')
+  it 'create new and finalizes', ->
+    css = Scena.Css.create('tested_css')
     styleEle = window.document.getElementById('tested_css')
     expect(styleEle).not.toBeNull()
 
@@ -12,8 +12,20 @@ describe 'Test of css.coffee', ->
     styleEle = window.document.getElementById('tested_css')
     expect(styleEle).toBeNull()
 
+  it 'finds a exist css', ->
+    css1 = Scena.Css.create('tested_css')
+    css2 = Scena.Css.findById('tested_css')
+    expect(css1.style).toEqual(css2.style)
+    css1.finalize()
+
+  it 'finds a exist css or creates new', ->
+    css1 = Scena.Css.findOrCreate('tested_css')
+    css2 = Scena.Css.findOrCreate('tested_css')
+    expect(css1.style).toEqual(css2.style)
+    css1.finalize()
+
   it 'adds rules with specifying style', ->
-    css = new Scena.Css('tested_css')
+    css = Scena.Css.create('tested_css')
     css.addRule('h2', {'color':'red'})
     css.addRule('h3', {'background-color':'blue'})
     expect(css.rules().length).toBe(2)
@@ -29,7 +41,7 @@ describe 'Test of css.coffee', ->
     window.document.body.appendChild(div_by_id)
     window.document.body.appendChild(div_by_class)
 
-    css = new Scena.Css('tested_css')
+    css = Scena.Css.create('tested_css')
     css.addRule('#div_id', {'color':'red'})
     css.addRule('.div_cls', {'background-color':'blue'})
 
@@ -41,7 +53,7 @@ describe 'Test of css.coffee', ->
     window.document.body.removeChild(div_by_class)
 
   it 'clears rules', ->
-    css = new Scena.Css('tested_css')
+    css = Scena.Css.create('tested_css')
     css.addRule('h2', {'color':'red'})
     css.addRule('h3', {'background-color':'blue'})
     css.clearRules()

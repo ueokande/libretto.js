@@ -3,11 +3,42 @@ class window.Scena.Css
   #
   #
   #
-  constructor: (id) ->
-    @style = document.createElement("style")
-    @style.appendChild(document.createTextNode(""))
-    @style.id = id if id isnt undefined
-    window.document.head.appendChild(@style)
+  @create: (id) ->
+    css = new Scena.Css
+    style = document.createElement("style")
+    style.appendChild(document.createTextNode(""))
+    style.id = id if id isnt undefined
+    window.document.head.appendChild(style)
+    css.style = style
+    return css
+
+  #
+  #
+  #
+  @findById: (id) ->
+    ele = document.getElementById(id)
+    return null if ele is null
+    if (/style/i).test(ele.tagName)
+      css = new Scena.Css
+      css.style = ele
+      return css
+    else
+      console.error("The element '##{id}' is existing.  The id was conflicted.")
+      return null
+
+  #
+  #
+  #
+  @findOrCreate: (id) ->
+    ele = document.getElementById(id)
+    return Scena.Css.create(id) if ele is null
+    if (/style/i).test(ele.tagName)
+      css = new Scena.Css
+      css.style = ele
+      return css
+    else
+      console.error("The element '##{id}' is existing.  The id was conflicted.")
+      return null
 
   #
   #

@@ -1,66 +1,60 @@
-class window.Scena.KeyframeAnimation
+class window.Scena.Animation
 
   #
   #
   #
-  constructor: (animationElement, styleName) ->
+  constructor: (animationElement, cssId) ->
     @keyframes = []
-    @css = null
-    return if animationElement is null
+    @index = 0
 
     keyframeNodes = animationElement.getElementsByTagName('keyframe')
     for k in keyframeNodes
       @keyframes.push(new Scena.Keyframe(k))
-    if styleName isnt undefined
-      @css = new Scena.Css(styleName)
-    else
-      @css = new Scena.Css('animation')
+    @css = Scena.Css.findOrCreate(cssId)
 
   #
   #
   #
-  finalize: ->
-    return if @css is null
-    @css.finalize()
-    @css = null
+  reset: ->
+    @css.clearRules()
+    @index = 0
 
   #
   #
   #
   hasNextKeyframe: ->
-    return null if @css is null
-    @keyframes.length > 0
+    @index < @keyframes.length
 
   #
   #
   #
   nextKeyframe : ->
-    return null if @css is null
-    return null if @keyframes.length == 0
+    return null unless @hasNextKeyframe()
     return @execKeyframe(0)
 
   execKeyframe : (afterTime) ->
-    keyframe = @keyframes.shift()
+    keyframe = @keyframes[@index]
+    ++@index
     target = keyframe.target()
     if target is null
       console.warn("The animation target '#{target()}' is not existing.")
-      return
+      return null
     properties = keyframe.properties()
     duration = keyframe.duration()
     if keyframe.delay() == null
       delay = afterTime + 'ms'
     else
-      delay = (KeyframeAnimation.timeToMillisecond(keyframe.delay()) + afterTime) + 'ms'
+      delay = (Animation.timeToMillisecond(keyframe.delay()) + afterTime) + 'ms'
     properties['transition-duration'] = duration
     properties['transition-delay'] = delay
     @css.addRule(target, properties)
 
     return unless @hasNextKeyframe()
-    next_key = @keyframes[0]
+    next_key = @keyframes[@index]
     if next_key.timing() == 'with'
       @execKeyframe(afterTime)
     else if next_key.timing() == 'after'
-      afterTime += KeyframeAnimation.timeToMillisecond(duration) if duration isnt null
+      afterTime += Animation.timeToMillisecond(duration) if duration isnt null
       @execKeyframe(afterTime)
     return 0
 
