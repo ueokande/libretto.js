@@ -37,7 +37,7 @@ class window.Scena.Animation
     ++@index
     target = keyframe.target()
     if target is null
-      console.warn("The animation target '#{target()}' is not existing.")
+      console.warn("The animation target is not specified.")
       return null
     properties = keyframe.properties()
     duration = keyframe.duration()
