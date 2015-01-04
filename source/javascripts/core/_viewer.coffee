@@ -44,7 +44,7 @@ class window.Scena.Viewer
     currentPage = Scena.Page.pageAt(index)
     @currentIndex = index
     @currentAnimation = currentPage.animation()
-    @currentAnimation.reset() if @currentAnimation isnt null
+    @currentAnimation.reset()
 
     @pageTransition.finalize() if @pageTransition isnt null
     @pageTransition = new Scena.PageTransition(prevIndex, nextIndex, currentPage)
@@ -56,7 +56,7 @@ class window.Scena.Viewer
   # Animate the element of page to next.
   #
   nextStep: ->
-    if @currentAnimation is null or !@currentAnimation.hasNextKeyframe()
+    if !@currentAnimation.hasNextKeyframe()
       @animateToPage(@currentIndex + 1)
     else
       @currentAnimation.nextKeyframe()
