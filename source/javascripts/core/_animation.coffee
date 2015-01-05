@@ -3,14 +3,15 @@ class window.Scena.Animation
   #
   #
   #
-  constructor: (animationElement, cssId) ->
+  constructor: (@page) ->
     @keyframes = []
     @index = 0
-
-    keyframeNodes = animationElement.getElementsByTagName('keyframe')
-    for k in keyframeNodes
-      @keyframes.push(new Scena.Keyframe(k))
-    @css = Scena.Css.findOrCreate(cssId)
+    animationNodes = @page.element.getElementsByTagName('animation')
+    for node in animationNodes
+      keyframeNodes = node.getElementsByTagName('keyframe')
+      for k in keyframeNodes
+        @keyframes.push(new Scena.Keyframe(k))
+    @css = Scena.Css.findOrCreate("animation-#{@page.indexOf()}")
 
   #
   #
@@ -37,7 +38,7 @@ class window.Scena.Animation
     ++@index
     target = keyframe.target()
     if target is null
-      console.warn("The animation target '#{target()}' is not existing.")
+      console.warn("The animation target is not specified.")
       return null
     properties = keyframe.properties()
     duration = keyframe.duration()
@@ -47,7 +48,8 @@ class window.Scena.Animation
       delay = (Animation.timeToMillisecond(keyframe.delay()) + afterTime) + 'ms'
     properties['transition-duration'] = duration
     properties['transition-delay'] = delay
-    @css.addRule(target, properties)
+    targetStr = "section:nth-of-type(#{@page.indexOf() + 1}) #{target}"
+    @css.addRule(targetStr, properties)
 
     return unless @hasNextKeyframe()
     next_key = @keyframes[@index]

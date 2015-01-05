@@ -68,6 +68,4 @@ class window.Scena.Page
   #
   animation: ->
     return null if @element is null
-    animeEle = @element.getElementsByTagName('animation')[0]
-    return null if (animeEle is undefined or animeEle is null)
-    return new Scena.Animation(animeEle, "animation-#{@indexOf()}")
+    return new Scena.Animation(this)
