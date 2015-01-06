@@ -4,20 +4,34 @@ head
   = javascript_include_tag  'gh-pages'
 
 body
-  h1 Scena.js
-  h2 An HTML based presentation framework
+  header
+    h1 Scena.js
+    ul.global-menu
+      li
+        a href="https://github.com/iBenza/Scena.js/archive/gh-pages.zip" Download
+      li
+        a href="https://github.com/iBenza/Scena.js" GitHub
 
-  <style>#forkongithub a{background:#000;color:#fff;text-decoration:none;font-family:arial,sans-serif;text-align:center;font-weight:bold;padding:5px 40px;font-size:1rem;line-height:2rem;position:relative;transition:0.3s;}#forkongithub a:hover{background:#c11;color:#fff;}#forkongithub a::before,#forkongithub a::after{content:"";width:100%;display:block;position:absolute;top:1px;left:0;height:1px;background:#fff;}#forkongithub a::after{bottom:1px;top:auto;}@media screen and (min-width:800px){#forkongithub{position:absolute;display:block;top:0;right:0;width:200px;overflow:hidden;height:200px;z-index:9999;}#forkongithub a{width:200px;position:absolute;top:60px;right:-60px;transform:rotate(45deg);-webkit-transform:rotate(45deg);-ms-transform:rotate(45deg);-moz-transform:rotate(45deg);-o-transform:rotate(45deg);box-shadow:4px 4px 10px rgba(0,0,0,0.8);}}</style><span id="forkongithub"><a href="https://github.com/iBenza/Scena.js">Fork me on GitHub</a></span>
+  section.wide
+    #editor-wrapper
+      textarea#editor spellcheck='false'
+      .input-wrapper style='background-color:red; margin:0'
+        input#commit-button type='button' value='Commit it!'
+        input#open-button type='button' value='Open in new window'
 
-  hr
+    div#preview-wrapper
+      iframe#preview
 
-  #editor-wrapper
-    textarea#editor
-    .input-wrapper
-      input#commit-button type='button' value='Commit it!'
-      input#open-button type='button' value='Open in new window'
-
-  div#preview-wrapper
-    iframe#preview
-
-  hr
+  section
+    h2 What is it?
+    p
+      | Scena.js is an HTML based presentation framework.
+        It's powered by HTML5 and CSS transitions. You will install
+        the browser which supports such techniques.
+    p
+      | This is inspired by similar frameworks such as 
+      a href="http://lab.hakim.se/reveal-js/" Reveal.js
+      |  and 
+      a href="http://imakewebthings.com/deck.js/#now-what" Deck.js
+      | , however, Scena.js is not for beauty's sake.  It can be used in
+        everything situations from formal to casual, by designing theme.
