@@ -7,7 +7,7 @@
 #     up ... Top to Bottom
 #     down ... Bottom to Top
 #
-Scena.registerPageEffect 'dissolve', ->
+Libretto.registerPageEffect 'dissolve', ->
   before: (prevStyle, nextStyle, duration, options) ->
     nextStyle.opacity = "0"
 
@@ -25,7 +25,7 @@ Scena.registerPageEffect 'dissolve', ->
 #     up ... Top to Bottom
 #     down ... Bottom to Top
 #
-Scena.registerPageEffect 'move-in', ->
+Libretto.registerPageEffect 'move-in', ->
 
   before: (prevStyle, nextStyle, duration, options) ->
     origin = ({
@@ -57,7 +57,7 @@ Scena.registerPageEffect 'move-in', ->
 #     up      ... Top to Bottom
 #     down    ... Bottom to Top
 #
-Scena.registerPageEffect 'push', ->
+Libretto.registerPageEffect 'push', ->
 
   before: (prevStyle, nextStyle, duration, options) ->
     posPrefix = {
@@ -94,7 +94,7 @@ Scena.registerPageEffect 'push', ->
 #     in
 #     out
 #
-Scena.registerPageEffect 'scale', ->
+Libretto.registerPageEffect 'scale', ->
 
   before: (prevStyle, nextStyle, duration, options) ->
     direction = options.direction

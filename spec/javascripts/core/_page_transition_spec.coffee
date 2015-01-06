@@ -7,8 +7,8 @@ describe 'Test of page_transition.coffee', ->
     window.document.body.appendChild(@pageEle1)
     window.document.body.appendChild(@pageEle2)
 
-    @prevPage = new Scena.Page(@pageEle1)
-    @nextPage = new Scena.Page(@pageEle2)
+    @prevPage = new Libretto.Page(@pageEle1)
+    @nextPage = new Libretto.Page(@pageEle2)
 
   afterEach ->
     window.document.body.removeChild(@pageEle1)
@@ -19,7 +19,7 @@ describe 'Test of page_transition.coffee', ->
     @pageEle2 = null
 
   it 'constructs and destructs a object', ->
-    pageTransition = new Scena.PageTransition(0, 1, @nextPage, 'TestPageTransition')
+    pageTransition = new Libretto.PageTransition(0, 1, @nextPage, 'TestPageTransition')
     styleEle = window.document.getElementById('TestPageTransition')
     expect(styleEle).not.toBeNull()
 
@@ -28,7 +28,7 @@ describe 'Test of page_transition.coffee', ->
     expect(styleEle).toBeNull()
 
   it 'switches the page without transition', ->
-    pageTransition = new Scena.PageTransition(0, 1, @nextPage, 'TestPageTransition')
+    pageTransition = new Libretto.PageTransition(0, 1, @nextPage, 'TestPageTransition')
     pageTransition.switchPage(false)
 
     expect(window.getComputedStyle(@pageEle1).zIndex) \

@@ -1,1 +1,1 @@
-window.Scena = {}
+window.Libretto = {}

@@ -1,7 +1,7 @@
-class window.Scena.Viewer
+class window.Libretto.Viewer
 
   @viewer: ->
-    window.Scena.viewer
+    window.Libretto.viewer
 
   #
   # Initializes internal variables and HTML contents.
@@ -12,7 +12,7 @@ class window.Scena.Viewer
     @pageTransition = null
     @currentPageChangedListeners = []
 
-    window.Scena.viewer = @
+    window.Libretto.viewer = @
 
   getCurrentIndex: ->
     @currentIndex
@@ -21,14 +21,14 @@ class window.Scena.Viewer
   # Skips to specified page without animation.
   #
   skipToPage: (index) ->
-    return if Scena.Page.count() == 0
+    return if Libretto.Page.count() == 0
     switchPage.call(@, index, false)
 
   #
   #
   #
   animateToPage: (index) ->
-    return if Scena.Page.count() == 0
+    return if Libretto.Page.count() == 0
     switchPage.call(@, index, true)
 
   #
@@ -36,18 +36,18 @@ class window.Scena.Viewer
   #
   switchPage = (index, animationEnable) ->
     index = Math.max(0, index)
-    index = Math.min(Scena.Page.count() - 1, index)
+    index = Math.min(Libretto.Page.count() - 1, index)
     return if index is @currentIndex
 
     prevIndex = @currentIndex
     nextIndex = index
-    currentPage = Scena.Page.pageAt(index)
+    currentPage = Libretto.Page.pageAt(index)
     @currentIndex = index
     @currentAnimation = currentPage.animation()
-    @currentAnimation.reset() if @currentAnimation isnt null
+    @currentAnimation.reset()
 
     @pageTransition.finalize() if @pageTransition isnt null
-    @pageTransition = new Scena.PageTransition(prevIndex, nextIndex, currentPage)
+    @pageTransition = new Libretto.PageTransition(prevIndex, nextIndex, currentPage)
     @pageTransition.switchPage(animationEnable)
 
     l() for l in @currentPageChangedListeners
@@ -56,7 +56,7 @@ class window.Scena.Viewer
   # Animate the element of page to next.
   #
   nextStep: ->
-    if @currentAnimation is null or !@currentAnimation.hasNextKeyframe()
+    if !@currentAnimation.hasNextKeyframe()
       @animateToPage(@currentIndex + 1)
     else
       @currentAnimation.nextKeyframe()
@@ -89,7 +89,7 @@ class window.Scena.Viewer
   # Skips to last page without animation.
   #
   skipToLastPage: ->
-    @skipToPage(Scena.Page.count() - 1)
+    @skipToPage(Libretto.Page.count() - 1)
 
   #
   #
@@ -98,5 +98,5 @@ class window.Scena.Viewer
     @currentPageChangedListeners.push(listener)
 
 
-new window.Scena.Viewer
+new window.Libretto.Viewer
 

@@ -1,10 +1,10 @@
-class window.Scena.Css
+class window.Libretto.Css
 
   #
   #
   #
   @create: (id) ->
-    css = new Scena.Css
+    css = new Libretto.Css
     style = document.createElement("style")
     style.appendChild(document.createTextNode(""))
     style.id = id if id isnt undefined
@@ -19,7 +19,7 @@ class window.Scena.Css
     ele = document.getElementById(id)
     return null if ele is null
     if (/style/i).test(ele.tagName)
-      css = new Scena.Css
+      css = new Libretto.Css
       css.style = ele
       return css
     else
@@ -31,9 +31,9 @@ class window.Scena.Css
   #
   @findOrCreate: (id) ->
     ele = document.getElementById(id)
-    return Scena.Css.create(id) if ele is null
+    return Libretto.Css.create(id) if ele is null
     if (/style/i).test(ele.tagName)
-      css = new Scena.Css
+      css = new Libretto.Css
       css.style = ele
       return css
     else

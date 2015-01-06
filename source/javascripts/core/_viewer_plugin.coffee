@@ -1,4 +1,4 @@
-class window.Scena.Plugin
+class window.Libretto.Plugin
   constructor: (name) ->
     window.addEventListener("load", @initialize)
 

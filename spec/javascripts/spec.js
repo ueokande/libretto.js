@@ -1,2 +1,2 @@
-//= require scena
+//= require libretto
 //= require_tree .
