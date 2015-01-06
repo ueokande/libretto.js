@@ -1,7 +1,7 @@
-class Scena.ElementCarry extends window.Scena.Plugin
+class Libretto.ElementCarry extends window.Libretto.Plugin
 
   initialize: =>
-    @css = new Scena.Css('element-carry')
+    @css = new Libretto.Css('element-carry')
     @css.addRule('.element-carry-highlight', {'box-shadow':'0 0 8px #44f'})
 
     @targetObject = null
@@ -69,4 +69,4 @@ class Scena.ElementCarry extends window.Scena.Plugin
 
 
 #  This plugin will potentially be removed.
-# new window.Scena.ElementCarry
+# new window.Libretto.ElementCarry

@@ -1,9 +1,9 @@
-window.Scena.pageEffects = {}
+window.Libretto.pageEffects = {}
 
-window.Scena.registerPageEffect = (name, animation) ->
-  Scena.pageEffects[name.toLowerCase()] = animation
+window.Libretto.registerPageEffect = (name, animation) ->
+  Libretto.pageEffects[name.toLowerCase()] = animation
 
-window.Scena.loadPageEffect = (name) ->
+window.Libretto.loadPageEffect = (name) ->
   name = name.toLowerCase()
-  return null unless Scena.pageEffects.hasOwnProperty(name)
-  return Scena.pageEffects[name]
+  return null unless Libretto.pageEffects.hasOwnProperty(name)
+  return Libretto.pageEffects[name]

@@ -8,7 +8,7 @@ window.onload = (e) ->
     preview.srcdoc = editor.value
 
   open = ->
-    win =  window.open('','Scena.js','')
+    win =  window.open('','Libretto.js','')
     win.document.write(editor.value)
 
     # Fire an onload event

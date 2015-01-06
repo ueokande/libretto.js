@@ -1,15 +1,15 @@
 #
-# Scena.Keyframe class
+# Libretto.Keyframe class
 # 
-# The Scena.Keyframe class provides the keyframe of the animation.
+# The Libretto.Keyframe class provides the keyframe of the animation.
 # The animation mechanism is very simple, the style (css) of the element in
 # HTML will be overwritten when the keyframe is fired.  To use it, create a
-# Scena.Keyframe from the HTML element object which described as <keyframe>
-# tag in HTML.  The <keyframe> tag is distinctive specification in Scena.js.
+# Libretto.Keyframe from the HTML element object which described as <keyframe>
+# tag in HTML.  The <keyframe> tag is distinctive specification in Libretto.js.
 # The keyframe will be fired with start() method.
 #
 
-class window.Scena.Keyframe
+class window.Libretto.Keyframe
   #
   # Constructs a Keyframe object with the given element which is a element
   # contained in <keyframe>.

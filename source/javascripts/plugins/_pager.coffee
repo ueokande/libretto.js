@@ -1,7 +1,7 @@
 #
-# Scena.Pager module
+# Libretto.Pager module
 #
-# The Scena.Pager module provides the pager of slides to search and jump to
+# The Libretto.Pager module provides the pager of slides to search and jump to
 # page.  When the presenter press number key, the pager will be shown the
 # top of display. The slides are arranged likes list view, and presentation
 # will show slide with specified with inputted number or clicked page.
@@ -10,7 +10,7 @@
 # page, use text box.
 #
 
-class window.Scena.Pager extends window.Scena.Plugin
+class window.Libretto.Pager extends window.Libretto.Plugin
   constructor: ->
     @inputBox = null
     @show - false
@@ -82,7 +82,7 @@ class window.Scena.Pager extends window.Scena.Plugin
     return if e.keyCode != 13
     
     num = ~~(@inputBox.value)
-    viewer = window.Scena.Viewer.viewer()
+    viewer = window.Libretto.Viewer.viewer()
     viewer.skipToPage(num - 1)
     @hidePager()
   

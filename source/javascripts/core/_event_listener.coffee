@@ -1,7 +1,7 @@
 #
-# Scena.EventListener class
+# Libretto.EventListener class
 #
-class window.Scena.EventListener
+class window.Libretto.EventListener
   addEventListener: (name, handler) ->
     @listeners = {} if @listeners == undefined
     unless @listeners.hasOwnProperty(name)

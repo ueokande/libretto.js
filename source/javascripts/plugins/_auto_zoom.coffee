@@ -1,4 +1,4 @@
-class Scena.AutoZoom extends window.Scena.Plugin
+class Libretto.AutoZoom extends window.Libretto.Plugin
   initialize: =>
     @initialBodyWidth = bodyWidth.call(@)
     @initialBodyHeight = bodyHeight.call(@)
@@ -18,4 +18,4 @@ class Scena.AutoZoom extends window.Scena.Plugin
   bodyHeight = ->
     window.getComputedStyle(window.document.body).height.split('px')[0]
 
-new window.Scena.AutoZoom
+new window.Libretto.AutoZoom

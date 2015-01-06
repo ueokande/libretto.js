@@ -20,8 +20,8 @@ describe 'Test of animation.coffee', ->
     window.document.body.appendChild(sec0)
     window.document.body.appendChild(sec1)
 
-    page0 = Scena.Page.pageAt(0)
-    page1 = Scena.Page.pageAt(1)
+    page0 = Libretto.Page.pageAt(0)
+    page1 = Libretto.Page.pageAt(1)
 
   afterEach ->
     window.document.body.removeChild(sec0)
@@ -34,7 +34,7 @@ describe 'Test of animation.coffee', ->
     div_by_class = null
 
   it 'constructs and reset', ->
-    anime = new Scena.Animation(page0)
+    anime = new Libretto.Animation(page0)
     style = window.document.getElementById('animation-0')
     expect(style).not.toBeNull()
     anime.css.finalize()
@@ -46,7 +46,7 @@ describe 'Test of animation.coffee', ->
         <keyframe target="h2" color="red"></keyframe>
       </animation>
     '''
-    anime = new Scena.Animation(page0)
+    anime = new Libretto.Animation(page0)
 
     expect(anime.css.rules().length).toBe(0)
     anime.nextKeyframe()
@@ -60,7 +60,7 @@ describe 'Test of animation.coffee', ->
         <keyframe target='h2' ></keyframe>
       </animation>
     '''
-    anime = new Scena.Animation(page1)
+    anime = new Libretto.Animation(page1)
     expect(anime.hasNextKeyframe()).toBeTruthy()
     anime.nextKeyframe()
     expect(anime.hasNextKeyframe()).toBeTruthy()
@@ -75,7 +75,7 @@ describe 'Test of animation.coffee', ->
         <keyframe target='.div_cls' background-color='green' />
       </animation>
     '''
-    anime = new Scena.Animation(page1)
+    anime = new Libretto.Animation(page1)
     expect(anime.keyframes.length).toBe(2)
     expect(anime.nextKeyframe()).not.toBeNull()
     expect(anime.nextKeyframe()).not.toBeNull()
@@ -88,7 +88,7 @@ describe 'Test of animation.coffee', ->
         <keyframe target='h1' ></keyframe>
       </animation>
     '''
-    anime = new Scena.Animation(page1)
+    anime = new Libretto.Animation(page1)
     anime.nextKeyframe()
     expect(anime.css.rules().length).toBe(1)
     anime.reset()
@@ -104,7 +104,7 @@ describe 'Test of animation.coffee', ->
         <keyframe target='#div_id' duration='500ms' delay='500ms' color='red'></keyframe>
       </animation>
     '''
-    anime = new Scena.Animation(page0)
+    anime = new Libretto.Animation(page0)
     anime.nextKeyframe()
     expect(anime.css.rules()[0].style.transitionDuration).toBe('500ms')
     expect(anime.css.rules()[0].style.transitionDelay).toBe('500ms')
@@ -117,7 +117,7 @@ describe 'Test of animation.coffee', ->
         <keyframe target='.div_cls' timing='with' color='blue'/></keyframe>
       </animation>
     '''
-    anime = new Scena.Animation(page0)
+    anime = new Libretto.Animation(page0)
     anime.nextKeyframe()
     expect(anime.css.rules()[0].style.color).toBe('red')
     expect(anime.css.rules()[1].style.color).toBe('blue')
@@ -130,17 +130,17 @@ describe 'Test of animation.coffee', ->
         <keyframe target='.div_cls' timing='after' color='blue'></keyframe>
       </animation>
     '''
-    anime = new Scena.Animation(page0)
+    anime = new Libretto.Animation(page0)
     anime.nextKeyframe()
     expect(anime.css.rules()[0].style.color).toBe('red')
     expect(anime.css.rules()[1].style.color).toBe('blue')
     anime.css.finalize()
 
   it 'converts the duratin text to millisec', ->
-    expect(Scena.Animation.timeToMillisecond("200ms")).toBe(200)
-    expect(Scena.Animation.timeToMillisecond("5s")).toBe(5000)
-    expect(Scena.Animation.timeToMillisecond("1.4s")).toBe(1400)
-    expect(Scena.Animation.timeToMillisecond("abc1.4s")).toBeNull()
-    expect(Scena.Animation.timeToMillisecond("x")).toBeNull()
-    expect(Scena.Animation.timeToMillisecond("ms")).toBeNull()
-    expect(Scena.Animation.timeToMillisecond("")).toBeNull()
+    expect(Libretto.Animation.timeToMillisecond("200ms")).toBe(200)
+    expect(Libretto.Animation.timeToMillisecond("5s")).toBe(5000)
+    expect(Libretto.Animation.timeToMillisecond("1.4s")).toBe(1400)
+    expect(Libretto.Animation.timeToMillisecond("abc1.4s")).toBeNull()
+    expect(Libretto.Animation.timeToMillisecond("x")).toBeNull()
+    expect(Libretto.Animation.timeToMillisecond("ms")).toBeNull()
+    expect(Libretto.Animation.timeToMillisecond("")).toBeNull()

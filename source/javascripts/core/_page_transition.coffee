@@ -1,11 +1,11 @@
-class window.Scena.PageTransition
+class window.Libretto.PageTransition
 
   #
   #
   #
   constructor: (@prevIndex, @nextIndex, @nextPage, cssId) ->
     styleName = 'PageTransition' if styleName is undefined
-    @pageAnimeCss = Scena.Css.findOrCreate(cssId)
+    @pageAnimeCss = Libretto.Css.findOrCreate(cssId)
 
   #
   #
@@ -39,7 +39,7 @@ class window.Scena.PageTransition
     if effectName == null
       effect = null
     else
-      effect = Scena.loadPageEffect(effectName)
+      effect = Libretto.loadPageEffect(effectName)
     if effect is null
       console.warn("No such page effect : #{effectName}")
 

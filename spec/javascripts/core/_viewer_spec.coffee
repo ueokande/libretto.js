@@ -20,17 +20,17 @@ describe 'Test of viewer.coffee', ->
     elements = null
 
   it "initializes a object", ->
-    viewer = new Scena.Viewer
-    expect(window.Scena.viewer).toBe(viewer)
+    viewer = new Libretto.Viewer
+    expect(window.Libretto.viewer).toBe(viewer)
 
   it "skips to aspecified page", ->
-    viewer = new Scena.Viewer
+    viewer = new Libretto.Viewer
     viewer.skipToPage(2)
 
     expect(viewer.getCurrentIndex()).toBe(2)
 
   it "fires a keyframe if the page has keyframes", ->
-    viewer = new Scena.Viewer
+    viewer = new Libretto.Viewer
     viewer.skipToPage(0)
 
     expect(viewer.currentAnimation.index).toBe(0)
@@ -40,7 +40,7 @@ describe 'Test of viewer.coffee', ->
     expect(viewer.currentAnimation.index).toBe(2)
 
   it "moves to a next page if the page has no-keyframes", ->
-    viewer = new Scena.Viewer
+    viewer = new Libretto.Viewer
     viewer.skipToPage(0)
 
     viewer.nextStep()
@@ -50,7 +50,7 @@ describe 'Test of viewer.coffee', ->
     expect(viewer.getCurrentIndex()).toBe(1)
 
   it "skips to aspecified page and remove a keyframe if keyframes remain", ->
-    viewer = new Scena.Viewer
+    viewer = new Libretto.Viewer
     viewer.skipToPage(0)
     viewer.nextStep()    # of remaining keyframes is 1
     viewer.skipToPage(2)
@@ -61,31 +61,31 @@ describe 'Test of viewer.coffee', ->
   xit "animates to aspecified page", ->
 
   it "skips to aspecified page", ->
-    viewer = new Scena.Viewer
+    viewer = new Libretto.Viewer
     viewer.skipToPage(2)
 
     expect(viewer.getCurrentIndex()).toBe(2)
 
   it "skips to next page", ->
-    viewer = new Scena.Viewer
+    viewer = new Libretto.Viewer
     viewer.skipToPage(1)
 
     viewer.skipToNextPage()
     expect(viewer.getCurrentIndex()).toBe(2)
 
   it "skips to previous page", ->
-    viewer = new Scena.Viewer
+    viewer = new Libretto.Viewer
     viewer.skipToPage(1)
 
     viewer.skipToPrevPage()
     expect(viewer.getCurrentIndex()).toBe(0)
 
   it "skips to first page", ->
-    viewer = new Scena.Viewer
+    viewer = new Libretto.Viewer
     viewer.skipToFirstPage()
     expect(viewer.getCurrentIndex()).toBe(0)
 
   it "skips to last page", ->
-    viewer = new Scena.Viewer
+    viewer = new Libretto.Viewer
     viewer.skipToLastPage()
     expect(viewer.getCurrentIndex()).toBe(2)

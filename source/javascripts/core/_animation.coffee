@@ -1,4 +1,4 @@
-class window.Scena.Animation
+class window.Libretto.Animation
 
   #
   #
@@ -10,8 +10,8 @@ class window.Scena.Animation
     for node in animationNodes
       keyframeNodes = node.getElementsByTagName('keyframe')
       for k in keyframeNodes
-        @keyframes.push(new Scena.Keyframe(k))
-    @css = Scena.Css.findOrCreate("animation-#{@page.indexOf()}")
+        @keyframes.push(new Libretto.Keyframe(k))
+    @css = Libretto.Css.findOrCreate("animation-#{@page.indexOf()}")
 
   #
   #
