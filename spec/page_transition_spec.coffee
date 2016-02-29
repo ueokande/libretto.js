@@ -21,18 +21,18 @@ describe 'Test of page_transition.coffee', ->
   it 'constructs and destructs a object', ->
     pageTransition = new Libretto.PageTransition(0, 1, @nextPage, 'TestPageTransition')
     styleEle = window.document.getElementById('TestPageTransition')
-    expect(styleEle).not.toBeNull()
+    expect(styleEle).not.to.be.null
 
     pageTransition.finalize()
     styleEle = window.document.getElementById('TestPageTransition')
-    expect(styleEle).toBeNull()
+    expect(styleEle).to.be.null
 
   it 'switches the page without transition', ->
     pageTransition = new Libretto.PageTransition(0, 1, @nextPage, 'TestPageTransition')
     pageTransition.switchPage(false)
 
     expect(window.getComputedStyle(@pageEle1).zIndex) \
-      .toBeLessThan(window.getComputedStyle(@pageEle2).zIndex)
+      .to.be.below(window.getComputedStyle(@pageEle2).zIndex)
 
     pageTransition.finalize()
 
