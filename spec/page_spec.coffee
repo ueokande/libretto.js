@@ -16,7 +16,7 @@ describe 'Test of page.coffee', ->
   it 'returns the number of the page which has body as parent', ->
     grandchildElement = document.createElement('section')
     elements[1].appendChild(grandchildElement)
-    expect(Libretto.Page.count()).toBe(3)
+    expect(Libretto.Page.count()).to.equal(3)
 
   it 'returns a page object of the specified by index', ->
     grandchildElement = document.createElement('section')
@@ -26,33 +26,33 @@ describe 'Test of page.coffee', ->
     childSections = []
     for c in window.document.body.children
       childSections.push(c) if c.tagName.match(/section/i)
-    expect(object.element).toBe(childSections[2])
+    expect(object.element).to.equal(childSections[2])
 
   it 'returns an index of the pages', ->
     grandchildElement = document.createElement('section')
-    expect(Libretto.Page.pageAt(1).indexOf()).toBe(1)
+    expect(Libretto.Page.pageAt(1).indexOf()).to.equal(1)
 
   it 'returns an effect name if the name is given', ->
     pageEle = window.document.body.getElementsByTagName('section')[1]
     pageEle.setAttribute('effect', 'my_effect')
     page = Libretto.Page.pageAt(1)
-    expect(page.animationEffect()).toBe('my_effect')
+    expect(page.animationEffect()).to.equal('my_effect')
 
   it 'returns null if the name is not given', ->
     pageEle = window.document.body.getElementsByTagName('section')[1]
     page = Libretto.Page.pageAt(1)
-    expect(page.animationEffect()).toBeNull()
+    expect(page.animationEffect()).to.be.null
 
   it 'return a effect duration if the duration is given', ->
     pageEle = window.document.body.getElementsByTagName('section')[1]
     pageEle.setAttribute('duration', '500ms')
     page = Libretto.Page.pageAt(1)
-    expect(page.animationDuration()).toBe('500ms')
+    expect(page.animationDuration()).to.equal('500ms')
 
   it 'return null if the duration is not given', ->
     pageEle = window.document.body.getElementsByTagName('section')[1]
     page = Libretto.Page.pageAt(1)
-    expect(page.animationDuration()).toBeNull()
+    expect(page.animationDuration()).to.be.null
 
   # it 'animationOptions() of given options', ->
   #   pageEle = window.document.createElement('section')
@@ -60,9 +60,9 @@ describe 'Test of page.coffee', ->
   #   pageEle.setAttribute('fog', 'true')
   #   page = new Libretto.Page(pageEle)
   #   options = pageEle.options()
-  #   expect(options.length).toBe(2)
-  #   expect(options['direction']).toBe('up')
-  #   expect(options['fog']).toBe('true')
+  #   expect(options.length).to.equal(2)
+  #   expect(options['direction']).to.equal('up')
+  #   expect(options['fog']).to.equal('true')
 
   # it 'animationOptions() of non-given options', ->
   #   pageEle = window.document.createElement('section')
@@ -70,6 +70,6 @@ describe 'Test of page.coffee', ->
   #   pageEle.setAttribute('fog', 'true')
   #   page = new Libretto.Page(pageEle)
   #   options = pageEle.options()
-  #   expect(options.length).toBe(0)
+  #   expect(options.length).to.equal(0)
 
   # it 'createAnimation()', ->

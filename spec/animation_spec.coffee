@@ -36,7 +36,7 @@ describe 'Test of animation.coffee', ->
   it 'constructs and reset', ->
     anime = new Libretto.Animation(page0)
     style = window.document.getElementById('animation-0')
-    expect(style).not.toBeNull()
+    expect(style).not.to.be.null
     anime.css.finalize()
 
   it 'fires keyframes', ->
@@ -48,9 +48,9 @@ describe 'Test of animation.coffee', ->
     '''
     anime = new Libretto.Animation(page0)
 
-    expect(anime.css.rules().length).toBe(0)
+    expect(anime.css.rules().length).to.equal(0)
     anime.nextKeyframe()
-    expect(anime.css.rules().length).toBe(1)
+    expect(anime.css.rules().length).to.equal(1)
     anime.css.finalize()
 
   it 'hasNextKeyframe returns trush value if the keyframes are remaining', ->
@@ -61,11 +61,11 @@ describe 'Test of animation.coffee', ->
       </animation>
     '''
     anime = new Libretto.Animation(page1)
-    expect(anime.hasNextKeyframe()).toBeTruthy()
+    expect(anime.hasNextKeyframe()).to.be.ok
     anime.nextKeyframe()
-    expect(anime.hasNextKeyframe()).toBeTruthy()
+    expect(anime.hasNextKeyframe()).to.be.ok
     anime.nextKeyframe()
-    expect(anime.hasNextKeyframe()).toBeFalsy()
+    expect(anime.hasNextKeyframe()).not.to.be.ok
     anime.css.finalize()
 
   it 'does nothing when keyframes are not in the queue', ->
@@ -76,10 +76,10 @@ describe 'Test of animation.coffee', ->
       </animation>
     '''
     anime = new Libretto.Animation(page1)
-    expect(anime.keyframes.length).toBe(2)
-    expect(anime.nextKeyframe()).not.toBeNull()
-    expect(anime.nextKeyframe()).not.toBeNull()
-    expect(anime.nextKeyframe()).toBeNull()
+    expect(anime.keyframes.length).to.equal(2)
+    expect(anime.nextKeyframe()).not.to.be.null
+    expect(anime.nextKeyframe()).not.to.be.null
+    expect(anime.nextKeyframe()).to.be.null
     anime.css.finalize()
 
   it 'resets keyframes', ->
@@ -90,10 +90,10 @@ describe 'Test of animation.coffee', ->
     '''
     anime = new Libretto.Animation(page1)
     anime.nextKeyframe()
-    expect(anime.css.rules().length).toBe(1)
+    expect(anime.css.rules().length).to.equal(1)
     anime.reset()
 
-    expect(anime.css.rules().length).toBe(0)
+    expect(anime.css.rules().length).to.equal(0)
     anime.css.finalize()
 
   it 'pops the next key frame', ->
@@ -106,8 +106,8 @@ describe 'Test of animation.coffee', ->
     '''
     anime = new Libretto.Animation(page0)
     anime.nextKeyframe()
-    expect(anime.css.rules()[0].style.transitionDuration).toBe('500ms')
-    expect(anime.css.rules()[0].style.transitionDelay).toBe('500ms')
+    expect(anime.css.rules()[0].style.transitionDuration).to.equal('500ms')
+    expect(anime.css.rules()[0].style.transitionDelay).to.equal('500ms')
     anime.css.finalize()
 
   it 'fires a keyframe with the previous keyframe by property timing="with"', ->
@@ -119,8 +119,8 @@ describe 'Test of animation.coffee', ->
     '''
     anime = new Libretto.Animation(page0)
     anime.nextKeyframe()
-    expect(anime.css.rules()[0].style.color).toBe('red')
-    expect(anime.css.rules()[1].style.color).toBe('blue')
+    expect(anime.css.rules()[0].style.color).to.equal('red')
+    expect(anime.css.rules()[1].style.color).to.equal('blue')
     anime.css.finalize()
 
   it 'fires a keyframe after the previous keyframe by property timing="after"', ->
@@ -132,15 +132,15 @@ describe 'Test of animation.coffee', ->
     '''
     anime = new Libretto.Animation(page0)
     anime.nextKeyframe()
-    expect(anime.css.rules()[0].style.color).toBe('red')
-    expect(anime.css.rules()[1].style.color).toBe('blue')
+    expect(anime.css.rules()[0].style.color).to.equal('red')
+    expect(anime.css.rules()[1].style.color).to.equal('blue')
     anime.css.finalize()
 
   it 'converts the duratin text to millisec', ->
-    expect(Libretto.Animation.timeToMillisecond("200ms")).toBe(200)
-    expect(Libretto.Animation.timeToMillisecond("5s")).toBe(5000)
-    expect(Libretto.Animation.timeToMillisecond("1.4s")).toBe(1400)
-    expect(Libretto.Animation.timeToMillisecond("abc1.4s")).toBeNull()
-    expect(Libretto.Animation.timeToMillisecond("x")).toBeNull()
-    expect(Libretto.Animation.timeToMillisecond("ms")).toBeNull()
-    expect(Libretto.Animation.timeToMillisecond("")).toBeNull()
+    expect(Libretto.Animation.timeToMillisecond("200ms")).to.equal(200)
+    expect(Libretto.Animation.timeToMillisecond("5s")).to.equal(5000)
+    expect(Libretto.Animation.timeToMillisecond("1.4s")).to.equal(1400)
+    expect(Libretto.Animation.timeToMillisecond("abc1.4s")).to.be.null
+    expect(Libretto.Animation.timeToMillisecond("x")).to.be.null
+    expect(Libretto.Animation.timeToMillisecond("ms")).to.be.null
+    expect(Libretto.Animation.timeToMillisecond("")).to.be.null
