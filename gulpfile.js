@@ -1,4 +1,5 @@
 var gulp = require('gulp');
+var sass = require('gulp-sass');
 
 gulp.task('build', function() {
   var coffee = require('gulp-coffee');
@@ -8,10 +9,16 @@ gulp.task('build', function() {
                  join: true}))
   .pipe(concat('libretto.js'))
   .pipe(gulp.dest('build'));
+
   var buildSpec = gulp.src('spec/**/*_spec.coffee')
   .pipe(coffee({ bare: true,
                  join: true}))
   .pipe(concat('spec.js'))
   .pipe(gulp.dest('build'));
-  return [buildSrc, buildSpec];
+
+  var buildCss = gulp.src('css/**/*.{sass,scss}')
+  .pipe(sass().on('error', sass.logError))
+  .pipe(gulp.dest('build'));
+
+  return [buildSrc, buildSpec, buildCss];
 });
