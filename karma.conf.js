@@ -21,7 +21,7 @@ module.exports = function(config) {
   };
   if (process.env.TRAVIS) {
     options.customLaunchers = {
-      Chrome_travis_ci: {
+      chrome_travis_ci: {
         options: 'Chrome',
         flags: ['--no-sandbox']
       }
