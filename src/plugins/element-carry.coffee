@@ -1,4 +1,4 @@
-class Libretto.ElementCarry extends window.Libretto.Plugin
+class Libretto.ElementCarry extends Libretto.Plugin
 
   initialize: =>
     @css = new Libretto.Css('element-carry')
@@ -69,4 +69,4 @@ class Libretto.ElementCarry extends window.Libretto.Plugin
 
 
 #  This plugin will potentially be removed.
-# new window.Libretto.ElementCarry
+# new Libretto.ElementCarry

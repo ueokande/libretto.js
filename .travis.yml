@@ -5,6 +5,7 @@ addons:
   apt:
     packages:
     - xvfb
+  firefox: "36.0"
 cache:
   apt: true
   directories:
