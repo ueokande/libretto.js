@@ -1,12 +1,12 @@
 var gulp = require('gulp');
+var babel = require('gulp-babel');
 var sass = require('gulp-sass');
 
 gulp.task('build', function() {
   var coffee = require('gulp-coffee');
   var concat = require('gulp-concat');
-  var buildSrc = gulp.src(['src/index.coffee', 'src/**/*.coffee'])
-  .pipe(coffee({ bare: true,
-                 join: true}))
+  var buildSrc = gulp.src(['src/index.js', 'src/**/*.js'])
+  .pipe(babel({ presets: ["es2015"] }))
   .pipe(concat('libretto.js'))
   .pipe(gulp.dest('build'));
 
