@@ -3,16 +3,14 @@ var babel = require('gulp-babel');
 var sass = require('gulp-sass');
 
 gulp.task('build', function() {
-  var coffee = require('gulp-coffee');
   var concat = require('gulp-concat');
   var buildSrc = gulp.src(['src/index.js', 'src/**/*.js'])
   .pipe(babel({ presets: ["es2015"] }))
   .pipe(concat('libretto.js'))
   .pipe(gulp.dest('build'));
 
-  var buildSpec = gulp.src('spec/**/*_spec.coffee')
-  .pipe(coffee({ bare: true,
-                 join: true}))
+  var buildSpec = gulp.src('spec/**/*_spec.js')
+  .pipe(babel({ presets: ["es2015"] }))
   .pipe(concat('spec.js'))
   .pipe(gulp.dest('build'));
 
