@@ -1,4 +1,4 @@
-class window.Libretto.Plugin
+class Libretto.Plugin
   constructor: (name) ->
     window.addEventListener("load", @initialize)
 

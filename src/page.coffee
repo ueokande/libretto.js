@@ -6,7 +6,7 @@
 # hide(), and neutralStyle() methods.
 #
 
-class window.Libretto.Page
+class Libretto.Page
   #
   # Returns the number of the pages in the document.
   #

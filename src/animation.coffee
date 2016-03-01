@@ -1,4 +1,4 @@
-class window.Libretto.Animation
+class Libretto.Animation
 
   #
   #

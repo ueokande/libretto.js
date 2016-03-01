@@ -1,4 +1,4 @@
-class window.Libretto.PageTransition
+class Libretto.PageTransition
 
   #
   #

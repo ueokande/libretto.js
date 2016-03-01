@@ -1,7 +1,7 @@
-class Libretto.IO extends window.Libretto.Plugin
+class Libretto.IO extends Libretto.Plugin
   initialize: =>
     window.addEventListener('keypress', (e) =>
-      viewer = window.Libretto.Viewer.viewer()
+      viewer = Libretto.Viewer.viewer()
       if e.charCode == '['.charCodeAt(0)
         viewer.skipToPrevPage()
       else if e.charCode == ']'.charCodeAt(0)
@@ -10,7 +10,7 @@ class Libretto.IO extends window.Libretto.Plugin
 
     window.addEventListener('keydown', (e)=>
       # TODO: Added Enter key but the Enter is conflicted to pager plugin.
-      viewer = window.Libretto.Viewer.viewer()
+      viewer = Libretto.Viewer.viewer()
       switch (e.keyCode)
         # case 13:    // Enter
         when 32, 40, 34    # Space, Arrow Down, Page Down
@@ -25,8 +25,8 @@ class Libretto.IO extends window.Libretto.Plugin
 
     window.addEventListener('click', (e) =>
       return if e.button != 0
-      viewer = window.Libretto.Viewer.viewer()
+      viewer = Libretto.Viewer.viewer()
       viewer.nextStep()
     )
 
-new window.Libretto.IO
+new Libretto.IO

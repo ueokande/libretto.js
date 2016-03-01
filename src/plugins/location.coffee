@@ -1,11 +1,11 @@
-class window.Libretto.Location extends window.Libretto.Plugin
+class Libretto.Location extends Libretto.Plugin
 
   initialize: =>
     window.addEventListener('hashchange', (e)=>
       @applyPage()
     )
 
-    viewer = window.Libretto.Viewer.viewer()
+    viewer = Libretto.Viewer.viewer()
     viewer.addCurrentPageChangedListener(=>
       index = viewer.getCurrentIndex()
       @setHash(index)
@@ -19,9 +19,9 @@ class window.Libretto.Location extends window.Libretto.Plugin
   applyPage: ()->
     num = +(window.location.hash.split('#')[1])
     num = 1 if isNaN(num)
-    viewer = window.Libretto.Viewer.viewer()
+    viewer = Libretto.Viewer.viewer()
     viewer.skipToPage(num - 1)
 
 
-new window.Libretto.Location
+new Libretto.Location
 

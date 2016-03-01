@@ -1,1 +1,1 @@
-window.Libretto = {}
+Libretto = {}

@@ -10,7 +10,7 @@
 # page, use text box.
 #
 
-class window.Libretto.Pager extends window.Libretto.Plugin
+class Libretto.Pager extends Libretto.Plugin
   constructor: ->
     @inputBox = null
     @show - false
@@ -82,7 +82,7 @@ class window.Libretto.Pager extends window.Libretto.Plugin
     return if e.keyCode != 13
     
     num = ~~(@inputBox.value)
-    viewer = window.Libretto.Viewer.viewer()
+    viewer = Libretto.Viewer.viewer()
     viewer.skipToPage(num - 1)
     @hidePager()
   

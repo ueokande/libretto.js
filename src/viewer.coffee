@@ -1,7 +1,7 @@
-class window.Libretto.Viewer
+class Libretto.Viewer
 
   @viewer: ->
-    window.Libretto.viewer
+    Libretto.viewer
 
   #
   # Initializes internal variables and HTML contents.
@@ -12,7 +12,7 @@ class window.Libretto.Viewer
     @pageTransition = null
     @currentPageChangedListeners = []
 
-    window.Libretto.viewer = @
+    Libretto.viewer = @
 
   getCurrentIndex: ->
     @currentIndex
@@ -97,6 +97,4 @@ class window.Libretto.Viewer
   addCurrentPageChangedListener: (listener) ->
     @currentPageChangedListeners.push(listener)
 
-
-new window.Libretto.Viewer
-
+new Libretto.Viewer

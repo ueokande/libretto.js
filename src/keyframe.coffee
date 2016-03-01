@@ -9,7 +9,7 @@
 # The keyframe will be fired with start() method.
 #
 
-class window.Libretto.Keyframe
+class Libretto.Keyframe
   #
   # Constructs a Keyframe object with the given element which is a element
   # contained in <keyframe>.

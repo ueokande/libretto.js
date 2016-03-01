@@ -1,4 +1,4 @@
-class window.Libretto.Css
+class Libretto.Css
 
   #
   #
