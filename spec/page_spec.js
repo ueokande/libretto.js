@@ -37,6 +37,10 @@ describe('Test of page.coffee', function() {
     expect(object.element).to.equal(childSections[2]);
   });
 
+  it('throw RangeError if the index is out of the range', function() {
+    expect(() => Libretto.Page.pageAt(5)).to.throw(RangeError);
+  });
+
   it('returns an index of the pages', function() {
     let grandchildElement = document.createElement('section');
     expect(Libretto.Page.pageAt(1).indexOf()).to.equal(1);
