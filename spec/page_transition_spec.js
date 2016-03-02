@@ -23,10 +23,10 @@ describe('Test of page_transition.coffee', function() {
   it('constructs and destructs a object', function() {
     let pageTransition = new Libretto.PageTransition(0, 1, this.nextPage, 'TestPageTransition');
     let styleEle = window.document.getElementById('TestPageTransition');
-    expect(styleEle).not.to.be["null"];
+    expect(styleEle).not.to.be.null;
     pageTransition.finalize();
     styleEle = window.document.getElementById('TestPageTransition');
-    expect(styleEle).to.be["null"];
+    expect(styleEle).to.be.null;
   });
 
   it('switches the page without transition', function() {

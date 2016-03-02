@@ -52,7 +52,7 @@ describe('Test of page.coffee', function() {
   it('returns null if the name is not given', function() {
     let pageEle = window.document.body.getElementsByTagName('section')[1];
     let page = Libretto.Page.pageAt(1);
-    expect(page.animationEffect()).to.be["null"];
+    expect(page.animationEffect()).to.be.null;
   });
 
   it('a effect duration if the duration is given', function() {
@@ -65,6 +65,6 @@ describe('Test of page.coffee', function() {
   it('null if the duration is not given', function() {
     let pageEle = window.document.body.getElementsByTagName('section')[1];
     let page = Libretto.Page.pageAt(1);
-    expect(page.animationDuration()).to.be["null"];
+    expect(page.animationDuration()).to.be.null;
   });
 });

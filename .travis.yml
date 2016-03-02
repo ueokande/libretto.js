@@ -13,6 +13,7 @@ cache:
 install:
 - npm install
 before_script:
+- npm run lint
 - npm run build
 - export CHROME_BIN=chromium-browser
 - export DISPLAY=:99.0

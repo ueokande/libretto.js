@@ -2,10 +2,10 @@ describe('Test of css.coffee', function() {
   it('create new and finalizes', function() {
     let css = Libretto.Css.create('tested_css');
     let styleEle = window.document.getElementById('tested_css');
-    expect(styleEle).not.to.be["null"];
+    expect(styleEle).not.to.be.null;
     css.finalize();
     styleEle = window.document.getElementById('tested_css');
-    expect(styleEle).to.be["null"];
+    expect(styleEle).to.be.null;
   });
 
   it('finds a exist css', function() {

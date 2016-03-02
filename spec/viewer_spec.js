@@ -6,10 +6,12 @@ describe('Test of viewer.coffee', function() {
     let results = [];
     for (let i in elements) {
       elements[i] = window.document.createElement('section');
-      elements[i].innerHTML = '<animation>\n  <keyframe target=\'h1\'>\n  <keyframe target=\'h2\'>\n</animation>';
+      elements[i].innerHTML = '<animation>' +
+                              '  <keyframe target="h1">' +
+                              '  <keyframe target="h2">' +
+                              '</animation>';
       results.push(window.document.body.appendChild(elements[i]));
     }
-    results;
   });
 
   afterEach(function() {
@@ -19,19 +21,19 @@ describe('Test of viewer.coffee', function() {
     elements = null;
   });
 
-  it("initializes a object", function() {
-    let viewer = new Libretto.Viewer;
+  it('initializes a object', function() {
+    let viewer = new Libretto.Viewer();
     expect(window.Libretto.viewer).to.equal(viewer);
   });
 
-  it("skips to aspecified page", function() {
-    let viewer = new Libretto.Viewer;
+  it('skips to aspecified page', function() {
+    let viewer = new Libretto.Viewer();
     viewer.skipToPage(2);
     expect(viewer.getCurrentIndex()).to.equal(2);
   });
 
-  it("fires a keyframe if the page has keyframes", function() {
-    let viewer = new Libretto.Viewer;
+  it('fires a keyframe if the page has keyframes', function() {
+    let viewer = new Libretto.Viewer();
     viewer.skipToPage(0);
     expect(viewer.currentAnimation.index).to.equal(0);
     viewer.nextStep();
@@ -40,8 +42,8 @@ describe('Test of viewer.coffee', function() {
     expect(viewer.currentAnimation.index).to.equal(2);
   });
 
-  it("moves to a next page if the page has no-keyframes", function() {
-    let viewer = new Libretto.Viewer;
+  it('moves to a next page if the page has no-keyframes', function() {
+    let viewer = new Libretto.Viewer();
     viewer.skipToPage(0);
     viewer.nextStep();
     viewer.nextStep();
@@ -50,8 +52,8 @@ describe('Test of viewer.coffee', function() {
     expect(viewer.getCurrentIndex()).to.equal(1);
   });
 
-  it("skips to aspecified page and remove a keyframe if keyframes remain", function() {
-    let viewer = new Libretto.Viewer;
+  it('skips to aspecified page and remove a keyframe if keyframes remain', function() {
+    let viewer = new Libretto.Viewer();
     viewer.skipToPage(0);
     viewer.nextStep();
     viewer.skipToPage(2);
@@ -59,36 +61,36 @@ describe('Test of viewer.coffee', function() {
     expect(viewer.currentAnimation.keyframes.length).to.equal(2);
   });
 
-  xit("animates to aspecified page", function() {});
+  xit('animates to aspecified page', function() {});
 
-  it("skips to aspecified page", function() {
-    let viewer = new Libretto.Viewer;
+  it('skips to aspecified page', function() {
+    let viewer = new Libretto.Viewer();
     viewer.skipToPage(2);
     expect(viewer.getCurrentIndex()).to.equal(2);
   });
 
-  it("skips to next page", function() {
-    let viewer = new Libretto.Viewer;
+  it('skips to next page', function() {
+    let viewer = new Libretto.Viewer();
     viewer.skipToPage(1);
     viewer.skipToNextPage();
     expect(viewer.getCurrentIndex()).to.equal(2);
   });
 
-  it("skips to previous page", function() {
-    let viewer = new Libretto.Viewer;
+  it('skips to previous page', function() {
+    let viewer = new Libretto.Viewer();
     viewer.skipToPage(1);
     viewer.skipToPrevPage();
     expect(viewer.getCurrentIndex()).to.equal(0);
   });
 
-  it("skips to first page", function() {
-    let viewer = new Libretto.Viewer;
+  it('skips to first page', function() {
+    let viewer = new Libretto.Viewer();
     viewer.skipToFirstPage();
     expect(viewer.getCurrentIndex()).to.equal(0);
   });
 
-  it("skips to last page", function() {
-    let viewer = new Libretto.Viewer;
+  it('skips to last page', function() {
+    let viewer = new Libretto.Viewer();
     viewer.skipToLastPage();
     expect(viewer.getCurrentIndex()).to.equal(2);
   });

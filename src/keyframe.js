@@ -12,7 +12,7 @@ Libretto.Keyframe = class {
   // contained in <keyframe>.
   constructor(element) {
     this.element = element;
-    if (element === undefined) {
+    if (typeof element === 'undefined') {
       this.element = null;
     }
   }
@@ -20,34 +20,34 @@ Libretto.Keyframe = class {
   // Returns the target of the keyframe.
   target() {
     if (this.element === null) { return null; }
-    return this.element.getAttribute("target");
+    return this.element.getAttribute('target');
   }
 
   // Returns the duration of the animation as text.  Return null If the
   // duration is note speficied.
   duration() {
     if (this.element === null) { return null; }
-    return this.element.getAttribute("duration");
+    return this.element.getAttribute('duration');
   }
 
   properties() {
-    if (this.element === null) { return null  }
-    let obj = {}
+    if (this.element === null) { return null; }
+    let obj = {};
     for (let attr of Array.prototype.slice.call(this.element.attributes)) {
-      if (attr.nodeName !== "target" && attr.nodeName !== "duration") {
-        obj[attr.nodeName] = attr.value
+      if (attr.nodeName !== 'target' && attr.nodeName !== 'duration') {
+        obj[attr.nodeName] = attr.value;
       }
     }
-    return obj
+    return obj;
   }
 
   delay() {
     if (this.element === null) { return null; }
-    return this.element.getAttribute("delay")
+    return this.element.getAttribute('delay');
   }
 
   timing() {
     if (this.element === null) { return null; }
-    return this.element.getAttribute("timing")
+    return this.element.getAttribute('timing');
   }
-}
+};

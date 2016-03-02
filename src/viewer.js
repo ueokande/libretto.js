@@ -1,7 +1,7 @@
 Libretto.Viewer = class {
 
   static viewer() {
-    return Libretto.viewer
+    return Libretto.viewer;
   }
 
   //
@@ -17,7 +17,7 @@ Libretto.Viewer = class {
   }
 
   getCurrentIndex() {
-    return this.currentIndex
+    return this.currentIndex;
   }
 
   //
@@ -25,7 +25,7 @@ Libretto.Viewer = class {
   //
   skipToPage(index) {
     if (Libretto.Page.count() === 0) { return; }
-    this.switchPage(index, false)
+    this.switchPage(index, false);
   }
 
   //
@@ -52,7 +52,9 @@ Libretto.Viewer = class {
     this.currentAnimation.reset();
 
     if (this.pageTransition !== null) { this.pageTransition.finalize(); }
-    this.pageTransition = new Libretto.PageTransition(prevIndex, nextIndex, currentPage);
+    this.pageTransition = new Libretto.PageTransition(prevIndex,
+                                                      nextIndex,
+                                                      currentPage);
     this.pageTransition.switchPage(animationEnable);
 
     for (let listener of this.currentPageChangedListeners) {
@@ -64,10 +66,10 @@ Libretto.Viewer = class {
   // Animate the element of page to next.
   //
   nextStep() {
-    if (!this.currentAnimation.hasNextKeyframe()) {
-      this.animateToPage(this.currentIndex + 1);
-    } else {
+    if (this.currentAnimation.hasNextKeyframe()) {
       this.currentAnimation.nextKeyframe();
+    } else {
+      this.animateToPage(this.currentIndex + 1);
     }
   }
 
@@ -109,6 +111,6 @@ Libretto.Viewer = class {
   addCurrentPageChangedListener(listener) {
     this.currentPageChangedListeners.push(listener);
   }
-}
+};
 
-new Libretto.Viewer
+new Libretto.Viewer();
