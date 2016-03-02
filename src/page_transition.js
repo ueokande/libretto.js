@@ -38,7 +38,7 @@ Libretto.PageTransition = class {
     if (effect === null) {
       this.execAnime();
     } else {
-      this.execAnime(effect(), duration, options);
+      this.execAnime(effect, duration, options);
     }
   }
 
