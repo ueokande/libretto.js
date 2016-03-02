@@ -16,7 +16,9 @@ Libretto.Page = class {
   //
   static pageAt(index) {
     let element = this.sectionNodes()[index];
-    if (typeof element === 'undefined') { return null; }
+    if (typeof element === 'undefined') {
+      throw new RangeError('Out of index in sections');
+    }
     let obj = new Libretto.Page();
     obj.element = element;
     return obj;
@@ -37,7 +39,6 @@ Libretto.Page = class {
   // Returns the effect name of the page animation
   //
   animationEffect() {
-    if (this.element === null) { return null; }
     return this.element.getAttribute('effect');
   }
 
@@ -45,7 +46,6 @@ Libretto.Page = class {
   // Returns the duration of the page animation
   //
   animationDuration() {
-    if (this.element === null) { return null; }
     return this.element.getAttribute('duration');
   }
 
@@ -53,7 +53,6 @@ Libretto.Page = class {
   // Returns all attributes.
   //
   animationOptions() {
-    if (this.element === null) { return null; }
     let obj = {};
     for (let attr of Array.prototype.slice.call(this.element.attributes)) {
       if (attr.nodeName != 'style' &&
@@ -77,7 +76,6 @@ Libretto.Page = class {
   // Create animation object
   //
   animation() {
-    if (this.element === null) { return null; }
     return new Libretto.Animation(this);
   }
 };
