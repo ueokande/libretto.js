@@ -3,11 +3,11 @@ Libretto.PageTransition = class {
     this.prevIndex = prevIndex;
     this.nextIndex = nextIndex;
     this.nextPage = nextPage;
-    this.pageAnimeCss = Libretto.Css.findOrCreate(cssId)
+    this.pageAnimeCss = Libretto.Css.findOrCreate(cssId);
   }
 
   finalize() {
-    this.pageAnimeCss.finalize()
+    this.pageAnimeCss.finalize();
   }
 
   switchPage(animationEnable) {
@@ -23,45 +23,42 @@ Libretto.PageTransition = class {
   }
 
   animatePage() {
-    let effectName = this.nextPage.animationEffect()
-    let duration = this.nextPage.animationDuration()
-    let options = this.nextPage.animationOptions()
+    let effectName = this.nextPage.animationEffect();
+    let duration = this.nextPage.animationDuration();
+    let options = this.nextPage.animationOptions();
 
-    var effect;
-    if (effectName == null) {
-      effect = null
-    } else {
+    let effect = null;
+    if (effectName !== null) {
       effect = Libretto.loadPageEffect(effectName);
     }
     if (effect === null) {
-      console.warn(`No such page effect : ${effectName}`)
+      console.warn(`No such page effect : ${effectName}`);
     }
 
-    if (effect == null) {
+    if (effect === null) {
       this.execAnime();
     } else {
-      this.execAnime(effect(), duration, options)
+      this.execAnime(effect(), duration, options);
     }
   }
 
   execAnime(effect, duration, options) {
     this.pageAnimeCss.clearRules();
-    let prevStyle, nextStyle;
+    let prevStyle = null;
     if (this.prevIndex !== null) {
-      prevStyle = this.pageAnimeCss.addRule(`section:nth-of-type(${this.prevIndex+1})`)
-      prevStyle.visibility = 'visible'
-      prevStyle.zIndex = 0
+      prevStyle = this.pageAnimeCss.addRule(`section:nth-of-type(${this.prevIndex + 1})`);
+      prevStyle.visibility = 'visible';
+      prevStyle.zIndex = 0;
     }
-    nextStyle = this.pageAnimeCss.addRule(`section:nth-of-type(${this.nextIndex+1})`)
-    nextStyle.visibility = 'visible'
-    nextStyle.zIndex = 1
+    let nextStyle = this.pageAnimeCss.addRule(`section:nth-of-type(${this.nextIndex + 1})`);
+    nextStyle.visibility = 'visible';
+    nextStyle.zIndex = 1;
 
-    if (effect === undefined) { return }
-
+    if (typeof effect === 'undefined') { return; }
     if (effect.hasOwnProperty('before')) {
-      effect.before(prevStyle, nextStyle, duration, options)
+      effect.before(prevStyle, nextStyle, duration, options);
     }
-    setTimeout(() => { effect.exec(prevStyle, nextStyle, duration, options)},
+    setTimeout(() => { effect.exec(prevStyle, nextStyle, duration, options); },
               50);  // 50ms is hack to run on Firefox
   }
-}
+};

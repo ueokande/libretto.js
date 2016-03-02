@@ -3,15 +3,15 @@ Libretto.IO = class extends Libretto.Plugin {
     window.addEventListener('keypress', (e) => {
       let viewer = Libretto.Viewer.viewer();
       if (e.charCode == '['.charCodeAt(0)) {
-        viewer.skipToPrevPage()
+        viewer.skipToPrevPage();
       } else if (e.charCode == ']'.charCodeAt(0)) {
-        viewer.skipToNextPage()
+        viewer.skipToNextPage();
       }
     });
 
     window.addEventListener('keydown', (e) => {
       // TODO: Added Enter key but the Enter is conflicted to pager plugin.
-      let viewer = Libretto.Viewer.viewer()
+      let viewer = Libretto.Viewer.viewer();
       switch (e.keyCode) {
       // case 13:    // Enter
       case 32:  // Space
@@ -21,13 +21,13 @@ Libretto.IO = class extends Libretto.Plugin {
         break;
       case 38:  // Arrow up
       case 33:  // Page Up
-        viewer.prevStep()
+        viewer.prevStep();
         break;
       case 36:  // Home
-        viewer.skipToFirstPage()
+        viewer.skipToFirstPage();
         break;
       case 35:  // End
-        viewer.skipToLastPage()
+        viewer.skipToLastPage();
         break;
       }
     });
@@ -38,6 +38,6 @@ Libretto.IO = class extends Libretto.Plugin {
       viewer.nextStep();
     });
   }
-}
+};
 
-new Libretto.IO
+new Libretto.IO();
