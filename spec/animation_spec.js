@@ -36,16 +36,15 @@ describe('Test of animation.coffee', function() {
   it('constructs and reset', () => {
     let anime = new Libretto.Animation(page0);
     let style = window.document.getElementById('animation-0');
-    expect(style).not.to.be["null"];
+    expect(style).not.to.be.null;
     anime.css.finalize();
   });
 
   it('fires keyframes', () => {
-    sec0.innerHTML += '\
-      <animation>\
-        <keyframe target="h1" color="red"></keyframe>\
-        <keyframe target="h2" color="red"></keyframe>\
-      </animation>';
+    sec0.innerHTML += '<animation>' +
+                      '  <keyframe target="h1" color="red"></keyframe>' +
+                      '  <keyframe target="h2" color="red"></keyframe>' +
+                      '</animation>';
     let anime = new Libretto.Animation(page0);
     expect(anime.css.rules().length).to.equal(0);
     anime.nextKeyframe();
@@ -54,11 +53,10 @@ describe('Test of animation.coffee', function() {
   });
 
   it('hasNextKeyframe returns trush value if the keyframes are remaining', function() {
-    sec1.innerHTML = '\
-      <animation>\
-        <keyframe target="h1" ></keyframe>\
-        <keyframe target="h2" ></keyframe>\
-      </animation>';
+    sec1.innerHTML = '<animation>' +
+                     '  <keyframe target="h1" ></keyframe>' +
+                     '  <keyframe target="h2" ></keyframe>' +
+                     '</animation>';
     let anime = new Libretto.Animation(page1);
     expect(anime.hasNextKeyframe()).to.be.ok;
     anime.nextKeyframe();
@@ -69,24 +67,22 @@ describe('Test of animation.coffee', function() {
   });
 
   it('does nothing when keyframes are not in the queue', function() {
-    sec1.innerHTML += '\
-      <animation>\
-        <keyframe target="#div_id" duration="500ms"/>\
-        <keyframe target=".div_cls" background-color="green" />\
-      </animation>';
+    sec1.innerHTML += '<animation>' +
+                      '  <keyframe target="#div_id" duration="500ms"/>' +
+                      '  <keyframe target=".div_cls" background-color="green" />' +
+                      '</animation>';
     let anime = new Libretto.Animation(page1);
     expect(anime.keyframes.length).to.equal(2);
-    expect(anime.nextKeyframe()).not.to.be["null"];
-    expect(anime.nextKeyframe()).not.to.be["null"];
-    expect(anime.nextKeyframe()).to.be["null"];
+    expect(anime.nextKeyframe()).not.to.be.null;
+    expect(anime.nextKeyframe()).not.to.be.null;
+    expect(anime.nextKeyframe()).to.be.null;
     anime.css.finalize();
   });
 
   it('resets keyframes', function() {
-    sec1.innerHTML = '\
-      <animation>\
-        <keyframe target="h1"></keyframe>\
-      </animation>';
+    sec1.innerHTML = '<animation>' +
+                     '  <keyframe target="h1"></keyframe>' +
+                     '</animation>';
     let anime = new Libretto.Animation(page1);
     anime.nextKeyframe();
     expect(anime.css.rules().length).to.equal(1);
@@ -99,10 +95,11 @@ describe('Test of animation.coffee', function() {
     let cs = function(elem) {
       window.getComputedStyle(elem);
     };
-    sec0.innerHTML += '\
-      <animation>\
-        <keyframe target="#div_id" duration="500ms" delay="500ms" color="red"></keyframe>\
-      </animation>';
+    sec0.innerHTML += '<animation>' +
+                      ' <keyframe target="#div_id"' +
+                      '           duration="500ms" delay="500ms"' +
+                      '           color="red"></keyframe>' +
+                      '</animation>';
     let anime = new Libretto.Animation(page0);
     anime.nextKeyframe();
     expect(anime.css.rules()[0].style.transitionDuration).to.equal('500ms');
@@ -112,11 +109,10 @@ describe('Test of animation.coffee', function() {
 
 
   it('fires a keyframe with the previous keyframe by property timing="with"', function() {
-    sec0.innerHTML += '\
-      <animation>\
-        <keyframe target="#div_id" color="red"/></keyframe>\
-        <keyframe target=".div_cls" timing="with" color="blue"/></keyframe>\
-      </animation>';
+    sec0.innerHTML += '<animation>' +
+                      '  <keyframe target="#div_id" color="red"/></keyframe>' +
+                      '  <keyframe target=".div_cls" timing="with" color="blue"/></keyframe>' +
+                      '</animation>';
     let anime = new Libretto.Animation(page0);
     anime.nextKeyframe();
     expect(anime.css.rules()[0].style.color).to.equal('red');
@@ -125,11 +121,10 @@ describe('Test of animation.coffee', function() {
   });
 
   it('fires a keyframe after the previous keyframe by property timing="after"', function() {
-    sec0.innerHTML += '\
-      <animation>\
-        <keyframe target="#div_id" color="red"></keyframe>\
-        <keyframe target=".div_cls" timing="after" color="blue"></keyframe>\
-      </animation>';
+    sec0.innerHTML += '<animation>' +
+                      '  <keyframe target="#div_id" color="red"></keyframe>' +
+                      '  <keyframe target=".div_cls" timing="after" color="blue"></keyframe>' +
+                      '</animation>';
     let anime = new Libretto.Animation(page0);
     anime.nextKeyframe();
     expect(anime.css.rules()[0].style.color).to.equal('red');
@@ -141,9 +136,9 @@ describe('Test of animation.coffee', function() {
     expect(Libretto.Animation.timeToMillisecond("200ms")).to.equal(200);
     expect(Libretto.Animation.timeToMillisecond("5s")).to.equal(5000);
     expect(Libretto.Animation.timeToMillisecond("1.4s")).to.equal(1400);
-    expect(Libretto.Animation.timeToMillisecond("abc1.4s")).to.be["null"];
-    expect(Libretto.Animation.timeToMillisecond("x")).to.be["null"];
-    expect(Libretto.Animation.timeToMillisecond("ms")).to.be["null"];
-    expect(Libretto.Animation.timeToMillisecond("")).to.be["null"];
+    expect(Libretto.Animation.timeToMillisecond("abc1.4s")).to.be.null;
+    expect(Libretto.Animation.timeToMillisecond("x")).to.be.null;
+    expect(Libretto.Animation.timeToMillisecond("ms")).to.be.null;
+    expect(Libretto.Animation.timeToMillisecond("")).to.be.null;
   });
 });
