@@ -42,24 +42,9 @@ describe('Test of keyframe.coffee', function() {
     expect(properties).to.be.empty;
   });
 
-  it('returns null target if invalid constructor', function() {
-    let keyframe1 = new Libretto.Keyframe(null);
-    let keyframe2 = new Libretto.Keyframe();
-    expect(keyframe1.target()).to.be.null;
-    expect(keyframe2.target()).to.be.null;
-  });
-
-  it('returns null duration if invalid constructor', function() {
-    let keyframe1 = new Libretto.Keyframe(null);
-    let keyframe2 = new Libretto.Keyframe();
-    expect(keyframe1.duration()).to.be.null;
-    expect(keyframe2.duration()).to.be.null;
-  });
-
-  it('returns null properties if invalid constructor', function() {
-    let keyframe1 = new Libretto.Keyframe(null);
-    let keyframe2 = new Libretto.Keyframe();
-    expect(keyframe1.properties()).to.be.null;
-    expect(keyframe2.properties()).to.be.null;
+  it('throws an error when invalid constructor', function() {
+      expect(() => new Libretto.Keyframe()).to.throw(TypeError);
+      expect(() => new Libretto.Keyframe(123)).to.throw(TypeError);
+      expect(() => new Libretto.Keyframe('elem')).to.throw(TypeError);
   });
 });
