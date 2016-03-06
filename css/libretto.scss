@@ -1,11 +1,17 @@
 body {
   overflow: hidden;
   counter-reset: pagecounter;
-  position: relative;
   -webkit-user-select: none;
   -moz-user-select: none;
   user-select: none;
   cursor: default;
+
+  // Move body to center
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transform-origin: 0 0 0;
 }
 
 section {
