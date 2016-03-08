@@ -6,7 +6,8 @@
   },
   "globals": {
     "Libretto": true,
-    "expect": true
+    "expect": true,
+    "require": true
   },
   "ecmaFeatures": {
     "generators": true,
