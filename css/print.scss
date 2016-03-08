@@ -1,5 +1,8 @@
 body {
   -webkit-print-color-adjust: exact;
+  position: static !important;
+  transform: none !important;
+  transform-origin: initial !important;
 }
 
 section {

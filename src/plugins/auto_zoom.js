@@ -13,8 +13,7 @@ Libretto.AutoZoom = class extends Libretto.Plugin {
     let iw = window.innerWidth;
     let ih = window.innerHeight;
     let zoom = Math.min(iw / this.initialBodyWidth, ih / this.initialBodyHeight);
-    window.document.body.style.transform = `scale(${zoom})`;
-    window.document.body.style.transformOrigin = '0 0';
+    window.document.body.style.transform = `scale(${zoom}) translate(-50%, -50%)`;
   }
 };
 
