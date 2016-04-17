@@ -1,14 +1,19 @@
 module.exports = function(config) {
   var options = {
     basePath: '',
-    frameworks: ['mocha', 'chai'],
+    frameworks: ['browserify', 'mocha', 'chai'],
     files: [
       'build/libretto.js',
-      'build/spec.js'
+      'spec/*_spec.js'
     ],
     exclude: [
     ],
     preprocessors: {
+      'spec/*_spec.js': [ 'browserify' ]
+    },
+    browserify: {
+      debug: true,
+      transform: [ 'babelify' ]
     },
     reporters: ['dots'],
     port: 9876,
