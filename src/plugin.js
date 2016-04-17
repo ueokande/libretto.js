@@ -1,4 +1,4 @@
-Libretto.Plugin = class {
+export default class Plugin {
   constructor() {
     let that = this;
     window.addEventListener('load', () => {
@@ -8,4 +8,4 @@ Libretto.Plugin = class {
 
   initialize() {
   }
-};
+}

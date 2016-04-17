@@ -7,7 +7,7 @@
 // tag in HTML.  The <keyframe> tag is distinctive specification in Libretto.js.
 // The keyframe will be fired with start() method.
 
-Libretto.Keyframe = class {
+export default class Keyframe {
   // Constructs a Keyframe object with the given element which is a element
   // contained in <keyframe>.
   constructor(element) {
@@ -45,4 +45,4 @@ Libretto.Keyframe = class {
   timing() {
     return this.element.getAttribute('timing');
   }
-};
+}

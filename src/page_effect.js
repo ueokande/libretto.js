@@ -1,11 +1,11 @@
-Libretto.pageEffects = {};
+let pageEffects = {};
 
-Libretto.registerPageEffect = (name, animation) => {
-  Libretto.pageEffects[name.toLowerCase()] = animation;
-};
+export function registerPageEffect(name, animation) {
+  pageEffects[name.toLowerCase()] = animation;
+}
 
-Libretto.loadPageEffect = (name) => {
+export function loadPageEffect(name) {
   name = name.toLowerCase();
-  if (!Libretto.pageEffects.hasOwnProperty(name)) return null;
-  return Libretto.pageEffects[name];
-};
+  if (!pageEffects.hasOwnProperty(name)) return null;
+  return pageEffects[name];
+}

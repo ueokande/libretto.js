@@ -4,7 +4,7 @@ class Location extends Libretto.Plugin {
       Location.prototype.applyPage.call(this);
     });
 
-    let viewer = Libretto.Viewer.viewer();
+    let viewer = Libretto.viewer();
     viewer.addEventListener('currentPageChanged', () => {
       let index = viewer.getCurrentIndex();
       Location.prototype.setHash.call(this, index);
@@ -20,7 +20,7 @@ class Location extends Libretto.Plugin {
   applyPage() {
     let num = Number(window.location.hash.split('#')[1]);
     if (isNaN(num)) { num = 1; }
-    let viewer = Libretto.Viewer.viewer();
+    let viewer = Libretto.viewer();
     viewer.skipToPage(num - 1);
   }
 }

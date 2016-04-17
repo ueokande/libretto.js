@@ -18,14 +18,14 @@ gulp.task('gh-pages', function() {
 
 gulp.task('build', function() {
   var concat = require('gulp-concat');
-  var buildSrc = gulp.src(['src/index.js', 'src/**/*.js'])
-  .pipe(concat('libretto.js'))
+  var buildSrc = gulp.src('src/libretto.js')
   .pipe(browserify({ transform: 'babelify' }))
   .pipe(gulp.dest('build'));
 
   var buildSpec = gulp.src('spec/**/*_spec.js')
   .pipe(babel({ presets: ["es2015"] }))
   .pipe(concat('spec.js'))
+  .pipe(browserify({ transform: 'babelify' }))
   .pipe(gulp.dest('build'));
 
   var buildCss = gulp.src('css/**/*.{sass,scss}')

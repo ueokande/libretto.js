@@ -1,16 +1,20 @@
-// Libretto.Page class
+import Animation from './animation';
+
+// Page class
 //
 // The Page class provides the page of the slides.  The Page object is created
 // from <section> node in HTML.  The css of the page is modified with show(),
 // hide(), and neutralStyle() methods.
 
-Libretto.Page = class {
+export default class Page {
+
   //
   // Returns the number of the pages in the document.
   //
   static count() {
     return this.sectionNodes().length;
   }
+
   //
   // Returns a Page object of specified index
   //
@@ -19,7 +23,7 @@ Libretto.Page = class {
     if (typeof element === 'undefined') {
       throw new RangeError('Out of index in sections');
     }
-    let obj = new Libretto.Page();
+    let obj = new Page();
     obj.element = element;
     return obj;
   }
@@ -68,7 +72,7 @@ Libretto.Page = class {
   // Returns index of the pages
   //
   indexOf() {
-    let sections = Libretto.Page.sectionNodes();
+    let sections = Page.sectionNodes();
     return sections.indexOf(this.element);
   }
 
@@ -76,6 +80,6 @@ Libretto.Page = class {
   // Create animation object
   //
   animation() {
-    return new Libretto.Animation(this);
+    return new Animation(this);
   }
-};
+}

@@ -1,6 +1,8 @@
+import Css from '../src/css'
+
 describe('Test of css.coffee', function() {
   it('create new and finalizes', function() {
-    let css = Libretto.Css.create('tested_css');
+    let css = Css.create('tested_css');
     let styleEle = window.document.getElementById('tested_css');
     expect(styleEle).not.to.be.null;
     css.finalize();
@@ -9,21 +11,21 @@ describe('Test of css.coffee', function() {
   });
 
   it('finds a exist css', function() {
-    let css1 = Libretto.Css.create('tested_css');
-    let css2 = Libretto.Css.findById('tested_css');
+    let css1 = Css.create('tested_css');
+    let css2 = Css.findById('tested_css');
     expect(css1.style).to.equal(css2.style);
     css1.finalize();
   });
 
   it('finds a exist css or creates new', function() {
-    let css1 = Libretto.Css.findOrCreate('tested_css');
-    let css2 = Libretto.Css.findOrCreate('tested_css');
+    let css1 = Css.findOrCreate('tested_css');
+    let css2 = Css.findOrCreate('tested_css');
     expect(css1.style).to.equal(css2.style);
     css1.finalize();
   });
 
   it('adds rules with specifying style', function() {
-    let css = Libretto.Css.create('tested_css');
+    let css = Css.create('tested_css');
     css.addRule('h2', {
       'color': 'red'
     });
@@ -43,7 +45,7 @@ describe('Test of css.coffee', function() {
     div_by_class.className = 'div_cls';
     window.document.body.appendChild(div_by_id);
     window.document.body.appendChild(div_by_class);
-    let css = Libretto.Css.create('tested_css');
+    let css = Css.create('tested_css');
     css.addRule('#div_id', {
       'color': 'red'
     });
@@ -58,7 +60,7 @@ describe('Test of css.coffee', function() {
   });
 
   it('clears rules', function() {
-    let css = Libretto.Css.create('tested_css');
+    let css = Css.create('tested_css');
     css.addRule('h2', {
       'color': 'red'
     });

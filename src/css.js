@@ -1,4 +1,4 @@
-Libretto.Css = class {
+export default class Css {
 
   //
   // Create <style> element into tag with id and return Css object.
@@ -15,7 +15,7 @@ Libretto.Css = class {
     }
     window.document.head.appendChild(style);
 
-    let css = new Libretto.Css();
+    let css = new Css();
     css.style = style;
     return css;
   }
@@ -30,7 +30,7 @@ Libretto.Css = class {
       return null;
     }
 
-    let css = new Libretto.Css();
+    let css = new Css();
     css.style = ele;
     return css;
   }
@@ -106,4 +106,4 @@ Libretto.Css = class {
     window.document.head.removeChild(this.style);
     this.style = null;
   }
-};
+}

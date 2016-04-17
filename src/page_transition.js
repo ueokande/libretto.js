@@ -1,9 +1,11 @@
-Libretto.PageTransition = class {
+import Css from './css';
+
+export default class PageTransition {
   constructor(prevIndex, nextIndex, nextPage, cssId) {
     this.prevIndex = prevIndex;
     this.nextIndex = nextIndex;
     this.nextPage = nextPage;
-    this.pageAnimeCss = Libretto.Css.findOrCreate(cssId);
+    this.pageAnimeCss = Css.findOrCreate(cssId);
   }
 
   finalize() {
@@ -61,4 +63,4 @@ Libretto.PageTransition = class {
     setTimeout(() => { effect.exec(prevStyle, nextStyle, duration, options); },
               50);  // 50ms is hack to run on Firefox
   }
-};
+}
