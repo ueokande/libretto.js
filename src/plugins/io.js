@@ -1,6 +1,10 @@
 class IO extends Libretto.Plugin {
   initialize() {
-    window.addEventListener('keypress', (e) => {
+    this.registerEvents(window);
+  }
+
+  registerEvents(win) {
+    win.addEventListener('keypress', (e) => {
       let viewer = Libretto.Viewer.viewer();
       if (e.charCode == '['.charCodeAt(0)) {
         viewer.skipToPrevPage();
@@ -9,7 +13,7 @@ class IO extends Libretto.Plugin {
       }
     });
 
-    window.addEventListener('keydown', (e) => {
+    win.addEventListener('keydown', (e) => {
       // TODO: Added Enter key but the Enter is conflicted to pager plugin.
       let viewer = Libretto.Viewer.viewer();
       switch (e.keyCode) {
@@ -32,7 +36,7 @@ class IO extends Libretto.Plugin {
       }
     });
 
-    window.addEventListener('click', (e) => {
+    win.addEventListener('click', (e) => {
       if (e.button != 0) { return; }
       let viewer = Libretto.Viewer.viewer();
       viewer.nextStep();
