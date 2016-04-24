@@ -1,4 +1,4 @@
-Libretto.IO = class extends Libretto.Plugin {
+class IO extends Libretto.Plugin {
   initialize() {
     window.addEventListener('keypress', (e) => {
       let viewer = Libretto.Viewer.viewer();
@@ -38,6 +38,6 @@ Libretto.IO = class extends Libretto.Plugin {
       viewer.nextStep();
     });
   }
-};
+}
 
-new Libretto.IO();
+Libretto.IO = new IO();

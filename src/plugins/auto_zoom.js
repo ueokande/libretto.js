@@ -1,12 +1,12 @@
-Libretto.AutoZoom = class extends Libretto.Plugin {
+class AutoZoom extends Libretto.Plugin {
   initialize() {
     let computerBodyStyle = window.getComputedStyle(window.document.body);
     this.initialBodyWidth = computerBodyStyle.width.split('px')[0];
     this.initialBodyHeight = computerBodyStyle.height.split('px')[0];
     window.addEventListener('resize', () => {
-      Libretto.AutoZoom.prototype.fitToWindow.call(this);
+      AutoZoom.prototype.fitToWindow.call(this);
     });
-    Libretto.AutoZoom.prototype.fitToWindow.call(this);
+    AutoZoom.prototype.fitToWindow.call(this);
   }
 
   fitToWindow() {
@@ -15,6 +15,6 @@ Libretto.AutoZoom = class extends Libretto.Plugin {
     let zoom = Math.min(iw / this.initialBodyWidth, ih / this.initialBodyHeight);
     window.document.body.style.transform = `scale(${zoom}) translate(-50%, -50%)`;
   }
-};
+}
 
-new Libretto.AutoZoom();
+Libretto.AutoZoom = new AutoZoom();

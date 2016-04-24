@@ -1,16 +1,16 @@
-Libretto.Location = class extends Libretto.Plugin {
+class Location extends Libretto.Plugin {
   initialize() {
     window.addEventListener('hashchange', () => {
-      Libretto.Location.prototype.applyPage.call(this);
+      Location.prototype.applyPage.call(this);
     });
 
     let viewer = Libretto.Viewer.viewer();
     viewer.addCurrentPageChangedListener(() => {
       let index = viewer.getCurrentIndex();
-      Libretto.Location.prototype.setHash.call(this, index);
+      Location.prototype.setHash.call(this, index);
     });
 
-    Libretto.Location.prototype.applyPage.call(this);
+    Location.prototype.applyPage.call(this);
   }
 
   setHash(index) {
@@ -23,6 +23,6 @@ Libretto.Location = class extends Libretto.Plugin {
     let viewer = Libretto.Viewer.viewer();
     viewer.skipToPage(num - 1);
   }
-};
+}
 
-new Libretto.Location();
+Libretto.Location = new Location();
