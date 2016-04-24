@@ -1,6 +1,9 @@
 Libretto.Plugin = class {
   constructor() {
-    window.addEventListener('load', this.initialize);
+    let that = this;
+    window.addEventListener('load', () => {
+      that.initialize().call(that);
+    });
   }
 
   initialize() {
