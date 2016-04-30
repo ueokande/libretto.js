@@ -32,9 +32,9 @@ export default class PageTransition {
     let effect = null;
     if (effectName !== null) {
       effect = Libretto.loadPageEffect(effectName);
-    }
-    if (effect === null) {
-      console.warn(`No such page effect : ${effectName}`);
+      if (effect === null) {
+        console.warn(`No such page effect : ${effectName}`);
+      }
     }
 
     if (effect === null) {
