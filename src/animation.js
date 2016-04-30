@@ -1,4 +1,7 @@
-Libretto.Animation = class {
+import Css from './css';
+import Keyframe from './keyframe';
+
+export default class Animation {
   constructor(page) {
     this.page = page;
     this.keyframes = [];
@@ -8,10 +11,10 @@ Libretto.Animation = class {
     for (let anime of Array.prototype.slice.call(animationNodes)) {
       let keyframeNodes = anime.getElementsByTagName('keyframe');
       for (let key of Array.prototype.slice.call(keyframeNodes)) {
-        this.keyframes.push(new Libretto.Keyframe(key));
+        this.keyframes.push(new Keyframe(key));
       }
     }
-    this.css = Libretto.Css.findOrCreate(`animation-${this.page.indexOf()}`);
+    this.css = Css.findOrCreate(`animation-${this.page.indexOf()}`);
   }
 
   reset() {
@@ -42,7 +45,7 @@ Libretto.Animation = class {
     if (keyframe.delay() === null) {
       delay = `${afterTime}ms`;
     } else {
-      let deleyStr = Libretto.Animation.timeToMillisecond(keyframe.delay()) + afterTime;
+      let deleyStr = Animation.timeToMillisecond(keyframe.delay()) + afterTime;
       delay = `${deleyStr}ms`;
     }
     properties['transition-duration'] = duration;
@@ -55,7 +58,7 @@ Libretto.Animation = class {
       this.execKeyframe(afterTime);
     } else if (nextKey.timing() === 'after') {
       if (duration !== null) {
-        afterTime += Libretto.Animation.timeToMillisecond(duration);
+        afterTime += Animation.timeToMillisecond(duration);
       }
       this.execKeyframe(afterTime);
     }
@@ -74,4 +77,4 @@ Libretto.Animation = class {
     if (isNaN(num)) { return null; }
     return num;
   }
-};
+}
