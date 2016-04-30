@@ -1,5 +1,6 @@
 import Page from './page';
 import PageTransition from './page_transition';
+import IO from './plugins/io';
 
 export default class Viewer {
 
@@ -18,6 +19,8 @@ export default class Viewer {
     this.currentAnimation = null;
     this.currentIndex = null;
     this.pageTransition = null;
+
+    new IO(window);
   }
 
   getCurrentIndex() {
@@ -110,5 +113,3 @@ export default class Viewer {
     this.skipToPage(Page.count() - 1);
   }
 }
-
-new Viewer();

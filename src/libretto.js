@@ -16,5 +16,4 @@ window.Libretto = {
 // Load plugins
 require('./plugins/2d-animations');
 require('./plugins/auto_zoom.js');
-require('./plugins/io.js');
 require('./plugins/location.js');
