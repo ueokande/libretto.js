@@ -8,10 +8,17 @@ Libretto.Viewer = class {
   // Initializes internal variables and HTML contents.
   //
   constructor() {
+    let eventTarget = document.createDocumentFragment();
+    ['addEventListener',
+     'dispatchEvent',
+     'removeEventListener'
+    ].forEach((method) => {
+      this[method] = eventTarget[method].bind(eventTarget);
+    }, this);
+
     this.currentAnimation = null;
     this.currentIndex = null;
     this.pageTransition = null;
-    this.currentPageChangedListeners = [];
 
     Libretto.viewer = this;
   }
@@ -57,9 +64,7 @@ Libretto.Viewer = class {
                                                       currentPage);
     this.pageTransition.switchPage(animationEnable);
 
-    for (let listener of this.currentPageChangedListeners) {
-      listener();
-    }
+    this.dispatchEvent(new Event('currentPageChanged'));
   }
 
   //
@@ -106,10 +111,6 @@ Libretto.Viewer = class {
   //
   skipToLastPage() {
     this.skipToPage(Libretto.Page.count() - 1);
-  }
-
-  addCurrentPageChangedListener(listener) {
-    this.currentPageChangedListeners.push(listener);
   }
 };
 

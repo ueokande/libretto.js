@@ -5,7 +5,7 @@ class Location extends Libretto.Plugin {
     });
 
     let viewer = Libretto.Viewer.viewer();
-    viewer.addCurrentPageChangedListener(() => {
+    viewer.addEventListener('currentPageChanged', () => {
       let index = viewer.getCurrentIndex();
       Location.prototype.setHash.call(this, index);
     });
