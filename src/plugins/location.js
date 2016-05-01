@@ -21,7 +21,7 @@ class Location extends Libretto.Plugin {
     let num = Number(window.location.hash.split('#')[1]);
     if (isNaN(num)) { num = 1; }
     let viewer = Libretto.viewer();
-    viewer.skipToPage(num - 1);
+    viewer.skipTo(num - 1);
   }
 }
 

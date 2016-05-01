@@ -25,35 +25,35 @@ describe('Test of viewer.coffee', function() {
 
   it('skips to aspecified page', function() {
     let viewer = Libretto.viewer();
-    viewer.skipToPage(2);
+    viewer.skipTo(2);
     expect(viewer.getCurrentIndex()).to.equal(2);
   });
 
   it('fires a keyframe if the page has keyframes', function() {
     let viewer = Libretto.viewer();
-    viewer.skipToPage(0);
+    viewer.skipTo(0);
     expect(viewer.currentAnimation.index).to.equal(0);
-    viewer.nextStep();
+    viewer.step();
     expect(viewer.currentAnimation.index).to.equal(1);
-    viewer.nextStep();
+    viewer.step();
     expect(viewer.currentAnimation.index).to.equal(2);
   });
 
   it('moves to a next page if the page has no-keyframes', function() {
     let viewer = Libretto.viewer();
-    viewer.skipToPage(0);
-    viewer.nextStep();
-    viewer.nextStep();
-    viewer.nextStep();
+    viewer.skipTo(0);
+    viewer.step();
+    viewer.step();
+    viewer.step();
     expect(viewer.currentAnimation.keyframes.length).to.equal(2);
     expect(viewer.getCurrentIndex()).to.equal(1);
   });
 
   it('skips to aspecified page and remove a keyframe if keyframes remain', function() {
     let viewer = Libretto.viewer();
-    viewer.skipToPage(0);
-    viewer.nextStep();
-    viewer.skipToPage(2);
+    viewer.skipTo(0);
+    viewer.step();
+    viewer.skipTo(2);
     expect(viewer.getCurrentIndex()).to.equal(2);
     expect(viewer.currentAnimation.keyframes.length).to.equal(2);
   });
@@ -62,33 +62,21 @@ describe('Test of viewer.coffee', function() {
 
   it('skips to aspecified page', function() {
     let viewer = Libretto.viewer();
-    viewer.skipToPage(2);
+    viewer.skipTo(2);
     expect(viewer.getCurrentIndex()).to.equal(2);
   });
 
   it('skips to next page', function() {
     let viewer = Libretto.viewer();
-    viewer.skipToPage(1);
-    viewer.skipToNextPage();
+    viewer.skipTo(1);
+    viewer.skipNext();
     expect(viewer.getCurrentIndex()).to.equal(2);
   });
 
   it('skips to previous page', function() {
     let viewer = Libretto.viewer();
-    viewer.skipToPage(1);
-    viewer.skipToPrevPage();
+    viewer.skipTo(1);
+    viewer.skipPrev();
     expect(viewer.getCurrentIndex()).to.equal(0);
-  });
-
-  it('skips to first page', function() {
-    let viewer = Libretto.viewer();
-    viewer.skipToFirstPage();
-    expect(viewer.getCurrentIndex()).to.equal(0);
-  });
-
-  it('skips to last page', function() {
-    let viewer = Libretto.viewer();
-    viewer.skipToLastPage();
-    expect(viewer.getCurrentIndex()).to.equal(2);
   });
 });

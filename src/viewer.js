@@ -30,7 +30,7 @@ export default class Viewer {
   //
   // Skips to specified page without animation.
   //
-  skipToPage(index) {
+  skipTo(index) {
     if (Page.count() === 0) { return; }
     this.switchPage(index, false);
   }
@@ -69,7 +69,7 @@ export default class Viewer {
   //
   // Animate the element of page to next.
   //
-  nextStep() {
+  step() {
     if (this.currentAnimation.hasNextKeyframe()) {
       this.currentAnimation.nextKeyframe();
     } else {
@@ -78,37 +78,16 @@ export default class Viewer {
   }
 
   //
-  // Skip to previous step of page.
-  //
-  prevStep() {
-    this.skipToPrevPage();
-  }
-
-  //
   // Skips to next page without animation.
   //
-  skipToNextPage() {
-    this.skipToPage(this.currentIndex + 1);
+  skipNext() {
+    this.skipTo(this.currentIndex + 1);
   }
 
   //
   // Skips to previous page without animation.
   //
-  skipToPrevPage() {
-    this.skipToPage(this.currentIndex - 1);
-  }
-
-  //
-  // Skips to last page without animation.
-  //
-  skipToFirstPage() {
-    this.skipToPage(0);
-  }
-
-  //
-  // Skips to last page without animation.
-  //
-  skipToLastPage() {
-    this.skipToPage(Page.count() - 1);
+  skipPrev() {
+    this.skipTo(this.currentIndex - 1);
   }
 }

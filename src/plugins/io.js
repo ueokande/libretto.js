@@ -3,9 +3,9 @@ export default class IO {
     target.addEventListener('keypress', (e) => {
       let viewer = Libretto.viewer();
       if (e.charCode == '['.charCodeAt(0)) {
-        viewer.skipToPrevPage();
+        viewer.skipPrev();
       } else if (e.charCode == ']'.charCodeAt(0)) {
-        viewer.skipToNextPage();
+        viewer.skipNext();
       }
     });
 
@@ -17,17 +17,17 @@ export default class IO {
       case 32:  // Space
       case 40:  // Arrow Down
       case 34:  // Page Down
-        viewer.nextStep();
+        viewer.step();
         break;
       case 38:  // Arrow up
       case 33:  // Page Up
-        viewer.prevStep();
+        viewer.skipPrev();
         break;
       case 36:  // Home
-        viewer.skipToFirstPage();
+        viewer.skipTo(0);
         break;
       case 35:  // End
-        viewer.skipToLastPage();
+        viewer.skipTo(Number.MAX_VALUE);
         break;
       }
     });
@@ -35,7 +35,7 @@ export default class IO {
     target.addEventListener('click', (e) => {
       if (e.button != 0) { return; }
       let viewer = Libretto.viewer();
-      viewer.nextStep();
+      viewer.step();
     });
   }
 }
