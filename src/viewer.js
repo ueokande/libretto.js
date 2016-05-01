@@ -60,8 +60,7 @@ export default class Viewer {
 
     if (this.pageTransition !== null) { this.pageTransition.finalize(); }
     this.pageTransition = new PageTransition(prevIndex,
-                                             nextIndex,
-                                             currentPage);
+                                             nextIndex);
     this.pageTransition.switchPage(animationEnable);
 
     this.dispatchEvent(new Event('currentPageChanged'));

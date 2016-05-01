@@ -11,20 +11,18 @@ describe('Test of page_transition.coffee', function() {
     window.document.body.appendChild(this.pageEle1);
     window.document.body.appendChild(this.pageEle2);
     this.prevPage = new Page(this.pageEle1);
-    this.nextPage = new Page(this.pageEle2);
   });
 
   afterEach(function() {
     window.document.body.removeChild(this.pageEle1);
     window.document.body.removeChild(this.pageEle2);
     this.prevPage = null;
-    this.nextPage = null;
     this.pageEle1 = null;
     this.pageEle2 = null;
   });
 
   it('constructs and destructs a object', function() {
-    let pageTransition = new PageTransition(0, 1, this.nextPage, 'TestPageTransition');
+    let pageTransition = new PageTransition(0, 1, 'TestPageTransition');
     let styleEle = window.document.getElementById('TestPageTransition');
     expect(styleEle).not.to.be.null;
     pageTransition.finalize();
@@ -33,7 +31,7 @@ describe('Test of page_transition.coffee', function() {
   });
 
   it('switches the page without transition', function() {
-    let pageTransition = new PageTransition(0, 1, this.nextPage, 'TestPageTransition');
+    let pageTransition = new PageTransition(0, 1, 'TestPageTransition');
     pageTransition.switchPage(false);
     expect(window.getComputedStyle(this.pageEle1).zIndex).to.be.below(window.getComputedStyle(this.pageEle2).zIndex);
     pageTransition.finalize();
