@@ -1,16 +1,16 @@
 // To support ES6 classes
 require('babel-polyfill');
 
-import Viewer from './viewer';
+import Nucleus from './nucleus';
 import * as PageEffect from './page_effect';
 import Plugin from './plugin';
 
-let viewerInstance = new Viewer();
+let nucleusInstance = new Nucleus();
 window.Libretto = {
   registerPageEffect: PageEffect.registerPageEffect,
   loadPageEffect: PageEffect.loadPageEffect,
   Plugin,
-  viewer: () => viewerInstance
+  nucleus: () => nucleusInstance
 };
 
 // Load plugins

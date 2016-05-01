@@ -2,7 +2,7 @@ import Page from './page';
 import PageTransition from './page_transition';
 import IO from './plugins/io';
 
-export default class Viewer {
+export default class Nucleus {
 
   //
   // Initializes internal variables and HTML contents.
