@@ -9,8 +9,8 @@ describe('Test of nucleus.coffee', function() {
     for (let i in elements) {
       elements[i] = window.document.createElement('section');
       elements[i].innerHTML = '<animation>' +
-                              '  <keyframe target="h1">' +
-                              '  <keyframe target="h2">' +
+                              '  <keyframe target="h1"></keyframe>' +
+                              '  <keyframe target="h2"></keyframe>' +
                               '</animation>';
       results.push(window.document.body.appendChild(elements[i]));
     }
@@ -31,34 +31,23 @@ describe('Test of nucleus.coffee', function() {
 
   it('fires a keyframe if the page has keyframes', function() {
     let nucleus = Libretto.nucleus();
+    let element = elements[0];
     nucleus.skipTo(0);
-    expect(nucleus.currentAnimation.index).to.equal(0);
+    expect(nucleus.nextKeyframe).to.equal(element.querySelectorAll('keyframe')[0]);
     nucleus.step();
-    expect(nucleus.currentAnimation.index).to.equal(1);
+    expect(nucleus.nextKeyframe).to.equal(element.querySelectorAll('keyframe')[1]);
     nucleus.step();
-    expect(nucleus.currentAnimation.index).to.equal(2);
+    expect(nucleus.nextKeyframe).to.be.null;
   });
 
   it('moves to a next page if the page has no-keyframes', function() {
     let nucleus = Libretto.nucleus();
-    nucleus.skipTo(0);
+    nucleus.skipTo(1);
     nucleus.step();
     nucleus.step();
     nucleus.step();
-    expect(nucleus.currentAnimation.keyframes.length).to.equal(2);
-    expect(nucleus.getCurrentIndex()).to.equal(1);
+    expect(nucleus.nextKeyframe).to.equal(elements[2].querySelector('keyframe'));
   });
-
-  it('skips to aspecified page and remove a keyframe if keyframes remain', function() {
-    let nucleus = Libretto.nucleus();
-    nucleus.skipTo(0);
-    nucleus.step();
-    nucleus.skipTo(2);
-    expect(nucleus.getCurrentIndex()).to.equal(2);
-    expect(nucleus.currentAnimation.keyframes.length).to.equal(2);
-  });
-
-  xit('animates to aspecified page', function() {});
 
   it('skips to aspecified page', function() {
     let nucleus = Libretto.nucleus();

@@ -49,4 +49,14 @@ describe('Test of keyframe.coffee', function() {
       expect(() => new Keyframe(123)).to.throw(TypeError);
       expect(() => new Keyframe('elem')).to.throw(TypeError);
   });
+
+  it('converts the duratin text to millisec', function() {
+    expect(Keyframe.timeToMillisecond("200ms")).to.equal(200);
+    expect(Keyframe.timeToMillisecond("5s")).to.equal(5000);
+    expect(Keyframe.timeToMillisecond("1.4s")).to.equal(1400);
+    expect(Keyframe.timeToMillisecond("abc1.4s")).to.be.null;
+    expect(Keyframe.timeToMillisecond("x")).to.be.null;
+    expect(Keyframe.timeToMillisecond("ms")).to.be.null;
+    expect(Keyframe.timeToMillisecond("")).to.be.null;
+  });
 });
