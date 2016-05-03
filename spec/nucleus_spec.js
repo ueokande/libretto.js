@@ -26,7 +26,7 @@ describe('Test of nucleus.coffee', function() {
   it('skips to aspecified page', function() {
     let nucleus = Libretto.nucleus();
     nucleus.skipTo(2);
-    expect(nucleus.getCurrentIndex()).to.equal(2);
+    expect(nucleus.getPageIndex()).to.equal(2);
   });
 
   it('fires a keyframe if the page has keyframes', function() {
@@ -52,20 +52,20 @@ describe('Test of nucleus.coffee', function() {
   it('skips to aspecified page', function() {
     let nucleus = Libretto.nucleus();
     nucleus.skipTo(2);
-    expect(nucleus.getCurrentIndex()).to.equal(2);
+    expect(nucleus.getPageIndex()).to.equal(2);
   });
 
   it('skips to next page', function() {
     let nucleus = Libretto.nucleus();
     nucleus.skipTo(1);
     nucleus.skipNext();
-    expect(nucleus.getCurrentIndex()).to.equal(2);
+    expect(nucleus.getPageIndex()).to.equal(2);
   });
 
   it('skips to previous page', function() {
     let nucleus = Libretto.nucleus();
     nucleus.skipTo(1);
     nucleus.skipPrev();
-    expect(nucleus.getCurrentIndex()).to.equal(0);
+    expect(nucleus.getPageIndex()).to.equal(0);
   });
 });

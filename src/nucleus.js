@@ -1,8 +1,5 @@
 import Page from './page';
-import PageTransition from './page_transition';
-import Css from './css';
 import Keyframe from './keyframe';
-import IO from './plugins/io';
 
 export default class Nucleus {
 
@@ -18,57 +15,13 @@ export default class Nucleus {
       this[method] = eventTarget[method].bind(eventTarget);
     }, this);
 
-    this.animationCss = null;
     this.nextKeyframe = null;
     this.currentIndex = null;
     this.pageTransition = null;
-
-    new IO(window);
   }
 
-  getCurrentIndex() {
+  getPageIndex() {
     return this.currentIndex;
-  }
-
-  //
-  // Skips to specified page without animation.
-  //
-  skipTo(index) {
-    if (Page.count() === 0) { return; }
-    this.switchPage(index, false);
-  }
-
-  //
-  //
-  //
-  animateToPage(index) {
-    if (Page.count() === 0) { return; }
-    this.switchPage(index, true);
-  }
-
-  //
-  //
-  //
-  switchPage(index, animationEnable) {
-    index = Math.max(0, index);
-    index = Math.min(Page.count() - 1, index);
-    if (index === this.currentIndex) { return; }
-
-    let prevIndex = this.currentIndex;
-    let nextIndex = index;
-    let currentPage = Page.pageAt(index);
-    this.currentIndex = index;
-
-    this.animationCss = Css.findOrCreate(`animation-${this.currentIndex}`);
-    this.animationCss.clearRules();
-    this.nextKeyframe = currentPage.element.querySelector('animation > keyframe');
-
-    if (this.pageTransition !== null) { this.pageTransition.finalize(); }
-    this.pageTransition = new PageTransition(prevIndex,
-                                             nextIndex);
-    this.pageTransition.switchPage(animationEnable);
-
-    this.dispatchEvent(new Event('currentPageChanged'));
   }
 
   //
@@ -76,10 +29,51 @@ export default class Nucleus {
   //
   step() {
     if (this.nextKeyframe) {
-      this.execNextKeyframe(0);
+      this.execNextKeyframe();
+    } else if (this.currentIndex + 1 >= Page.count()) {
+      return;
     } else {
-      this.animateToPage(this.currentIndex + 1);
+      let from = this.currentIndex;
+      let to = this.currentIndex + 1;
+      let transitEvent = new CustomEvent('page.transit', {
+        detail: {from, to}
+      });
+      let changedEvent = new CustomEvent('page.changed', {
+        detail: {from, to}
+      });
+      this.currentIndex += 1;
+      let currentPage = Page.pageAt(this.currentIndex);
+      this.nextKeyframe = currentPage.element.querySelector('animation > keyframe');
+
+      this.dispatchEvent(transitEvent);
+      this.dispatchEvent(changedEvent);
     }
+  }
+
+  //
+  // Skips to specified page without animation.
+  //
+  skipTo(index) {
+    let pageCount = Page.count();
+    if (pageCount === 0) { return; }
+
+    index = Math.max(0, index);
+    index = Math.min(pageCount - 1, index);
+    if (index === this.currentIndex) { return; }
+
+    let from = this.currentIndex;
+    let to = index;
+    let skipEvent = new CustomEvent('page.skip', {
+      detail: {from, to}
+    });
+    let changedEvent = new CustomEvent('page.changed', {
+      detail: {from, to}
+    });
+    this.currentIndex = index;
+    let currentPage = Page.pageAt(this.currentIndex);
+    this.nextKeyframe = currentPage.element.querySelector('animation > keyframe');
+    this.dispatchEvent(skipEvent);
+    this.dispatchEvent(changedEvent);
   }
 
   execNextKeyframe() {
@@ -99,8 +93,11 @@ export default class Nucleus {
       let duration = keyframe.duration();
       properties['transition-delay'] = `${delay}ms`;
       properties['transition-duration'] = duration;
-      let targetStr = `section:nth-of-type(${this.currentIndex + 1}) ${target}`;
-      this.animationCss.addRule(targetStr, properties);
+      target = `section:nth-of-type(${this.currentIndex + 1}) ${target}`;
+      let e = new CustomEvent('keyframe.play', {
+        detail: {target, properties}
+      });
+      this.dispatchEvent(e);
 
       this.nextKeyframe = this.nextKeyframe.nextElementSibling;
       if (!this.nextKeyframe) {

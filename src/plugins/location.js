@@ -6,7 +6,7 @@ class Location extends Libretto.Plugin {
 
     let nucleus = Libretto.nucleus();
     nucleus.addEventListener('page.changed', () => {
-      let index = nucleus.getCurrentIndex();
+      let index = nucleus.getPageIndex();
       Location.prototype.setHash.call(this, index);
     });
 

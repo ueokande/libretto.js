@@ -2,6 +2,7 @@
 require('babel-polyfill');
 
 import Nucleus from './nucleus';
+import Viewer from './viewer';
 import * as PageEffect from './page_effect';
 import Plugin from './plugin';
 
@@ -12,6 +13,8 @@ window.Libretto = {
   Plugin,
   nucleus: () => nucleusInstance
 };
+
+new Viewer();
 
 // Load plugins
 require('./plugins/2d-animations');
