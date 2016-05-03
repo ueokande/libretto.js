@@ -1,10 +1,10 @@
 import Css from './css';
+import Page from './page';
 
 export default class PageTransition {
-  constructor(prevIndex, nextIndex, nextPage, cssId) {
+  constructor(prevIndex, nextIndex, cssId) {
     this.prevIndex = prevIndex;
     this.nextIndex = nextIndex;
-    this.nextPage = nextPage;
     this.pageAnimeCss = Css.findOrCreate(cssId);
   }
 
@@ -25,9 +25,10 @@ export default class PageTransition {
   }
 
   animatePage() {
-    let effectName = this.nextPage.animationEffect();
-    let duration = this.nextPage.animationDuration();
-    let options = this.nextPage.animationOptions();
+    let nextPage = Page.pageAt(this.nextIndex);
+    let effectName = nextPage.animationEffect();
+    let duration = nextPage.animationDuration();
+    let options = nextPage.animationOptions();
 
     let effect = null;
     if (effectName !== null) {

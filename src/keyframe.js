@@ -45,4 +45,18 @@ export default class Keyframe {
   timing() {
     return this.element.getAttribute('timing');
   }
+
+  // Converts time descrived as string to millisecond
+  // timeToMs("200ms")    // return 200
+  // timeToMs("5s")       // return 5000
+  // timeToMs("1.4s")     // return 1400
+  static timeToMillisecond(time) {
+    if (time.length === 0) { return null; }
+    let msec1 = Number(time.split('ms')[0]);
+    let msec2 = time.split('s')[0] * 1000;
+    let num = msec1 || msec2;
+    if (isNaN(num)) { return null; }
+    return num;
+  }
+
 }

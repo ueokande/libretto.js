@@ -1,43 +1,41 @@
-class IO extends Libretto.Plugin {
-  initialize() {
-    window.addEventListener('keypress', (e) => {
-      let viewer = Libretto.viewer();
+export default class IO {
+  constructor(target) {
+    target.addEventListener('keypress', (e) => {
+      let nucleus = Libretto.nucleus();
       if (e.charCode == '['.charCodeAt(0)) {
-        viewer.skipToPrevPage();
+        nucleus.skipPrev();
       } else if (e.charCode == ']'.charCodeAt(0)) {
-        viewer.skipToNextPage();
+        nucleus.skipNext();
       }
     });
 
-    window.addEventListener('keydown', (e) => {
+    target.addEventListener('keydown', (e) => {
       // TODO: Added Enter key but the Enter is conflicted to pager plugin.
-      let viewer = Libretto.viewer();
+      let nucleus = Libretto.nucleus();
       switch (e.keyCode) {
       // case 13:    // Enter
       case 32:  // Space
       case 40:  // Arrow Down
       case 34:  // Page Down
-        viewer.nextStep();
+        nucleus.step();
         break;
       case 38:  // Arrow up
       case 33:  // Page Up
-        viewer.prevStep();
+        nucleus.skipPrev();
         break;
       case 36:  // Home
-        viewer.skipToFirstPage();
+        nucleus.skipTo(0);
         break;
       case 35:  // End
-        viewer.skipToLastPage();
+        nucleus.skipTo(Number.MAX_VALUE);
         break;
       }
     });
 
-    window.addEventListener('click', (e) => {
+    target.addEventListener('click', (e) => {
       if (e.button != 0) { return; }
-      let viewer = Libretto.viewer();
-      viewer.nextStep();
+      let nucleus = Libretto.nucleus();
+      nucleus.step();
     });
   }
 }
-
-Libretto.IO = new IO();

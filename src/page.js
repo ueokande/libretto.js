@@ -1,5 +1,3 @@
-import Animation from './animation';
-
 // Page class
 //
 // The Page class provides the page of the slides.  The Page object is created
@@ -74,12 +72,5 @@ export default class Page {
   indexOf() {
     let sections = Page.sectionNodes();
     return sections.indexOf(this.element);
-  }
-
-  //
-  // Create animation object
-  //
-  animation() {
-    return new Animation(this);
   }
 }
