@@ -18,6 +18,21 @@ export default class Nucleus {
     this.nextKeyframe = null;
     this.currentIndex = null;
     this.pageTransition = null;
+
+    this.rootWindow = window;
+    while (this.rootWindow.opener) {
+      this.rootWindow = this.rootWindow.opener;
+    }
+    this.rootWindow.addEventListener('message', (e) => {
+      switch (e.data.type) {
+      case 'step':
+        this.receiveStep();
+        break;
+      case 'skip_to':
+        this.receiveSkipTo(e.data.index);
+        break;
+      }
+    });
   }
 
   getPageIndex() {
@@ -28,6 +43,11 @@ export default class Nucleus {
   // Animate the element of page to next.
   //
   step() {
+    let data = {type: 'step'};
+    this.rootWindow.postMessage(data, '*');
+  }
+
+  receiveStep() {
     if (this.nextKeyframe) {
       this.execNextKeyframe();
     } else if (this.currentIndex + 1 >= Page.count()) {
@@ -54,6 +74,11 @@ export default class Nucleus {
   // Skips to specified page without animation.
   //
   skipTo(index) {
+    let data = {type: 'skip_to', index};
+    this.rootWindow.postMessage(data, '*');
+  }
+
+  receiveSkipTo(index) {
     let pageCount = Page.count();
     if (pageCount === 0) { return; }
 
