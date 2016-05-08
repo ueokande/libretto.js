@@ -43,7 +43,7 @@ export default class Nucleus {
   // Animate the element of page to next.
   //
   step() {
-    let data = {type: 'step'};
+    let data = { type: 'step' };
     this.rootWindow.postMessage(data, '*');
   }
 
@@ -56,10 +56,10 @@ export default class Nucleus {
       let from = this.currentIndex;
       let to = this.currentIndex + 1;
       let transitEvent = new CustomEvent('page.transit', {
-        detail: {from, to}
+        detail: { from, to }
       });
       let changedEvent = new CustomEvent('page.changed', {
-        detail: {from, to}
+        detail: { from, to }
       });
       this.currentIndex += 1;
       let currentPage = Page.pageAt(this.currentIndex);
@@ -74,7 +74,7 @@ export default class Nucleus {
   // Skips to specified page without animation.
   //
   skipTo(index) {
-    let data = {type: 'skip_to', index};
+    let data = { type: 'skip_to', index };
     this.rootWindow.postMessage(data, '*');
   }
 
@@ -89,10 +89,10 @@ export default class Nucleus {
     let from = this.currentIndex;
     let to = index;
     let skipEvent = new CustomEvent('page.skip', {
-      detail: {from, to}
+      detail: { from, to }
     });
     let changedEvent = new CustomEvent('page.changed', {
-      detail: {from, to}
+      detail: { from, to }
     });
     this.currentIndex = index;
     let currentPage = Page.pageAt(this.currentIndex);
@@ -120,7 +120,7 @@ export default class Nucleus {
       properties['transition-duration'] = duration;
       target = `section:nth-of-type(${this.currentIndex + 1}) ${target}`;
       let e = new CustomEvent('keyframe.play', {
-        detail: {target, properties}
+        detail: { target, properties }
       });
       this.dispatchEvent(e);
 

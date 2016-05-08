@@ -154,7 +154,7 @@
     "id-match": 2,
     "no-continue": 2,
     "no-new": 0,
-    "object-curly-spacing": 2,
+    "object-curly-spacing": ["error", "always"],
     "jsx-quotes": 2,
     "key-spacing": 2,
     "no-underscore-dangle": 2,
